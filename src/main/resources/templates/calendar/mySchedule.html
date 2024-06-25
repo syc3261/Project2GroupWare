@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="~{common/layout/adminLayout}">
+
+
+<th:block layout:fragment="title">
+  <!-- 각 페이지 마다 변경 -->
+  <title>개인일정</title>
+</th:block>
+<th:block layout:fragment="css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">-->
+<!--  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+  <link rel="stylesheet" th:href="@{/css/calendar/calendar.css}">
+  <link rel="stylesheet" th:href="@{/css/calendar/o.css}">
+  <link rel="stylesheet" th:href="@{/css/calendar/i.css}">
+  <link rel="stylesheet" th:href="@{/css/calendar/e.css}">
+  <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">-->
+  <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">-->
+</th:block>
+
+</th:block>
+<th:block layout:fragment="script">
+  <!-- 각 페이지 마다 변경 -->
+
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+  <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>-->
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script th:src="@{/js/calendar/myCalendar.js}" defer></script>
+</th:block>
+
+
+<th:block layout:fragment="adminContainer">
+  <div class="adminContainer">
+    <div id="content">
+      <h1 class="title">
+       내 일정 관리
+
+      </h1>
+      <div class="img"></div>
+      <div id='calendar-container'>
+        <div id='calendar'>
+
+        </div>
+      </div>
+    </div>
+    <input type="hidden" name="employeeId" id="employeeId" th:value="${#authentication.principal.memberEntity.id}">
+
+    <!-- 모달 창 수정 필요하면 , 새롭게 만들면 필요 없음   -->
+    <div class="modal fade" id="calendarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">일정을 입력하세요.</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="calendar_content" class="col-form-label">일정 내용</label>
+              <input type="text" class="form-control" id="calendar_content" name="content">
+              <label for="calendar_start_date" class="col-form-label">시작 날짜</label>
+              <input type="datetime-local" class="form-control" id="calendar_start_date" name="start">
+              <label for="calendar_end_date" class="col-form-label">종료 날짜</label>
+              <input type="datetime-local" class="form-control" id="calendar_end_date" name="end">
+
+              <!-- <label for="employeeId" class="col-form-label">회원 아이디</label>
+               <input type="text" class="form-control" id="employeeId" name="employeeId"
+                      th:value="${#authentication.principal.memberEntity.id}">-->
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-warning" id="addBtn">추가</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                    id="sprintSettingModalClose">취소
+            </button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="eventModalLabel">이벤트 세부 정보</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p id="event-id"></p>
+          <p id="event-title"></p>
+          <p id="event-content"></p>
+          <p id="event-start"></p>
+          <p id="event-end"></p>
+          <p id="event-employeeId"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+          <button type="button" class="btn btn-danger" id="deleteEventBtn">삭제</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</th:block>
+</html>

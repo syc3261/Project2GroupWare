@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/adminLayout}">
+<th:block layout:fragment="title">
+    <title>BUS API</title>
+</th:block>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/api/busApi.css}">
+</th:block>
+<th:block layout:fragment="script">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=91a3f87bcaa1f50b354e0b8952c45270&libraries=services,clusterer,drawing">
+    </script>
+    <script th:src="@{/js/api/bus.js}" defer></script>
+</th:block>
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+        <div class="bus">
+            <div class="busLeft-con">
+                <div class="busLeftTop">
+                    <h1 class="bus-title"><img th:src="@{/images/bus1.png}" alt="bus" height="32px">버스 정보 조회</h1>
+                    <div class="search">
+                        <input type="text" name="busSearch" id="busSearch" value="1139">
+                        <button id="busBtn" onclick="busSearch()">버스 노선 조회</button>
+                    </div>
+                    <div class="table-css">
+                        <table class="bus-table1">
+                            <thead>
+                            <tr>
+                                <th>노선</th>
+                                <th>번호</th>
+                                <th>기점</th>
+                                <th>종점</th>
+                                <th>첫차시간</th>
+                                <th>막차시간</th>
+                                <th>배차간격</th>
+                                <th>노선ID</th>
+                            </tr>
+                            </thead>
+                            <tbody id="bus1">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="busLeftBottom">
+                    <h1>정류장 보기</h1>
+                    <div class="bus-station">
+
+                    </div>
+                </div>
+            </div>
+            <div class="busRight-con">
+                <div class="bus-map">
+                    <!--                    <div class="left-bus">-->
+                    <!--                        <h1><img th:src="@{/images/map.png}" alt="map" height="32px"> 지도 보기</h1>-->
+                    <!--                    </div>-->
+                    <div class="right-map">
+                        <section id="mymap" style="width: 100%;">
+                            <div class="map" id="map">
+
+                            </div>
+                            <div class="roadviewTop" style="display: none">
+                                <span class="close">X</span>
+                                <div class="stationInfo" id="stationInfo">
+
+                                </div>
+                                <div class="roadview" id="roadview">
+
+                                </div>
+                            </div>
+                            <script>
+                                $('.close').click(function () {
+                                    $('.roadviewTop').css('display', 'none');
+                                });
+                            </script>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

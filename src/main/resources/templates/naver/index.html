@@ -1,0 +1,47 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="https://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>NAVER API 예제</title>-->
+<!--    <link rel="stylesheet" th:href="@{/css/naver/naver.css}">-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="naver">-->
+<!--    <div class="left">-->
+<!--        <ul>-->
+<!--            <li>-->
+<!--                <a href="워크플레이스 URL" class="naverBtn">네이버API연동</a>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                &lt;!&ndash; https://developers.worksmobile.com/kr/docs/auth-oauth &ndash;&gt;-->
+<!--                &lt;!&ndash; 클라이언트 앱에서 사용자 인증을 통해 Authorization Code를 발급받으려면 아래와 같은 URL을 호출 &ndash;&gt;-->
+<!--                <form action="https://auth.worksmobile.com/oauth2/v2.0/authorize" method="get">-->
+<!--                    <input type="hidden" name="client_id" value="FlR_0mjyLZ4jddlkIcaD">-->
+<!--                    <input type="hidden" name="redirect_uri" value="http://localhost:8095/naver/auth2">-->
+<!--                    <input type="hidden" name="scope" value="directory,directory.read,orgunit,orgunit.read,user,user.read">-->
+<!--                    <input type="hidden" name="response_type" value="code">-->
+<!--                    <input type="hidden" name="state" value="test">-->
+<!--                    <input type="submit" value="조직인증"  class="naverBtn">-->
+<!--                </form>-->
+<!--            </li>-->
+
+<!--            <li>-->
+<!--                &lt;!&ndash; naver 이메일 연동 기본 주소 &ndash;&gt;-->
+<!--                <form id="mail"	onsubmit="window.open('https://mail.worksmobile.com/write/popup', '_blank', 'width=600, height=400,resizeable,scrollbars');">-->
+<!--                    <input type="submit" value="메일연동"  class="naverBtn">-->
+<!--                </form>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                &lt;!&ndash; 네이버 로그인  &ndash;&gt;-->
+<!--                <a href="oauth2/authorization/naver"   class="naverBtn">NAVER LOGIN</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--    <div class="right">-->
+
+
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

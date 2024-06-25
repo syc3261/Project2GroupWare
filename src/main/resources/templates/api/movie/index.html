@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/api/movie/movie.css}">
+    <link rel="stylesheet" th:href="@{/css/api/movie/chatBot.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script th:src="@{/js/chatbot/chat.js}" defer></script>
+    <script th:src="@{/js/api/movie.js}" defer></script>
+    <script th:src="@{/js/api/movieDaily.js}" defer></script>
+    <script th:src="@{/js/api/movieWeekly.js}" defer></script>
+</head>
+
+<div th:replace="~{/api/movie/common/header :: MovieHeaderFragment}"></div>
+<div th:replace="~{/api/movie/common/chatBot :: chatBotFragment}"></div>
+
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+        <div class="movie">
+            <div class="movie-con">
+                <h1>영화</h1>
+                <button onclick="movieFn()">영화목록</button>
+                <button onclick="boxOfficeFn()">(주간)박스오피스 순위</button>
+                <button onclick="boxMovieFn()">(일일)박스오피스 순위</button>
+
+                <h1>Movie Poster</h1>
+
+                <table class="movie_table" id="movie_table" style="display:none;">
+                    <thead>
+                    <tr>
+                        <th>movieCd</th>
+                        <th>movieNm</th>
+                        <th>movieNmEn</th>
+                        <th>prdtYear</th>
+                        <th>repGenreNm</th>
+                        <th>repNationNm</th>
+                        <th>typeNm</th>
+                        <th>getCompanyCd</th>
+                        <th>getCompanyNm</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+
+
+                <div class="weekly">
+                    <div class="menuBtn2" style="display:none;">
+                        <div class="menu3" onclick="menu3()"><img th:src="@{/images/movie/menu.png}" alt="메뉴1" width="40px"></div>
+                        <div class="menu4" onclick="menu4()"><img th:src="@{/images/movie/layout.png}" alt="메뉴2" width="40px"></div>
+                    </div>
+                <table class="boxOffice_table" id="boxOffice_table" style="display:none;">
+                    <thead>
+                    <tr>
+                        <th>순위</th>
+                        <th>영화코드</th>
+                        <th>영화제목</th>
+                        <th>OLD/NEW</th>
+                        <th>순위 변동</th>
+                        <th>관객 수</th>
+                        <th>누적 매출액</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <div class="grid1" id="grid1" style="display:none;">
+                        <div class="grid-con">
+                            <div class="span-on">
+
+
+                            </div>
+                        </div>
+                    </div>
+                    </tbody>
+                </table>
+                </div>
+
+
+                <div class="daily">
+                    <div class="menuBtn" style="display:none;">
+                        <div class="menu1" onclick="menu1()"><img th:src="@{/images/movie/menu.png}" alt="메뉴1" width="40px"></div>
+                        <div class="menu2" onclick="menu2()"><img th:src="@{/images/movie/layout.png}" alt="메뉴2" width="40px"></div>
+                    </div>
+                    <table class="box_movie_table" id="box_movie_table" style="display:none;">
+                        <thead>
+                        <tr>
+                            <th>순위</th>
+                            <th>영화 코드</th>
+                            <th>영화 제목</th>
+                            <th>개봉일</th>
+                            <th>매출액</th>
+                            <th>누적관객수</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <div class="grid" id="grid" style="display:none;">
+                            <div class="grid-con">
+                                <div class="span-on">
+
+
+                                </div>
+                            </div>
+                        </div>
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+                <div class="detailModal" style="display:none">
+                    <div class="detailModal-content">
+                        <span class="close">X</span>
+                        영화이름(Kr) : <span class="kr"></span> <br>
+                        영화이름(En) : <span class="en"></span> <br>
+                        개봉일 : <span class="open"></span> <br>
+                        개봉여부 : <span class="open1"></span> <br>
+                    </div>
+                    <script>
+                        $('.close').click(function() {
+                    $('.detailModal').css('display', 'none');
+                    });
+                    </script>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</th:block>
+</html>

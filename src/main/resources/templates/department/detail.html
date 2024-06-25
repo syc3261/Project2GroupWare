@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/adminLayout}">
+<th:block layout:fragment="title">
+    <title>상위부서</title>
+</th:block>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/topDepartment/department.css}">
+</th:block>
+<th:block layout:fragment="script">
+    <script th:src="@{/js/department/department.js}" defer></script>
+</th:block>
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+        <div class="make">
+            <a th:href="@{/department/top/deList}"><h1>부 서 관 리</h1></a>
+            <div class="make-con">
+                <div class="de_left">
+                    <div class="creation">
+                        <th:block sec:authorize="hasAnyRole('ADMIN','MANAGER')">
+                            <a th:href="@{/department/write}">부서생성</a>
+                            <th:block sec:authorize="hasRole('ADMIN')">
+                                <a th:href="@{/department/top/write}">상위부서생성</a>
+                            </th:block>
+                        </th:block>
+                    </div>
+                    <h1><a th:href="@{/department/top/deList}">부 서 목 록</a></h1>
+                    <div class="top">
+                        <ul th:each="top : ${list}">
+                            <a th:href="@{/department/top/detail/{id}(id=${top.id})}" id="topDe">
+                                <li th:text="${top.topDepartmentName}"></li>
+                            </a>
+                            <ul th:each="de : ${top.departmentEntityList}">
+                                <a th:href="@{/department/detail/{id}(id=${de.id})}" id="lowDe">
+                                    <li th:text="${de.departmentName}"
+                                        th:classappend="${activeId == de.id} ? 'highlighted-link' : ''"></li>
+                                </a>
+                            </ul>
+                        </ul>
+                    </div>
+                </div>
+                <div class="de_right">
+                    <h2>부서 수정</h2>
+                    <ul>
+                        <form th:action="@{/department/update}" method="POST">
+                            <input type="hidden" name="id" id="id"
+                                   th:value="${department.id}" readonly>
+                            <input type="hidden" name="topId" id="topId"
+                                   th:value="${department.topDepartmentEntity.id}" readonly>
+                            <li>
+                                <label for="departmentName">부 서 명</label>
+                                <input type="text" name="departmentName" id="departmentName"
+                                       th:value="${department.departmentName}">
+                            </li>
+                            <li class="subDepartment">
+                                <label for="topDepartmentEntity">소 속 본 부</label>
+                                <select name="topDepartmentEntity" id="topDepartmentEntity">
+                                    <option value="">부서명</option>
+                                    <th:block th:each="de : ${list}">
+                                        <option name="chose" th:value="${de.id}"
+                                                th:text="${de.topDepartmentName}"
+                                                th:selected="${de.id eq department.topDepartmentEntity.id}"></option>
+                                    </th:block>
+                                </select>
+                            </li>
+                            <label for="memberEntityList" class="mem">소 속 멤 버</label>
+                            <li class="meList">
+                                <div th:each="de : ${department.memberEntityList}" class="subDepartment">
+                                    <input type="text" id="memberEntityList"
+                                           th:value="${de.name}" readonly>
+                                </div>
+                            </li>
+                            <li>
+                                <th:block sec:authorize="hasAnyRole('ADMIN')">
+                                        <input type="submit" value="수정" name="btn">
+                                        <a th:href="@{'/department/delete/' + ${department.id}}"
+                                           onclick="return confirm('부서를 삭제하시겠습니까?\n※ 소속멤버도 삭제됩니다! ※');"
+                                           name="btn">삭제</a>
+                                </th:block>
+                            </li>
+                        </form>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

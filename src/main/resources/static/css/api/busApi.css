@@ -1,0 +1,229 @@
+@import url(../common/reset.css);
+
+.adminContainer .bus{
+    width: 100%;
+    height: calc( 100vh - 100px - 150px);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    text-align: center;
+    box-sizing: border-box;
+    gap : 5px;
+}
+
+.adminContainer .bus .busLeft-con{
+    width: 40%;
+    height: calc( 100vh - 75px - 87px);
+    /*border: 1px solid black;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-sizing: border-box;
+}
+
+.adminContainer .bus .busLeft-con .busLeftTop{
+    display: flex;
+    flex : 3;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 5px;
+    /*border: 1px solid red;*/
+    box-sizing: border-box;
+}
+
+.adminContainer .bus .busLeft-con .busLeftTop h1{
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #324153;
+    color: white;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.adminContainer .bus .busLeft-con .busLeftTop .search{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.adminContainer .bus .busLeft-con .busLeftTop .search input{
+    flex: 6;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.adminContainer .bus .busLeft-con .busLeftTop .search button{
+    flex: 4;
+    border: 0;
+    background-color: #3767a6;
+    font-family: 'TTLaundryGothicB';
+    color : white;
+    border-radius: 3px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.adminContainer .bus .busLeft-con .busLeftTop{
+    overflow: auto; /* 스크롤 활성화 */
+    height : 50%;
+}
+
+.adminContainer .bus .busLeft-con .busLeftTop .table-css{
+    overflow-y: auto;
+}
+
+.adminContainer .bus .busLeft-con .busLeftTop table {
+    width: 100%;
+    height: 100%;
+    table-layout: fixed;
+}
+
+.adminContainer .bus .busLeft-con .busLeftTop table thead{
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1;
+}
+
+.adminContainer .bus .busLeft-con .busLeftTop table tr th{
+    font-size: 14px;
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.adminContainer .bus .busLeft-con .busLeftTop table tr td{
+    font-size: 10px;
+    padding: 5px;
+    table-layout: fixed;
+    overflow-y: auto;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ccc;
+}
+
+.adminContainer .bus .busLeft-con .busLeftBottom h1{
+    background-color: #3767a6;
+    color : white;
+    padding: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+.adminContainer .bus .busLeft-con .busLeftBottom .bus-station{
+    text-align: left;
+    box-sizing: border-box;
+}
+.adminContainer .bus .busLeft-con .busLeftBottom .bus-station .busStation-con{
+    padding : 5px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 2px;
+    box-sizing: border-box;
+}
+.adminContainer .bus .busLeft-con .busLeftBottom .bus-station .busStation-con:hover{
+    background-color: #eff6ff;
+    cursor: pointer;
+}
+.adminContainer .bus .busLeft-con .busLeftBottom .bus-station .busStation-con.selected{
+    background-color: #3767a6;
+    color : white;
+}
+
+.adminContainer .bus .busLeft-con .busLeftBottom{
+    flex : 7;
+    height: 200px;
+    /*border: 1px solid red;*/
+    box-sizing: border-box;
+}
+
+.adminContainer .bus .busLeft-con .busLeftBottom .bus-station{
+    overflow-y: auto;
+    height: 100%;
+}
+
+
+.adminContainer .bus .busRight-con{
+    width: 60%;
+    height: calc( 100vh - 100px - 150px);
+    /*border: 1px solid black;*/
+    box-sizing: border-box;
+}
+
+.adminContainer .bus .busRight-con .bus-map{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /*border: 1px solid #324153;*/
+    /*border-radius: 5px;*/
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/*.adminContainer .bus .busRight-con .bus-map h1{*/
+/*    padding: 10px;*/
+/*    box-sizing: border-box;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    gap: 10px;*/
+/*}*/
+
+.adminContainer .bus .busRight-con .bus-map .right-map .map{
+    width:100%;
+    height:calc( 100vh - 75px - 40px);
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.adminContainer .bus .busRight-con .bus-map .right-map .roadviewTop{
+    width: 400px;
+    height: 400px;
+    position: fixed;
+    z-index: 1;
+    left: 1200px;
+    top: 300px;
+    overflow: auto;
+    flex-direction: column;
+}
+
+.adminContainer .bus .busRight-con .bus-map .right-map .roadviewTop .stationInfo{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: #333333;
+    color: white;
+    gap : 10px;
+    padding: 15px 0;
+    border-radius: 5px 5px 5px 5px;
+    box-sizing: border-box;
+}
+
+.close{
+    color: white;
+    background-color: #324153;
+    margin-left: 365px;
+    margin-bottom: 4px;
+    width: 20px;
+    height: 20px;
+    padding: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 3px 3px;
+}
+
+.close:hover,
+.close:focus {
+    color: #ff0000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.adminContainer .bus .busRight-con .bus-map .right-map .roadview{
+    /*background-color: #fefefe;*/
+    height : 100%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    max-width: 500px;
+}

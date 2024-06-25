@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="~{common/layout/adminLayout}">
+<th:block layout:fragment="title">
+    <!-- 각 페이지 마다 변경 -->
+</th:block>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/role/admin.css}">
+</th:block>
+<th:block layout:fragment="script">
+    <script th:src="@{/js/role/admin.js}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</th:block>
+
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+        <div class="role_admin">
+            <div class="role_admin-con">
+                <div class="commute">
+                    <div class="plus">
+                        <a th:href="@{/commute/index}">근태 관리 &gt </a>
+                    </div>
+                    <div id="clock" class="clock"></div>
+                    <div class="commute-con">
+                        <div class="commute1">
+                            <div class="people">
+                                <img th:src="@{/images/commute/substract.png}" alt="대체이미지" height="20px">
+                                <div class="people-con">
+                                    미출근 : [[${notWorkInPeople}]] 명
+                                </div>
+                            </div>
+                            <div class="people"><img th:src="@{/images/commute/correct.png}" alt="대체이미지" height="20px">
+                                <div class="people-con">
+                                    출근 : [[${workPeople}]] 명
+                                </div>
+                            </div>
+                            <div class="people"><img th:src="@{/images/commute/check.png}" alt="대체이미지" height="20px">
+                                <div class="people-con">
+                                    퇴근 : [[${workOutPeople}]] 명
+                                </div>
+                            </div>
+                        </div>
+                        <div class="commute2">
+                            <div class="people"><img th:src="@{/images/commute/exclamation.png}" alt="대체이미지"
+                                                     height="20px">
+                                <div class="people-con">
+                                    지각 : [[${latePeople}]] 명
+                                </div>
+                            </div>
+                            <div class="people"><img th:src="@{/images/commute/exclamation.png}" alt="대체이미지"
+                                                     height="20px">
+                                <div class="people-con">
+                                    조퇴 : [[${leaveEarlyPeople}]] 명
+                                </div>
+                            </div>
+                        </div>
+                        <div class="commute3">
+                            <div class="people"><img th:src="@{/images/commute/substract.png}" alt="대체이미지"
+                                                     height="20px">
+                                <div class="people-con">
+                                    휴가 : [[${vacationPeople}]] 명
+                                </div>
+                            </div>
+                            <div class="people"><img th:src="@{/images/commute/substract.png}" alt="대체이미지"
+                                                     height="20px">
+                                <div class="people-con">
+                                    병가 : [[${sickVacationPeople}]] 명
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="department">
+                    <div class="plus">
+                        <a th:href="@{/department/top/deList}">부서 관리 &gt </a>
+                    </div>
+                    <div class="department-tree">
+                        <ul th:each="top : ${topDepartmentDtos}">
+                            <li class="top" th:text="${top.topDepartmentName}"></li>
+                            <li class="sub">
+                                <ul th:each="de : ${top.departmentEntityList}">
+                                    <span th:text="${de.departmentName}"></span>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="schedule">
+                    <div class="plus">
+                        <a th:href="@{/my/schedule}">오늘의 일정 &gt </a>
+                    </div>
+                    <div class="schedule-con">
+                        <table>
+                            <tr th:each="schedule : ${scheduleDtoList}">
+                                <td><img th:src="@{/images/scCheck.png}" alt="대체이미지" height="30px"></td>
+                                <td th:text="'  ' +${schedule.memberEntity.name} + ' 의 일정 : ' + ${schedule.content}"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="board">
+                    <div class="plus">
+                        <a th:href="@{/board/boardList}">게시판 관리 &gt </a>
+                    </div>
+                    <div class="board-con">
+                        <div class="boards">
+                            공지사항 : [[${board1}]]개
+                        </div>
+                        <div class="boards">
+                            자유게시판 : [[${board2}]]개
+                        </div>
+
+                        <div class="boards">
+                            수 다 방 : [[${board3}]]개
+                        </div>
+
+                        <div class="boards">
+                            Q & A : [[${board4}]]개
+                        </div>
+
+                    </div>
+                </div>
+                <div class="airplane">
+                    <div class="plus">
+                        <a th:href="@{/airplane/index}">항공편 관리 &gt </a>
+                    </div>
+                    <div class="airplane-con">
+                        <div class="airplanes">
+                            <img th:src="@{/images/airplane/airplane.png}" alt="대체이미지" height="40px">
+                            전체 항공편 : [[${allAirplane}]]개
+                        </div>
+                        <div class="airplanes">
+                            <img th:src="@{/images/airplane/green.png}" alt="대체이미지" height="40px">
+                            오늘의 항공편 : [[${todayAirplane}]]개
+                        </div>
+                    </div>
+                </div>
+                <div class="member">
+                    <div class="plus">
+                        <a th:href="@{/member/memberList}">직원 관리 &gt </a>
+                    </div>
+                    <div class="member-con">
+                        <div class="members">
+                            <img th:src="@{/images/work.png}" alt="대체이미지" height="40px">
+                            부장 : [[${managers}]]명
+                        </div>
+                        <div class="members">
+                            <img th:src="@{/images/member.png}" alt="대체이미지" height="40px">
+                            사원 : [[${members}]]명
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

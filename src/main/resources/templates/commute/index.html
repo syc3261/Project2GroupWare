@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/adminLayout}">
+<th:block layout:fragment="title">
+    <!-- 각 페이지 마다 변경 -->
+</th:block>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/commute/index.css}">
+</th:block>
+<th:block layout:fragment="script">
+    <!-- 각 페이지 마다 변경 -->
+</th:block>
+
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+        <div class="commute">
+            <div class="status">
+                <div class="people"><img th:src="@{/images/commute/substract.png}" alt="대체이미지" height="50px">
+                    <div class="people-con">
+                    미출근 : [[${notWorkInPeople}]] 명
+                    </div>
+                </div>
+                <div class="people"><img th:src="@{/images/commute/correct.png}" alt="대체이미지" height="50px">
+                    <div class="people-con">
+                    출근 : [[${workPeople}]] 명
+                    </div>
+                </div>
+                <div class="people"><img th:src="@{/images/commute/check.png}" alt="대체이미지" height="50px">
+                    <div class="people-con">
+                    퇴근 : [[${workOutPeople}]] 명
+                    </div>
+                </div>
+                <div class="people"><img th:src="@{/images/commute/exclamation.png}" alt="대체이미지" height="50px">
+                    <div class="people-con">
+                    지각 : [[${latePeople}]] 명
+                    </div>
+                </div>
+                <div class="people"><img th:src="@{/images/commute/exclamation.png}" alt="대체이미지" height="50px">
+                    <div class="people-con">
+                    조퇴 : [[${leaveEarlyPeople}]] 명
+                    </div>
+                </div>
+                <div class="people"><img th:src="@{/images/commute/substract.png}" alt="대체이미지" height="50px">
+                    <div class="people-con">
+                    휴가 : [[${vacationPeople}]] 명
+                    </div>
+                </div>
+                <div class="people"><img th:src="@{/images/commute/substract.png}" alt="대체이미지" height="50px">
+                    <div class="people-con">
+                    병가 : [[${sickVacationPeople}]] 명
+                    </div>
+                </div>
+            </div>
+            <div class="commute-con">
+                <div class="work">
+                    <a th:href="@{/commute/work}">출 퇴근 관리</a>
+                </div>
+                <div class="vacation">
+                    <a th:href="@{/commute/vacation}">휴가 관리</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

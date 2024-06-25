@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="~{common/layout/adminLayout}">
+<th:block layout:fragment="title">
+    <!-- 각 페이지 마다 변경 -->
+    <title>airplaneDetail</title>
+</th:block>
+<th:block layout:fragment="css">
+    <!-- 각 페이지 마다 변경 -->
+    <link rel="stylesheet" th:href="@{/css/airplane/detail.css}">
+</th:block>
+<th:block layout:fragment="script">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js" defer></script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b3a5eccd39d930692dcff3137053080b&libraries=services"></script>
+</th:block>
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+        <div class="airplaneDetail">
+            <div class="airplaneDetail-con">
+                <h1>[[${airplaneDto.id}]]번 비행기 정보</h1>
+                <form th:action="@{/airplane/delete/{id}(id=${airplaneDto.id})}" method="post">
+                    <ul>
+                        <li>
+                            <label for="toTime">출 발 시 간 : </label>
+                            <input type="text" id="toTime" name="toTime"
+                                   th:value="${#temporals.format(airplaneDto.toTime, 'MM월 dd일 HH시 mm분 ss초')}">
+
+                            <label for="fromTime">도 착 시 간 : </label>
+                            <input type="text" id="fromTime" name="fromTime"
+                                   th:value="${#temporals.format(airplaneDto.fromTime, 'MM월 dd일 HH시 mm분 ss초')}">
+                        </li>
+                        <li class="area">
+                            <ul>
+                                <li>
+                                    출 발 지 :
+                                    <span th:if="${airplaneDto.toArea.contains('인천')}" th:text="'인천국제공항 (ICN)'"></span>
+                                    <span th:if="${airplaneDto.toArea.contains('서울')}" th:text="'김포국제공항 (GMP)'"></span>
+                                    <span th:if="${airplaneDto.toArea.contains('김해')}" th:text="'김해국제공항 (PUS)'"></span>
+                                    <span th:if="${airplaneDto.toArea.contains('대구')}" th:text="'대구국제공항 (TAE)'"></span>
+                                    <span th:if="${airplaneDto.toArea.contains('광주')}" th:text="'광주공항 (KWJ)'"></span>
+                                    <span th:if="${airplaneDto.toArea.contains('울산')}" th:text="'울산공항 (USN)'"></span>
+                                    <span th:if="${airplaneDto.toArea.contains('청주')}" th:text="'청주공항 (CJJ)'"></span>
+                                    <span th:if="${airplaneDto.toArea.contains('양양')}" th:text="'양양국제공항 (YNY)'"></span>
+                                    <span th:if="${airplaneDto.toArea.contains('군산')}" th:text="'군산공항 (KUV)'"></span>
+                                    <span th:if="${airplaneDto.toArea.contains('여수')}" th:text="'여수공항 (RSU)'"></span>
+                                    <span th:if="${airplaneDto.toArea.contains('사천')}" th:text="'사천공항 (HIN)'"></span>
+                                    <span th:if="${airplaneDto.toArea.contains('포항')}" th:text="'포항공항 (KPO)'"></span>
+                                    <span th:if="${airplaneDto.toArea.contains('횡성')}" th:text="'원주공항 (WJU)'"></span>
+                                    <span th:if="${airplaneDto.toArea.contains('제주')}" th:text="'제주국제공항 (CJU)'"></span>
+                                    <span th:if="${airplaneDto.toArea.contains('밀양')}" th:text="'사랑나무공항 (KAG)'"></span>
+                                </li>
+                            </ul>
+
+                            <ul>
+                                <li>
+                                    도 착 지 :
+                                    <span th:if="${airplaneDto.fromArea.contains('인천')}" th:text="'인천국제공항 (ICN)'"></span>
+                                    <span th:if="${airplaneDto.fromArea.contains('서울')}" th:text="'김포국제공항 (GMP)'"></span>
+                                    <span th:if="${airplaneDto.fromArea.contains('김해')}" th:text="'김해국제공항 (PUS)'"></span>
+                                    <span th:if="${airplaneDto.fromArea.contains('대구')}" th:text="'대구국제공항 (TAE)'"></span>
+                                    <span th:if="${airplaneDto.fromArea.contains('광주')}" th:text="'광주공항 (KWJ)'"></span>
+                                    <span th:if="${airplaneDto.fromArea.contains('울산')}" th:text="'울산공항 (USN)'"></span>
+                                    <span th:if="${airplaneDto.fromArea.contains('청주')}" th:text="'청주공항 (CJJ)'"></span>
+                                    <span th:if="${airplaneDto.fromArea.contains('양양')}" th:text="'양양국제공항 (YNY)'"></span>
+                                    <span th:if="${airplaneDto.fromArea.contains('군산')}" th:text="'군산공항 (KUV)'"></span>
+                                    <span th:if="${airplaneDto.fromArea.contains('여수')}" th:text="'여수공항 (RSU)'"></span>
+                                    <span th:if="${airplaneDto.fromArea.contains('사천')}" th:text="'사천공항 (HIN)'"></span>
+                                    <span th:if="${airplaneDto.fromArea.contains('포항')}" th:text="'포항공항 (KPO)'"></span>
+                                    <span th:if="${airplaneDto.fromArea.contains('횡성')}" th:text="'원주공항 (WJU)'"></span>
+                                    <span th:if="${airplaneDto.fromArea.contains('제주')}" th:text="'제주국제공항 (CJU)'"></span>
+                                    <span th:if="${airplaneDto.fromArea.contains('밀양')}" th:text="'사랑나무공항 (KAG)'"></span>
+                                </li>
+                            </ul>
+
+                        </li>
+
+                    </ul>
+                    <div id="map" style="width:100%;height:350px;"></div>
+                    <th:block sec:authorize="hasAnyRole('ADMIN')">
+                    <div class="delete"> <a th:href="@{/airplane/delete/{id}(id=${airplaneDto.id})}">항공편 삭제</a></div>
+                    <div class="update"> <a th:href="@{/airplane/update/{id}(id=${airplaneDto.id})}">항공편 수정</a></div>
+                    </th:block>
+
+                    <script>
+                        var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+                            mapOption = {
+                                center: new kakao.maps.LatLng(36.5, 127.5), // 지도의 중심좌표
+                                level: 14 // 지도의 확대 레벨
+                            };
+
+                        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+                        var geocoder = new kakao.maps.services.Geocoder();
+
+                        var toArea, fromArea;
+
+                        geocoder.addressSearch('[[${airplaneDto.toArea}]]', function (result, status) {
+                            if (status === kakao.maps.services.Status.OK) {
+                                toArea = new kakao.maps.LatLng(result[0].y, result[0].x);
+                                var customOverlay = new kakao.maps.CustomOverlay({
+                                    map: map,
+                                    position: toArea,
+                                    content: '<div class="custom-marker">출발지</div>',
+                                    yAnchor: 1
+                                });
+                                if (fromArea) {
+                                    drawLine();
+                                }
+                            }
+                        });
+
+                        geocoder.addressSearch('[[${airplaneDto.fromArea}]]', function (result, status) {
+                            if (status === kakao.maps.services.Status.OK) {
+                                fromArea = new kakao.maps.LatLng(result[0].y, result[0].x);
+                                var customOverlay = new kakao.maps.CustomOverlay({
+                                    map: map,
+                                    position: fromArea,
+                                    content: '<div class="custom-marker">도착지</div>',
+                                    yAnchor: 1
+                                });
+                                if (toArea) {
+                                    drawLine();
+                                }
+                            }
+                        });
+
+                        function drawLine() {
+                            var linePath = [
+                                toArea,
+                                fromArea
+                            ];
+
+                            var polyline = new kakao.maps.Polyline({
+                                path: linePath,
+                                strokeWeight: 5,
+                                strokeColor: 'red',
+                                strokeOpacity: 0.8,
+                                strokeStyle: 'dot'
+                            });
+
+                            polyline.setMap(map);
+
+                            var distance = Math.round(polyline.getLength() / 1000) + 'km';
+
+                            var midPoint = new kakao.maps.LatLng(
+                                (toArea.getLat() + fromArea.getLat()) / 2,
+                                (toArea.getLng() + fromArea.getLng()) / 2
+                            );
+
+                            var customOverlay = new kakao.maps.CustomOverlay({
+                                position: midPoint,
+                                content: '<div class="infowindow">거리: ' + distance + '</div>'
+                            });
+
+                            customOverlay.setMap(map);
+
+                            var bounds = new kakao.maps.LatLngBounds();
+                            bounds.extend(toArea);
+                            bounds.extend(fromArea);
+
+                            // 출발지와 도착지가 화면에 딱 맞도록 지도를 조절합니다.
+                            map.setBounds(bounds);
+
+                            map.setDraggable(false);
+                            map.setZoomable(false);
+                        }
+                    </script>
+                </form>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

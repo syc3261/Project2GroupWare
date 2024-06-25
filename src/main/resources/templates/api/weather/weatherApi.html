@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/adminLayout}">
+<th:block layout:fragment="title">
+    <title>날씨예보</title>
+</th:block>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/api/weatherApi.css}">
+</th:block>
+<th:block layout:fragment="script">
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f956ef011454dabcb2db379b72c4e588"></script>
+    <script th:src="@{/js/api/weatherApi.js}"></script>
+</th:block>
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+        <div class="api">
+            <h1 class="airTitle"></h1>
+            <div class="weatherShow">
+                <div class="weatherApiPage">
+                    <div class="searchApi">
+                        <div class="searchMenu">
+                            <select name="searchApi" id="searchApi">
+                                <option value="Seoul">서울</option>
+                                <option value="Busan">부산</option>
+                                <option value="Gwangju">광주</option>
+                                <option value="ChunCheon">춘천</option>
+                            </select>
+                        </div>
+                        <button onclick="weatherSearchApi()">검색</button>
+                    </div>
+                    <div class="topWeatherApi">
+                        <h2 class="SeoulIconApi"></h2>
+                        <h2 class="SeoulNowTempApi"></h2>
+                    </div>
+                    <h3 class="nowWeatherApi"></h3>
+                    <div class="temp">
+                        <h5 class="SeoulTempMaxApi"></h5>
+                        <h5 class="SeoulTempMinApi"></h5>
+                    </div>
+                </div>
+                <div id="map" style="width:70%;height:550px;"></div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

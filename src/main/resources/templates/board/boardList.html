@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{common/layout/adminLayout}">
+
+<th:block layout:fragment="title">
+  <!-- 각 페이지 마다 변경 -->
+</th:block>
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/board/boardList.css}">
+  <!-- 각 페이지 마다 변경 -->
+</th:block>
+<th:block layout:fragment="script">
+  <!-- 각 페이지 마다 변경 -->
+</th:block>
+
+<th:block layout:fragment="adminContainer">
+  <div class="adminContainer">
+
+    <div class="boardList">
+      <div class="boardList-con">
+        <div class="top">
+          <h1>전체 게시판</h1>
+          <div class="search">
+
+            <form th:action="@{/board/boardList}" method="get">
+              <li><a th:href="@{/board/write}">글작성</a></li>
+              <select name="subject" id="subject">
+
+                <option value="title" th:selected="${#strings.equals( param.subject, 'title' )}">제목</option>
+                <option value="content" th:selected="${#strings.equals( param.subject, 'content' )}">내용</option>
+                <option value="writer" th:selected="${#strings.equals( param.subject, 'writer' )}">닉네임</option>
+              </select>
+              <input type="text" name="search" id="search" th:value="${param.search}">
+              <input type="submit" value="검색">
+            </form>
+          </div>
+          <table>
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>title</th>
+              <th>작성자</th>
+              <th>내용</th>
+              <th>조회수</th>
+              <th>작성일</th>
+     <!--         <th>수정시간</th>-->
+              <th>보기</th> <!-- 게시글 상세보기 -->
+              <th>삭제</th>
+     <!--         <th>분류</th>-->
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="board : ${pagingList}">
+
+              <th:block th:if="${board.boardSeparateId == 1}">
+                <td class="warring" th:text="'공지사항'" style="color:red"></td>
+              </th:block>
+              <th:block th:unless="${board.boardSeparateId == 1}">
+                <td th:text="${board.id}" style="color:black"></td>
+              </th:block>
+            <!--  <td th:text="${board.id}"></td>-->
+              <td th:text="${board.title}"></td>
+              <td th:text="${board.writer}"></td>
+              <td th:text="${board.content}"></td>
+              <td th:text="${board.hit}"></td>
+              <td th:text="${#temporals.format(board.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+
+     <!--         <td th:text="${#temporals.format(board.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
+              <td><a th:href="@{/board/detail/{id}(id=${board.id})}">보기</a></td><!-- 게시글 상세보기 -->
+
+
+              <th:block sec:authorize="isAuthenticated()">
+                <th:block th:if="${board.memberEntity.userEmail == myUserDetails.username}">
+                  <td><a th:href="@{/board/delete/{id}(id=${board.id})}" style="color:red">삭제</a></td>
+                </th:block>
+                <th:block th:unless="${board.memberEntity.userEmail == myUserDetails.username}">
+                  <th:block sec:authorize="hasAnyRole('ADMIN')">
+                    <td><a th:href="@{/board/delete/{id}(id=${board.id})}" style="color:red">삭제</a></td>
+                  </th:block>
+                  <th:block sec:authorize="!hasAnyRole('ADMIN')">
+                    <td></td>
+                  </th:block>
+                </th:block>
+
+              </th:block>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+        <div class="bottom">
+          <div class="paging">
+            <ul>
+              <li>
+                <!-- 현재페이지가  첫번째 페이지이면   span표시 -->
+                <span th:if="${pagingList.pageable.pageNumber+1 eq 1}" class="span0">&laquo</span>
+                <!-- 처음 페이지가 아니면  a -->
+                <span th:unless="${pagingList.pageable.pageNumber+1 eq 1}">
+              <a th:href="@{/board/boardList(page=0)}" class="span1">&laquo</a>
+            </span>
+              </li>
+              <li>
+                <!-- 이전페이지가  첫번째 페이지이면   span표시 -->
+                <span th:if="${1==pagingList.pageable.pageNumber+1}" class="span0">&lt</span>
+                <span th:unless="${1==pagingList.pageable.pageNumber+1}">
+            <!--boardList.pageable.pageNumber 현재페이지 -1 -->
+            <a th:href="@{/board/boardList(page=${pagingList.pageable.pageNumber-1})}" class="span1">&lt</a>
+          </span>
+              </li>
+              <!-- block  -->
+              <!-- 페이지 번호 -->
+              <li th:each="i: ${#numbers.sequence(startPage, endPage)}" class="block">
+
+                <span th:if="${i == pagingList.pageable.pageNumber+1}" th:text="${i}" class="now"></span>
+
+
+                <a th:unless="${i == pagingList.pageable.pageNumber+1}"
+                   th:href="@{/board/boardList(page=${ i - 1})}" th:text="${i}"></a>
+
+              </li>
+
+
+              <li>
+                <!-- 현재페이지가 마지막 페이지이면   span표시 -->
+                <span th:if="${pagingList.totalPages ==pagingList.pageable.pageNumber+1}" class="span0">&gt</span>
+                <!-- 현재페이지가 마지막 페이지아니면    a 표시 현재페이지 +1 -->
+                <span th:unless="${pagingList.totalPages ==pagingList.pageable.pageNumber+1}">
+             <a th:href="@{/board/boardList(page=${pagingList.pageable.pageNumber+1})}" class="span1">&gt</a>
+          </span>
+              </li>
+              <li>
+                <!-- 현재페이지가 마지막 페이지이면   span표시 -->
+                <span th:if="${pagingList.totalPages ==pagingList.pageable.pageNumber+1}" class="span0">&raquo</span>
+                <!-- 현재페이지가 마지막 페이지가 아니면 마지막 페이지로 이동 해라  a -->
+                <span th:unless="${pagingList.totalPages ==pagingList.pageable.pageNumber+1}">
+            <a th:href="@{/board/boardList(page=${pagingList.totalPages-1})}" class="span1">&raquo</a>
+          </span>
+
+              </li>
+
+            </ul>
+          </div>
+        </div>
+
+
+      </div>
+   
+    </div>
+
+  </div>
+</th:block>
+</html>

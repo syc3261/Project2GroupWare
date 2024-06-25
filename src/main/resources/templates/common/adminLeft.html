@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<div class="left" th:fragment="adminLeftFragment">
+    <div class="left-con">
+        <div class="top">
+            <div class="title">
+                <h1 class="logo">
+                    <th:block sec:authorize="hasAnyRole('ADMIN')">
+                        <a th:href="@{/role/admin}"><img th:src="@{/images/logo.png}" alt="대체이미지">
+                            <p>GroupAir</p>
+                        </a>
+                    </th:block>
+                    <th:block sec:authorize="hasAnyRole('MANAGER')">
+                        <a th:href="@{/role/manager}"><img th:src="@{/images/logo.png}" alt="대체이미지">
+                            <p>GroupAir</p>
+                        </a>
+                    </th:block>
+                    <th:block sec:authorize="hasAnyRole('MEMBER')">
+                        <a th:href="@{/role/member}"><img th:src="@{/images/logo.png}" alt="대체이미지">
+                            <p>GroupAir</p>
+                        </a>
+                    </th:block>
+                </h1>
+                <div class="weatherApi">
+                    <h6 class="nowTime"></h6>
+                    <div class="search">
+                        <div class="searchMenu">
+                            <select name="search" id="search">
+                                <option value="Seoul">서울</option>
+                                <option value="Busan">부산</option>
+                                <option value="Gwangju">광주</option>
+                                <option value="ChunCheon">춘천</option>
+                            </select>
+                        </div>
+                        <button onclick="weatherSearch()">검색</button>
+                    </div>
+                    <div class="topWeather">
+                        <h3 class="SeoulIcon"></h3>
+                        <h5 class="nowWeather"></h5>
+                    </div>
+                    <h5 class="SeoulNowTemp"></h5>
+                    <h5 class="SeoulTempRange"></h5>
+                </div>
+            </div>
+            <div class="left-menu">
+                <ul>
+                    <li class="menuBar">
+                        <th:block sec:authorize="hasAnyRole('ADMIN')">
+                            <img th:src="@{/images/pay.png}" alt="member">
+                            <a th:href="@{/commute/index}">근태급여</a>
+                            <ul class="subMenu">
+                                <li><a th:href="@{/commute/index}">근태</a></li>
+                                <li><a th:href="@{/salary/index}">급여</a></li>
+                            </ul>
+                        </th:block>
+                        <th:block sec:authorize="hasAnyRole('MEMBER','MANAGER')">
+                            <img th:src="@{/images/pay.png}" alt="member">
+                            <a th:href="@{/commute/index}">근태</a>
+                            <ul class="subMenu">
+                                <li><a id="work"
+                                       th:href="@{/commute/workDetail/{id}(id = ${#authentication.principal.memberEntity.id})}">출근
+                                    기록</a></li>
+                                <li><a id="salary"
+                                       th:href="@{/salary/mySalary/{id}(id = ${#authentication.principal.memberEntity.id})}">내
+                                    급여</a></li>
+                                <li><a id="vacation"
+                                       th:href="@{/commute/myVacation/{id}(id = ${#authentication.principal.memberEntity.id})}">내
+                                    휴가</a></li>
+                            </ul>
+                        </th:block>
+                    </li>
+                    <th:block sec:authorize="hasAnyRole('MANAGER','ADMIN')">
+                        <li class="menuBar">
+                            <img th:src="@{/images/department.png}" alt="member">
+                            <a th:href="@{#}">부서</a>
+                            <ul class="subMenu">
+                                <li><a th:href="@{/department/top/deList}">부서관리</a></li>
+                            </ul>
+                        </li>
+                    </th:block>
+                    <li class="menuBar">
+                        <img th:src="@{/images/employee.png}" alt="member">
+                        <a th:href="@{#}">사원관리</a>
+                        <ul class="subMenu">
+                            <th:block sec:authorize="hasAnyRole('ADMIN')">
+                                <li><a th:href="@{/member/memberJoin}">사원등록</a></li>
+                            </th:block>
+                            <li><a th:href="@{/member/memberList}">사원조회</a></li>
+                        </ul>
+                    </li>
+                    <li class="menuBar">
+                        <img th:src="@{/images/naver.png}" alt="member">
+                        <a th:href="@{#}">naver</a>
+                        <ul class="subMenu">
+                            <li>
+                                <a href="https://groupair2.ncpworkplace.com/v/home/" class="naverBtn">네이버API연동</a>
+                            </li>
+                            <li>
+                                <!-- https://developers.worksmobile.com/kr/docs/auth-oauth -->
+                                <!-- 클라이언트 앱에서 사용자 인증을 통해 Authorization Code를 발급받으려면 아래와 같은 URL을 호출 -->
+                                <form action="https://auth.worksmobile.com/oauth2/v2.0/authorize" method="get">
+                                    <input type="hidden" name="client_id" value="FlR_0mjyLZ4jddlkIcaD">
+                                    <input type="hidden" name="redirect_uri" value="http://localhost:8095/naver/auth2">
+                                    <input type="hidden" name="scope"
+                                           value="directory,directory.read,orgunit,orgunit.read,user,user.read">
+                                    <input type="hidden" name="response_type" value="code">
+                                    <input type="hidden" name="state" value="test">
+                                    <input type="submit" value="조직인증" class="naverBtn"
+                                           style="background-color:transparent;  border:0px transparent solid;">
+                                </form>
+                            </li>
+
+                            <li>
+                                <!-- naver 이메일 연동 기본 주소 -->
+                                <form id="mail"
+                                      onsubmit="window.open('https://mail.worksmobile.com/write/popup', '_blank', 'width=600, height=400,resizeable,scrollbars');">
+                                    <input type="submit" value="메일연동" class="naverBtn"
+                                           style="background-color:transparent;  border:0px transparent solid;">
+                                </form>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="menuBar">
+                        <img th:src="@{/images/plane.png}" alt="member">
+                        <a th:href="@{/airplane/index}">항공편</a>
+                        <ul class="subMenu">
+                            <th:block sec:authorize="hasAnyRole('ADMIN')">
+                                <li><a th:href="@{/airplane/index}">항공편 관리</a></li>
+                                <li><a th:href="@{/airplane/pilot}">기장님 관리</a></li>
+                            </th:block>
+                            <th:block sec:authorize="hasAnyRole('MEMBER')">
+                                <li><a th:href="@{/airplane/index}">항공편 관리</a></li>
+                            </th:block>
+                            <th:block sec:authorize="hasAnyRole('MANAGER')">
+                                <li><a th:href="@{/airplane/index}">항공편 관리</a></li>
+                                <li><a
+                                        th:href="@{/airplane/myAirplane/{id}(id = ${#authentication.principal.memberEntity.id})}">내
+                                    운행정보</a></li>
+                            </th:block>
+                        </ul>
+                    </li>
+                    <li class="menuBar">
+                        <img th:src="@{/images/board.png}" alt="board">
+                        <a th:href="@{/board/write}">게시판 작성</a>
+                        <ul class="subMenu">
+                            <li><a th:href="@{/board/boardList}">전체게시판</a></li>
+                            <li><a th:href="@{/board/Lists(boardSeparateId=1)}">공지사항</a></li>
+                            <li><a th:href="@{/board/Lists(boardSeparateId=2)}">자유게시판</a></li>
+                            <li><a th:href="@{/board/Lists(boardSeparateId=3)}">수다방</a></li>
+                            <li><a th:href="@{/board/Lists(boardSeparateId=4)}">Q&A</a></li>
+                        </ul>
+                    </li>
+                    <li class="menuBar">
+                        <img th:src="@{/images/payment.png}" alt="sign">
+                        <a th:href="@{/sign}">결재함</a>
+                    </li>
+                    <li class="menuBar">
+                        <img th:src="@{/images/calendar.png}" alt="calender">
+                        <a th:href="@{/my/schedule}">일정관리</a>
+                        <ul class="subMenu">
+                            <th:block sec:authorize="hasAnyRole('ADMIN')">
+                                <li><a th:href="@{/my/schedule}">전체 일정 관리</a></li>
+                            </th:block>
+                            <li><a th:href="@{/my/schedule/{id}(id=${#authentication.principal.memberEntity.id})}">내 일정
+                                확인</a></li>
+                        </ul>
+                    </li>
+                    <li class="menuBar">
+                        <img th:src="@{/images/api.png}" alt="member">
+                        <a th:href="@{#}">API</a>
+                        <ul class="subMenu">
+                            <li><a th:href="@{/api/weather/weatherApi}">날씨 API</a></li>
+                            <li><a th:href="@{/api/weather/weatherWeek}">날씨예보</a></li>
+                            <li><a th:href="@{/api/movie/index}">영화 API</a></li>
+                            <li><a th:href="@{/api/bus/index}">버스 API</a></li>
+                            <li><a th:href="@{/api/bus/airplaneBusIndex}">공항버스 API</a></li>
+
+                        </ul>
+                    </li>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="bottom-con">
+                <p>저작권, 주소</p>
+                <div class="bottom-sns">
+                    <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.youtube.com" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://github.com/1thsdpdms1/Project2GroupAirTeam" target="_blank"><i
+                            class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="right" th:fragment="adminRightFragment">
+    <div class="right-con">
+        <div class="top">
+            <div class="gnb">
+                <ul>
+                    <li><a th:href="@{#}">로그인</a></li>
+                    <li><a th:href="@{#}">회원가입</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="admin-data">
+                data
+            </div>
+        </div>
+    </div>
+</div>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/adminLayout}">
+
+<th:block layout:fragment="title">
+
+</th:block>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/sign/index.css}">
+</th:block>
+<th:block layout:fragment="script">
+    <!-- 각 페이지 마다 변경 -->
+</th:block>
+
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+        <div class="sign">
+            <h1>결재</h1>
+            <div class="sign-con">
+                <div>
+                    <a th:href="@{/sign/write}">결재작성</a>
+                </div>
+                <div>
+                    <th:block th:if="${position} == '사원' or ${position} == '부장'">
+                        <a th:href="@{/sign/approveSignList}">상신함</a>
+                    </th:block>
+                </div>
+                <div>
+                    <th:block th:if="${position} == '부장' or ${position} == '대표이사'">
+                        <a th:href="@{/sign/signList}">나에게 온 결재함</a>
+                    </th:block>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    </div>
+</th:block>
+</html>
+
+
+

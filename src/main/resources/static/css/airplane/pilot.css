@@ -1,0 +1,35 @@
+@import url(../common/reset.css);
+@import url(../common/paging.css);
+
+.adminContainer h1{
+    text-align: center;
+    padding: 28px;
+    border-bottom: 1px solid #ccc;
+}
+
+.adminContainer .pilot .pilot-con{
+    height: calc( 100vh - 100px - 150px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.adminContainer .pilot .pilot-con table{
+    text-align: center;
+    padding: 0 20px;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.adminContainer .pilot .pilot-con table th{
+    font-size: 20px;
+    padding: 10px;
+    border-bottom: 1px solid #333;
+}
+
+.adminContainer .pilot .pilot-con table td{
+    font-size: 15px;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+}
+

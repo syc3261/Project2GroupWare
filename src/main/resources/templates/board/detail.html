@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/adminLayout}">
+
+<th:block layout:fragment="title">
+    <!-- 각 페이지 마다 변경 -->
+</th:block>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/board/detail.css}">
+    <!--  <link rel="stylesheet" th:href="@{/css/board/detail.css}">-->
+    <!-- 각 페이지 마다 변경 -->
+
+</th:block>
+<th:block layout:fragment="script">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script th:src="@{/js/board/reply.js}" defer></script>
+    <!-- 각 페이지 마다 변경 -->
+</th:block>
+
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+
+        <div class="detail">
+
+            <div class="detail-con">
+
+                <div class="top">
+                    <div class="detail-form">
+                        <form th:action="@{/board/boardUpdate}" method="post" enctype="multipart/form-data">
+                            <div class="left-img">
+                                <div class="left-img-con">
+                                    <th:block th:if="${board.boardAttachFile==1}"> <!--  이미지 표시 -->
+                                        <img th:src="@{|/upload/${board.boardNewFile}|}" alt="이미지대체문구">
+                                    </th:block>
+                                    <th:block th:unless="${board.boardAttachFile==1}">  <!--  이미지 표시 -->
+                                        <img src="https://placehold.co/300x300?text=NOIMAGE" alt="이미지대체문구">
+                                    </th:block>
+                                </div>
+                            </div>
+                            <ul>
+                                <li>
+                                    게시판 상세페이지
+                                </li>
+
+
+                                <li>
+                                    <label for="title">제목</label>
+                                    <input type="text" name="title" id="title" th:value="${board.title}" readonly>
+                                </li>
+                                <li>
+                                    <label for="writer">작성자</label>
+                                    <input type="text" name="writer" id="writer" th:value="${board.writer}" readonly>
+                                </li>
+
+                                <li>
+                                    <label for="hit">조회수</label>
+                                    <input type="text" name="hit" id="hit" th:value="${board.hit}" readonly>
+                                </li>
+                                <li>
+                                    <label>작성시간</label>
+                                    <span th:text="${board.createTime}"></span>
+                                </li>
+                                <li>
+                                    <label>수정시간</label>
+                                    <span th:text="${board.updateTime}"></span>
+                                </li>
+
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+
+
+                <div class="content">
+                    <!-- <li>
+                      <label for="content">내용</label>
+                    </li> -->
+                    <li class="content-con">
+                            <textarea name="content" id="content" cols="125" rows="12" th:text="${board.content}"
+                                      readonly></textarea>
+                    </li>
+
+                </div>
+                <div class="btn-content">
+                    <li class="btns">
+
+                        <th:block sec:authorize="isAuthenticated()">
+                            <th:block sec:authorize="hasAnyRole('ADMIN')">
+                                <th:block th:if="${board.memberEntity.userEmail==myUserDetails.username}">
+                                    <a class="btn1" th:href="@{/board/boardUpdate/{id}(id=${board.id})}">수정</a>
+                                </th:block>
+                                <a th:href="@{/board/delete/{id}(id=${board.id})}" class="btn1">삭제</a>
+
+                            </th:block>
+
+                            <th:block th:if="${board.memberEntity.userEmail==myUserDetails.username}">
+                                <th:block sec:authorize="hasAnyRole('MANAGER' ,'MEMBER')">
+                                    <a th:href="@{/board/boardUpdate/{id}(id=${board.id})}" class="bnt1">수정</a>
+                                    <!--<input type="submit" value="수정" class="btn1">-->
+                                    <a th:href="@{/board/delete/{id}(id=${board.id})}" class="btn1">삭제</a>
+                                </th:block>
+                            </th:block>
+
+                            <a th:href="@{/board/boardList}" class="btn1">목록</a>
+                        </th:block>
+
+                    <li>
+                        <input type="hidden" name="id" id="id" th:value="${board.id}" readonly
+                               style="display:none;">
+                    </li>
+
+
+                    <li>
+                        <!-- <label for="memberId">회원 아이디</label> -->
+                        <input type="hidden" name="memberId" id="memberId" th:value="${board.memberEntity.id}"
+                               readonly style="display:none;">
+                    </li>
+
+                    <li>
+                        <!-- <label for="boardSeparateId">카테고리 ID</label>       -->
+                        <!-- board.getMemberEntity().id -->
+                        <input type="hidden" name="boardSeparateEntity.id" id="boardSeparateId"
+                               th:value="${board.boardSeparateEntity.id}" readonly style="display:none;">
+                    </li>
+
+
+                    </form>
+
+                </div>
+            </div>
+
+
+            <div class="bottom">
+                <div class="reply">
+
+                    <div class="reply-con">
+
+
+                        <h1 class="title"> 댓글 </h1>
+
+                        <th:block sec:authorize="isAuthenticated()">
+                            <input type="hidden" name="boardId" id="boardId" th:value="${board.id}">
+                            <input type="text" name="replyWriter" id="replyWriter"
+                                   th:value="${myUserDetails.name}" readonly>
+                            <input type="text" name="replyContent" id="replyContent" placeholder="덧글을 남겨 보세요">
+                            <li class="replyBtn">
+                                <input type="button" value="등록" id="replyBtn">
+                            </li>
+                        </th:block>
+
+
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>게시판번호</th>
+                                <th>댓글번호</th>
+                                <th>내용</th>
+                                <th>작성자</th>
+                                <th>작성시간</th>
+                                <th>삭제</th>
+                            </tr>
+
+                            </thead>
+
+                            <tbody class="tData">
+                            <tr th:each="reply:${replyList}">
+                                <td th:text="${reply.boardEntity.id}"></td>
+                                <td th:text="${reply.id}"></td>
+                                <td th:text="${reply.replyContent}"></td>
+                                <td th:text="${reply.replyWriter}"></td>
+                                <td th:text="${#temporals.format(reply.createTime, 'yy/MM/dd HH:mm:ss')}"></td>
+
+
+                                <td><a th:href="@{/reply/boardReplyDelete/{id}(id=${reply.id})}">삭제</a></td>
+
+                                <!-- <a th:href="@{/board/delete/{id}(id=${board.id})}" class="btn1">삭제</a> -->
+                            </tr>
+                            <!--Ajax -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+</th:block>
+</html>

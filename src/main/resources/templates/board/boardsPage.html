@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/adminLayout}">
+
+<th:block layout:fragment="title">
+    <!-- 각 페이지 마다 변경 -->
+</th:block>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/board/boardsPage.css}">
+    <!-- 각 페이지 마다 변경 -->
+</th:block>
+<th:block layout:fragment="script">
+    <!-- 각 페이지 마다 변경 -->
+</th:block>
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+
+        <div class="boardList">
+            <div class="boardList-con">
+
+                <div class="top">
+                    <h1 th:switch="${boardSeparateId}">
+
+                        <li class="notice"><span th:case="1"> <img src="/images/board/sound.png" width="20px"
+                                                                   height="20px"> 공지사항 </span></li>
+                        <li class="free"><span th:case="2"><img src="/images/board/bird.png" width="20px" height="20px"> 자유게시판</span>
+                        </li>
+                        <li class="chet"><span th:case="3"><img src="/images/board/people.png" width="20px"
+                                                                height="20px"> 수다방</span></li>
+                        <li class="qna"><span th:case="4"><img src="/images/board/chat.png" width="30px" height="30px"> Q&A</span>
+                        </li>
+
+                    </h1>
+
+                    <div class="search">
+                        <div th:if="${boardSeparateId == 1}">
+                            <form th:action="@{/board/Lists(boardSeparateId=1)}" method="get">
+                                <li><a th:href="@{/board/write}">글작성</a></li>
+                                <input type="hidden" name="boardSeparateId" value="1">
+                                <label for="subject1"></label>
+                                <select name="subject" id="subject1">
+                                    <option value="title" th:selected="${#strings.equals(param.subject, 'title')}">제목
+                                    </option>
+                                    <option value="content" th:selected="${#strings.equals(param.subject, 'content')}">
+                                        내용
+                                    </option>
+                                    <option value="nickName"
+                                            th:selected="${#strings.equals(param.subject, 'nickName')}">닉네임
+                                    </option>
+                                </select>
+                                <label for="search1"></label>
+                                <input type="text" name="search" id="search1" th:value="${param.search}">
+                                <input type="submit" value="검색">
+                            </form>
+                        </div>
+
+
+                        <div th:if="${boardSeparateId == 2}">
+                            <form th:action="@{/board/Lists(boardSeparateId=2)}" method="get">
+                                <input type="hidden" name="boardSeparateId" value="2">
+                                <li><a th:href="@{/board/write}">글작성</a></li>
+                                <label for="subject2"></label>
+                                <select name="subject" id="subject2">
+                                    <option value="title" th:selected="${#strings.equals(param.subject, 'title')}">제목
+                                    </option>
+                                    <option value="content" th:selected="${#strings.equals(param.subject, 'content')}">
+                                        내용
+                                    </option>
+                                    <option value="nickName"
+                                            th:selected="${#strings.equals(param.subject, 'nickName')}">닉네임
+                                    </option>
+                                </select>
+                                <label for="search2"></label>
+                                <input type="text" name="search" id="search2" th:value="${param.search}">
+                                <input type="submit" value="검색">
+                            </form>
+                        </div>
+                        <div th:if="${boardSeparateId == 3}">
+                            <form th:action="@{/board/Lists(boardSeparateId=3)}" method="get">
+                                <input type="hidden" name="boardSeparateId" value="3">
+                                <li><a th:href="@{/board/write}">글작성</a></li>
+                                <label for="subject3"></label>
+                                <select name="subject" id="subject3">
+                                    <option value="title" th:selected="${#strings.equals(param.subject, 'title')}">제목
+                                    </option>
+                                    <option value="content" th:selected="${#strings.equals(param.subject, 'content')}">
+                                        내용
+                                    </option>
+                                    <option value="nickName"
+                                            th:selected="${#strings.equals(param.subject, 'nickName')}">닉네임
+                                    </option>
+                                </select>
+                                <label for="search2"></label>
+                                <input type="text" name="search" id="search3" th:value="${param.search}">
+                                <input type="submit" value="검색">
+                            </form>
+                        </div>
+
+
+                        <div th:if="${boardSeparateId == 4}">
+                            <form th:action="@{/board/Lists(boardSeparateId=4)}" method="get">
+                                <input type="hidden" name="boardSeparateId" value="4">
+                                <li><a th:href="@{/board/write}">글작성</a></li>
+                                <label for="subject2"></label>
+                                <select name="subject" id="subject">
+                                    <option value="title" th:selected="${#strings.equals(param.subject, 'title')}">제목
+                                    </option>
+                                    <option value="content" th:selected="${#strings.equals(param.subject, 'content')}">
+                                        내용
+                                    </option>
+                                    <option value="nickName"
+                                            th:selected="${#strings.equals(param.subject, 'nickName')}">닉네임
+                                    </option>
+                                </select>
+                                <label for="search2"></label>
+                                <input type="text" name="search" id="search4" th:value="${param.search}">
+                                <input type="submit" value="검색">
+                            </form>
+                        </div>
+
+                    </div>
+
+
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>title</th>
+                            <th>작성자</th>
+                            <th>내용</th>
+                            <th>조회수</th>
+                            <th>작성일</th>
+                            <th>수정 시간</th>
+                            <th>보기</th> <!-- 게시글 상세보기 -->
+                            <th>삭제</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="board : ${boards}">
+                            <th:block th:if="${board.boardSeparateId == 1}">
+                                <td class="warring" th:text="'공지사항'" style="color:red"></td>
+                                <!--  <img src="/static/images/board/warring.png" style="width:10px;height:10px;" alt="공지">-->
+                            </th:block>
+                            <th:block th:unless="${board.boardSeparateId == 1}">
+                                <td th:text="${board.id}" style="color:black"></td>
+                            </th:block>
+                            <td th:text="${board.title}"></td>
+                            <td th:text="${board.writer}"></td>
+                            <td th:text="${board.content}"></td>
+                            <td th:text="${board.hit}"></td>
+                            <td th:text="${#temporals.format(board.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+
+                            <td th:text="${#temporals.format(board.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+
+                            <td><a th:href="@{/board/detail/{id}(id=${board.id})}">보기</a></td><!-- 게시글 상세보기 -->
+
+
+                            <th:block sec:authorize="isAuthenticated()">
+                                <th:block th:if="${board.memberEntity.userEmail == myUserDetails.username}">
+                                    <td><a th:href="@{/board/delete/{id}(id=${board.id})}" style="color:red">삭제</a></td>
+                                </th:block>
+                                <th:block th:unless="${board.memberEntity.userEmail == myUserDetails.username}">
+                                    <th:block sec:authorize="hasAnyRole('ADMIN')">
+                                        <td><a th:href="@{/board/delete/{id}(id=${board.id})}" style="color:red">삭제</a>
+                                        </td>
+                                    </th:block>
+                                    <th:block sec:authorize="!hasAnyRole('ADMIN')">
+                                        <td></td>
+                                    </th:block>
+                                </th:block>
+
+                            </th:block>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="bottom">
+                    <div class="paging">
+                        <ul>
+                            <li>
+                                <!--              <!- 현재페이지가  첫번째 페이지이면   span표시 &ndash;&gt;-->
+                                <span th:if="${boards.pageable.pageNumber+1 eq 1}" class="span0">&laquo</span>
+                                <!-- 처음 페이지가 아니면  a -->
+                                <span th:unless="${boards.pageable.pageNumber+1 eq 1}">
+                   <!--              <a th:href="@{/board/Lists?boardSeparateId=1(page=0)}" class="span1">처음</a>-->
+
+                                    <!-- boardSeparateId=1일 때만 보이게 하기 -->
+                                 <div th:if="${boardSeparateId == 1}">
+
+                                     <a th:href="@{/board/Lists?boardSeparateId=1(page=0)}" class="span1">&laquo </a>
+                                 </div>
+                                    <!-- boardSeparateId=2일 때만 보이게 하기 -->
+                                 <div th:if="${boardSeparateId == 2}">
+                                     <a th:href="@{/board/Lists?boardSeparateId=2(page=0)}" class="span1">&laquo </a>
+                                 </div>
+
+                                  <div th:if="${boardSeparateId == 3}">
+                                     <a th:href="@{/board/Lists?boardSeparateId=3(page=0)}" class="span1">&laquo </a>
+                                 </div>
+
+                                  <div th:if="${boardSeparateId == 4}">
+                                     <a th:href="@{/board/Lists?boardSeparateId=5(page=0)}" class="span1">&laquo </a>
+                                 </div>
+
+
+                               </span>
+                            </li>
+
+                            <li>
+                                <!-- 이전페이지가  첫번째 페이지이면   span표시 -->
+                                <span th:if="${1==boards.pageable.pageNumber+1}" class="span0">&lt</span>
+                                <span th:unless="${1==boards.pageable.pageNumber+1}">
+                               <!--boardList.pageable.pageNumber 현재페이지 -1 -->
+
+                             <a th:if="${boardSeparateId == 1}"
+                                th:href="@{/board/Lists(boardSeparateId=1,page=${boards.number-1})}"
+                                class="span1">&lt;</a>
+
+                            <a th:if="${boardSeparateId == 2}"
+                               th:href="@{/board/Lists(boardSeparateId=2,page=${boards.number-1})}"
+                               class="span1">&lt;</a>
+
+                            <a th:if="${boardSeparateId == 3}"
+                               th:href="@{/board/Lists(boardSeparateId=3,page=${boards.number-1})}"
+                               class="span1">&lt;</a>
+
+                            <a th:if="${boardSeparateId == 4}"
+                               th:href="@{/board/Lists(boardSeparateId=4,page=${boards.number-1})}"
+                               class="span1">&lt;</a>
+
+
+                             </span>
+
+                            </li>
+
+                            <li th:each="i: ${#numbers.sequence(startPage, endPage)}" class="block">
+
+                                <div th:if="${boardSeparateId == 1}">
+                                    <span th:if="${i == boards.pageable.pageNumber+1}" th:text="${i}"
+                                          class="now"></span>
+                                    <a th:unless="${i == boards.pageable.pageNumber+1}"
+                                       th:href="@{/board/Lists?boardSeparateId=1(page=${ i - 1})}" th:text="${i}"></a>
+                                </div>
+
+                                <div th:if="${boardSeparateId == 2}">
+                                    <span th:if="${i == boards.pageable.pageNumber+1}" th:text="${i}"
+                                          class="now"></span>
+                                    <a th:unless="${i == boards.pageable.pageNumber+1}"
+                                       th:href="@{/board/Lists?boardSeparateId=2(page=${ i - 1})}" th:text="${i}"></a>
+                                </div>
+                                <div th:if="${boardSeparateId == 3}">
+                                    <span th:if="${i == boards.pageable.pageNumber+1}" th:text="${i}"
+                                          class="now"></span>
+                                    <a th:unless="${i == boards.pageable.pageNumber+1}"
+                                       th:href="@{/board/Lists?boardSeparateId=3(page=${ i - 1})}" th:text="${i}"></a>
+                                </div>
+                                <div th:if="${boardSeparateId == 4}">
+                                    <span th:if="${i == boards.pageable.pageNumber+1}" th:text="${i}"
+                                          class="now"></span>
+                                    <a th:unless="${i == boards.pageable.pageNumber+1}"
+                                       th:href="@{/board/Lists?boardSeparateId=4(page=${ i - 1})}" th:text="${i}"></a>
+                                </div>
+
+                            </li>
+
+
+                            <li>
+                                <!-- 현재페이지가 마지막 페이지이면   span표시 -->
+                                <span th:if="${boards.totalPages ==boards.pageable.pageNumber+1}"
+                                      class="span0">&gt</span>
+                                <!-- 현재페이지가 마지막 페이지아니면    a 표시 현재페이지 +1 -->
+                                <span th:unless="${boards.totalPages ==boards.pageable.pageNumber+1}">
+
+                                  <a th:if="${boardSeparateId == 1}"
+                                     th:href="@{/board/Lists?boardSeparateId=1(page=${boards.pageable.pageNumber + 1})}"
+                                     class="span1">&gt </a>
+
+                                    <!-- boardSeparateId가 2일 때만 보이게 하기 -->
+                               <a th:if="${boardSeparateId == 2}"
+                                  th:href="@{/board/Lists?boardSeparateId=2(page=${boards.pageable.pageNumber + 1})}"
+                                  class="span1">&gt </a>
+
+                                <a th:if="${boardSeparateId == 3}"
+                                   th:href="@{/board/Lists?boardSeparateId=3(page=${boards.pageable.pageNumber + 1})}"
+                                   class="span1">&gt </a>
+                                <a th:if="${boardSeparateId == 4}"
+                                   th:href="@{/board/Lists?boardSeparateId=4(page=${boards.pageable.pageNumber + 1})}"
+                                   class="span1">&gt </a>
+                             </span>
+                            </li>
+                            <li>
+                                <!-- 현재페이지가 마지막 페이지이면   span표시 -->
+                                <span th:if="${boards.totalPages ==boards.pageable.pageNumber+1}"
+                                      class="span0">&raquo</span>
+                                <!-- 현재페이지가 마지막 페이지가 아니면 마지막 페이지로 이동 해라  a -->
+                                <span th:unless="${boards.totalPages ==boards.pageable.pageNumber+1}">
+
+                               <a th:if="${boardSeparateId == 1}"
+                                  th:href="@{/board/Lists?boardSeparateId=1(page=${boards.totalPages-1})}"
+                                  class="span1">&raquo</a>
+
+                                   <a th:if="${boardSeparateId == 2}"
+                                      th:href="@{/board/Lists?boardSeparateId=2(page=${boards.totalPages-1})}"
+                                      class="span1">&raquo</a>
+
+                             <a th:if="${boardSeparateId == 3}"
+                                th:href="@{/board/Lists?boardSeparateId=3(page=${boards.totalPages-1})}" class="span1">&raquo</a>
+
+                             <a th:if="${boardSeparateId == 4}"
+                                th:href="@{/board/Lists?boardSeparateId=4(page=${boards.totalPages-1})}" class="span1">&raquo</a>
+                             </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

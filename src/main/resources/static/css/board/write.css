@@ -1,0 +1,278 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&display=swap');
+
+
+.adminContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.adminContainer .write{
+width: 1080px;
+  
+}
+
+
+.adminContainer .write .write-con{ 
+  padding: 30px;
+ 
+  display: flex;
+  justify-content: center;
+}
+
+.adminContainer .write .write-con h2{ 
+  letter-spacing: 0.5em;
+
+  font-family: "Jua", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+
+.adminContainer .write .write-con form{ 
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid gray;
+  box-shadow: 2px 10px 10px 1px #404d53;
+
+
+}
+
+.adminContainer .write .write-con .board-join ul{ 
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+}
+
+
+.adminContainer .write .write-con .header-box{ 
+/* margin-bottom: 20px; */
+height: 150px;
+border-radius: 30px;
+background-color: rgb(249 249 249);
+
+}
+
+
+  
+
+.adminContainer .write .write-con .header-box input{ 
+
+  border: 0;
+  border-bottom: 1px solid #ebecef;
+  /* width: 100%; */
+  padding: 10px;
+
+}
+.adminContainer .write .write-con .header-box .title{ 
+
+  height: 40px;
+  /* margin-left: 40px; */
+  width: 650px;
+  /* background-color: #f5f6f8;
+  border: 1px solid rgb(235, 231, 231); */
+  display: flex;
+  align-items: center;
+
+}
+.adminContainer .write .write-con .header-box .title input{ 
+
+width: 100%;
+}
+.adminContainer .write .write-con .board-box ul{ 
+  
+  display: flex;
+  justify-content: center;
+
+}
+.adminContainer .write .write-con .board-header{ 
+
+
+  box-sizing: border-box;
+ 
+
+}
+
+
+.adminContainer .write .write-con .board-header select{ 
+  letter-spacing: 1em;
+  border-bottom-color: #89b9db;
+  /* height: 40px; */
+  width: 300px;
+  border-width: 0 0 1px;
+  box-sizing: border-box;
+
+  padding: 10px;
+  
+  font-family: "Gamja Flower", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+
+}
+
+.adminContainer .write .write-con .board-header{ 
+  
+  padding: 45px;
+  height: 30px;
+  width: 100%;
+  border-radius: 20px;
+ 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.adminContainer .write .write-con .board-categoly{ 
+  
+  width: 650px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.adminContainer .write .write-con .board-categoly input{ 
+  
+  width: 240px;
+  text-align: center;
+}
+
+
+
+
+.adminContainer .write .write-con .board-header > li:nth-child(1){ 
+ 
+ width: 400px;
+
+}
+/* .adminContainer .write .write-con .board-header > li:nth-child(2){ 
+ 
+  flex: 1;
+  height: 40px;
+} */
+
+
+
+.adminContainer .write .write-con .board-header > li:nth-child(3) input{ 
+  
+width: 100%;
+padding: 10px;
+} 
+
+
+.adminContainer .write .write-con .board-header > li:nth-child(3){ 
+ 
+  display: flex;
+  justify-content: center;
+
+}
+
+.adminContainer .write .write-con .board-header > li:nth-child(3) label{ 
+
+  height: 40px;
+}
+
+
+
+.adminContainer .write .write-con .board-title{
+  font-size: 30px;
+  height: 60px;
+  text-align: center;
+}
+.adminContainer .write .write-con .board-join { 
+
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+
+
+}
+
+.adminContainer .write .write-con .board-join ul li:nth-child(2){
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.adminContainer .write .write-con .board-join li:nth-child(2) input{
+    background-color:white;
+    box-shadow: 1px 1px;
+    width: 50px;
+    height: 30px;
+    border-radius: 12px;
+    
+}
+
+.adminContainer .write .write-con .board-join li:nth-child(2) input:hover{
+
+  cursor: pointer;
+  background-color: #eff6ff;
+  color: black;
+  font-weight: 700;
+
+}
+
+
+
+
+
+
+
+
+
+.adminContainer .write .write-con textarea{ 
+  border-radius: 20px;
+  /* margin-top: 100px; */
+  border: none;
+  padding: 20px;
+  border:1px solid rgb(231, 223, 223);
+  box-shadow: 1px 1px 1px 1px beige;
+}
+
+.adminContainer .write .write-con textarea:focus{ 
+ 
+  outline: none;
+
+}
+
+
+.adminContainer .write .write-con .board-join .btn-upload{
+  width: 140px;
+  /* height: 30px; */
+  background: #fff;
+  border: 1px solid rgb(77,77,77);
+  border-radius: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background: url(/images/board/gallery.png) no-repeat 95%/cover; 
+  background-size: 20px;
+  padding: 10px;
+}
+
+
+
+
+.adminContainer .write .write-con .board-join .btn-upload:hover{
+  font-weight: 700;
+  background-color: rgba(77, 77, 77, 0.164);
+  color: #fff;
+  /* background: url(/static/images/board/gallery.png)no-repeat 50%/cover;
+  background: url(/images/board/gallery.png) no-repeat 50%/cover; */
+
+ 
+
+}
+
+
+
+
+.adminContainer .write .write-con .board-join #boardFile{
+
+ 
+  display: none;
+
+}
+
+

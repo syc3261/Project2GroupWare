@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/adminLayout}">
+<th:block layout:fragment="title">
+    <!-- 각 페이지 마다 변경 -->
+    <title>memberJoin</title>
+</th:block>
+<th:block layout:fragment="css">
+    <!-- 각 페이지 마다 변경 -->
+    <link rel="stylesheet" th:href="@{/css/member/memberJoin.css}">
+</th:block>
+<th:block layout:fragment="script">
+    <!-- 각 페이지 마다 변경 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js" defer></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script th:src="@{/js/member/member.js}" defer></script>
+    <script th:src="@{/js/member/address.js}" defer></script>
+    <script th:src="@{/js/member/department.js}" defer></script>
+</th:block>
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+        <div class="memberJoin">
+            <div class="memberJoin-con">
+                <h1>회원등록</h1>
+                <div class="memberJoin1" id="memberJoin1">
+                    <form th:action="@{/member/memberJoin}" method="post" th:object="${memberDto}"
+                          enctype="multipart/form-data">
+                        <ul>
+                            <li>
+                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--                                <script type="text/javascript">-->
+<!--                                    function sendNumber(){-->
+
+<!--                                        $.ajax({-->
+<!--                                            url:"/mail",-->
+<!--                                            type:"post",-->
+<!--                                            dataType:"json",-->
+<!--                                            data:{"mail" : $("#userEmail").val()},-->
+<!--                                            success: function(data){-->
+<!--                                                alert("입력된 이메일로 초기 비빌번호를 전송하였습니다!");-->
+<!--&lt;!&ndash;                                                $("#Confirm").attr("value",data);&ndash;&gt;-->
+<!--                                            $("#userPw").val(data.number); // 서버에서 반환된 난수를 비밀번호 필드에 설정-->
+<!--                                            }-->
+<!--                                        });-->
+<!--                                    }-->
+
+<!--                                </script>-->
+
+                                <script>
+                                    function sendNumber() {
+                                        var email = $("#userEmail").val();
+
+                                        $.ajax({
+                                            url: "/mail",
+                                            type: "post",
+                                            data: {
+                                                "mail": email
+                                            },
+                                            success: function(data) {
+                                                alert("입력된 이메일로 초기 비밀번호를 전송하였습니다!");
+                                                $("#userPw").val(data); // 서버에서 반환된 난수를 비밀번호 필드에 설정
+                                            },
+                                            error: function(error) {
+                                                console.error("Error sending mail", error);
+                                            }
+                                        });
+                                    }
+                                </script>
+
+
+                                <label for="userEmail" class="label1">이 메 일</label>
+                                <div id="mail_input" name="mail_input">
+                                    <input type="text" name="userEmail" id="userEmail" placeholder="이메일 입력">
+                                    <button type="button" id="sendBtn" name="sendBtn" onclick="sendNumber()"> 메일보내기</button>
+                                </div>
+                                <br>
+
+                                <br>
+                                <input type="text" id="Confirm" name="Confirm" style="display: none" value="">
+
+<!--                                <input type="email" id="userEmail" th:field="*{userEmail}" placeholder="이 메 일"> <br>-->
+                            </li>
+                            <p th:if="${#fields.hasErrors('userEmail')}" th:errors="*{userEmail}" class="error"  style="color: #ff0000; font-size: 12px;"></p>
+
+                            <li>
+                                <label for="userPw" class="label1">비 밀 번 호</label>
+                                <div id="showPw" class="showPw">
+                                    <img th:src="@{/images/eye.png}" alt="이미지대체문구" height="24px">
+                                </div>
+                                <input type="password" id="userPw" th:field="*{userPw}" placeholder="비 밀 번 호">
+                            </li>
+                            <p th:if="${#fields.hasErrors('userPw')}" th:errors="*{userPw}" class="error"  style="color: #ff0000; font-size: 12px;"></p>
+
+                            <li>
+                                <label for="memberName" class="label1">이 름</label>
+                                <input type="text" id="memberName" th:field="*{name}" placeholder="이 름"> <br>
+                            </li>
+                            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error"  style="color: #ff0000; font-size: 12px;"></p>
+
+                            <li>
+                                <label for="employeeDate" class="label1">입사일</label>
+                                <input type="date" id="employeeDate" th:field="*{employeeDate}">
+                            </li>
+                            <p th:if="${#fields.hasErrors('employeeDate')}" th:errors="*{employeeDate}"
+                               class="error"></p>
+
+                            <li>
+                                <label for="topDepartmentSelect" class="label1">상위 부서</label>
+                            </li>
+                            <li>
+                                <select name="departmentEntity.topDepartmentEntity" id="topDepartmentSelect">
+                                    <option value="">상위 부서를 선택하세요</option>
+                                    <th:block th:each="topDepartment : ${list}">
+                                        <option th:value="${topDepartment.id}"
+                                                th:utext="${topDepartment.topDepartmentName}"
+                                                th:attr="data-department-list=${topDepartment.departmentEntityList}"></option>
+                                    </th:block>
+                                </select>
+                            </li>
+
+                            <li>
+                                <select name="departmentEntity" id="departmentSelect">
+                                    <option value="">부서를 선택하세요</option>
+                                </select>
+                            </li>
+                            <li>
+                                <label for="positionEntity.positionName" class="label1">직급</label>
+                                <select name="positionEntity.positionName" id="positionEntity.positionName">
+                                    <option value="사원">사원</option>
+                                    <option value="부장">부장</option>
+                                    <option value="대표이사">대표이사</option>
+                                </select>
+                            </li>
+                            <p th:if="${#fields.hasErrors('positionEntity.positionName')}"
+                               th:errors="*{positionEntity.positionName}"
+                               class="error"></p>
+                            <li>
+                                <label for="address" class="label1">주 소</label>
+                            </li>
+                            <li class="addressCss">
+                                <div class="address-con">
+                                <input type="text" id="sample6_postcode" placeholder="우편번호">
+                                <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+                                </div>
+                                <input type="text" id="sample6_address" placeholder="주소">
+                                <input type="text" id="sample6_detailAddress" placeholder="상세주소">
+                                <input type="hidden" id="address" placeholder="결합된 주소" th:field="*{address}">
+                            <li>
+                                <label for="phone" class="label1">전 화 번 호</label>
+
+                                <input type="text" id="phone" oninput="memberPhoneNumberInput()" maxlength="13"
+                                       th:field="*{phone}" placeholder="전화번호"> <br>
+                            </li>
+
+                            <li class="file">
+                                <label for="memberFile" class="label1">사 진 첨 부</label>
+                                <input type="file" name="memberFile" id="memberFile">
+                            </li>
+
+                            <li>
+                                <input type="submit" class="submitBtn" onclick="AllConfirm()" value="회원등록">
+                            </li>
+                            <li>
+                                <th:block th:if="error">
+                                    <p style="color: #ff0000; font-size: 12px;"></p>
+                                </th:block>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

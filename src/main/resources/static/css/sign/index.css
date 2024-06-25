@@ -1,0 +1,106 @@
+@import url(../common/reset.css);
+.adminContainer{
+    position: absolute;
+    min-height: calc(100vh - 75px);
+    width: calc(100% - 230px);
+    right: 0;
+    top: 75px;
+    background-color: #fff;
+    border-radius: 10px 0 0 0;
+}
+/*
+.sign-con h1{
+text-align: center
+}
+
+.sign-con div {
+   text-align: center;
+    margin: 30px 0;
+}
+
+.sign-con a {
+    display: inline-block;
+    width: 299px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 10px;
+    border: 1px solid;
+    font-size:25px;
+    color: white;
+    background: #96b3d9;
+    padding:10px 20px
+
+}
+
+.sign-con a:hover{
+background-color: #0056b3;
+
+}
+
+*/
+
+/* 기존 CSS 코드 */
+
+
+.sign {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign h1 {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    height: 100%;
+    margin-top: 30px;
+    box-sizing: border-box;
+}
+
+
+.sign-con {
+    height: 80vh;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.sign-con h1 {
+    grid-column: span 3; /* 3열을 차지하도록 설정 */
+    text-align: center;
+    background-color: white;
+    color: black;
+    padding: 10px;
+}
+
+.sign-con div {
+    text-align: center;
+    margin: 30px 0;
+
+}
+
+.sign-con a {
+    width: 90%; /* 부모 그리드 컬럼의 100%를 차지하도록 설정 */
+    height: 80px;
+    line-height: 30px;
+    border-radius: 10px;
+    border: 1px solid;
+    font-size: 30px;
+    color: white;
+    background: #96b3d9;
+    padding: 10px 20px;
+    transition: background-color 0.3s; /* 호버 효과를 위한 transition 효과 */
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.sign-con a:hover {
+    background-color: #0056b3; /* 호버 시 배경색 변경 */
+}
+
+
+

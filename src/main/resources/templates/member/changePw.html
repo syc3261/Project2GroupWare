@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/member/changPw.css}">
+    <script th:src="@{/js/member/checkEmail.js}" defer></script>
+    <script th:src="@{/js/member/checkPw.js}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js" defer></script>
+</head>
+<body>
+<div class="adminContainer">
+    <div class="changePw">
+        <div class="changePw-con">
+            <h1>비밀번호 변경</h1>
+            <li>
+                <input type="hidden" name="id" id="id" th:value="${memberDto.id}">
+            </li>
+
+            <li class="change">
+                <label for="userEmail" class="label1">이 메 일: </label>
+                <input type="email" name="userEmail" id="userEmail" th:value="${memberDto.userEmail}">
+                <br>
+            </li>
+            <li class="change">
+                <label for="name" class="label1">이 름:</label>
+                <input type="text" name="name" id="name" th:value="${memberDto.name}">
+                <br>
+            </li>
+            <li class="change">
+                <label for="newPassword" class="label1">새 비밀번호:</label>
+                <div id="password_input" name="password_input">
+                    <input type="password" name="newPassword" id="newPassword" placeholder="새 비밀번호 입력">
+                </div>
+                <br>
+            </li>
+            <li class="btn">
+                <button type="button" id="changePasswordBtn" name="changePasswordBtn"
+                        onclick="changePassword()">비밀번호 변경
+                </button>
+            </li>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>

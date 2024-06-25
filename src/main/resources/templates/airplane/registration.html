@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/adminLayout}">
+<th:block layout:fragment="title">
+    <!-- 각 페이지 마다 변경 -->
+</th:block>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/airplane/registration.css}">
+</th:block>
+<th:block layout:fragment="script">
+    <!-- 각 페이지 마다 변경 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js" defer></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script th:src="@{/js/airplane/airplane.js}" defer></script>
+</th:block>
+
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+        <div class="registration">
+            <div class="registration-con">
+                <form th:action="@{/airplane/registration}" method="post" th:object="${airplaneDto}">
+                    <ul>
+                        <li>
+                            <label for="toArea">출발지</label>
+                        </li>
+                        <li>
+                            <input type="text" id="toArea" class="address" placeholder="주소"
+                                   th:field="*{toArea}" readonly>
+                            <input type="button" onclick="toAreaFn()" value="출발지 찾기"><br>
+                        </li>
+                        <p th:if="${#fields.hasErrors('toArea')}" th:errors="*{toArea}" class="error"></p>
+
+                        <li>
+                            <label for="fromArea">도착지</label>
+                        </li>
+                        <li>
+                            <input type="text" id="fromArea" class="address" placeholder="주소"
+                                   th:field="*{fromArea}" readonly>
+                            <input type="button" onclick="fromAreaFn()" value="도착지 찾기"><br>
+                        </li>
+                        <p th:if="${#fields.hasErrors('fromArea')}" th:errors="*{fromArea}" class="error"></p>
+
+                        <li>
+                            <label for="toTime">출발시간</label>
+                        </li>
+                        <li>
+                            <input type="datetime-local" id="toTime" th:field="*{toTime}">
+                        </li>
+                        <p th:if="${#fields.hasErrors('toTime')}" th:errors="*{toTime}" class="error"></p>
+                        <li>
+                            <label for="fromTime">도착시간</label>
+                        </li>
+                        <li>
+                            <input type="datetime-local" id="fromTime" th:field="*{fromTime}">
+                        </li>
+                        <p th:if="${#fields.hasErrors('fromTime')}" th:errors="*{fromTime}" class="error"></p>
+                        <li>
+                            <label for="airplane">비행기</label>
+                        </li>
+
+                        <li>
+                            <input type="text" id="airplane"  th:field="*{airplane}">
+                        </li>
+                        <p th:if="${#fields.hasErrors('airplane')}" th:errors="*{toArea}" class="error"></p>
+
+                        <li>
+                            <label for="pilot">기장</label>
+                        </li>
+
+                        <li>
+                            <select name="memberId" id="pilot">
+                                <option th:each="pilot : ${memberDtoList}"
+                                        th:value="${pilot.id}"
+                                        th:text="${pilot.name}">
+                                </option>
+                            </select>
+                        </li>
+
+                        <li class="li2">
+                            <input type="submit" value="항공편 등록">
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

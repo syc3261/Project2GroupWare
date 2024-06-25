@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/adminLayout}">
+
+<th:block layout:fragment="title">
+
+</th:block>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/sign/signNo.css}">
+</th:block>
+<th:block layout:fragment="script">
+    <!-- 각 페이지 마다 변경 -->
+</th:block>
+
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+        <div class="signNo">
+            <div class="signNo-con">
+
+                <h2>반려된 결재 목록:<span th:text="'(' + ${signNoList.size()} + '건)'"></span></h2>
+
+                <!--                <span><a th:href="@{/sign/signList}">결재함</a></span> <br>-->
+                <!--                <span><a th:href="@{/sign/signOk}">승인된 결재 목록</a></span>-->
+
+                <form th:action="@{/sign/signNo}" method="get">
+
+
+                </form>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>기안자</th>
+                        <th>부서</th>
+                        <th>직급</th>
+                        <th>제목</th>
+                        <th>내용</th>
+                        <th>작성시간</th>
+                        <th>수정시간</th>
+                        <th>처리상태</th>
+                        <th>상세보기</th>
+                        <th>삭제</th>
+                        <th>최종승인자</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="sign : ${signNoList}">
+                        <td th:text="${sign.id}"></td>
+                        <td th:text="${sign.approve}"></td>
+                        <td th:text="${sign.deptName}"></td>
+                        <td th:text="${sign.level}"></td>
+                        <td th:text="${sign.title}"></td>
+                        <td th:text="${sign.content}"></td>
+                        <td th:text="${#temporals.format(sign.createTime, 'yy-mm-dd hh:mm:ss')}"></td>
+                        <td th:text="${#temporals.format(sign.updateTime, 'yy-mm-dd hh:mm:ss')}"></td>
+
+                        <td th:text="${sign.subContent}"></td>
+                        <td><a th:href="@{/sign/detail/{id}(id=${sign.id})}">상세보기</a></td>
+
+                        <td><a th:href="@{/sign/delete/{id}(id=${sign.id})}">삭제</a></td>
+
+                        <td th:text="${sign.lastApprover}">승인자</td>
+
+
+                        <!--                        <th:block th:if="${sign.signAttachFile==1}">-->
+                        <!--                            <td>O</td>-->
+                        <!--                        </th:block>-->
+                        <!--                        <th:block th:unless="${sign.signAttachFile==1}">-->
+                        <!--                            <td>X</td>-->
+                        <!--                        </th:block>-->
+
+                    </tr>
+                    </tbody>
+
+
+            </div>
+        </div>
+
+    </div>
+    </div>
+    </div>
+</th:block>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/adminLayout}">
+<th:block layout:fragment="title">
+    <title>상위부서</title>
+</th:block>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/topDepartment/department.css}">
+</th:block>
+<th:block layout:fragment="script">
+    <!--    <script th:src="@{/js/department/department.js}" defer></script>-->
+</th:block>
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+        <div class="make">
+            <a th:href="@{/department/top/deList}"><h1>부  서  관  리</h1></a>
+            <div class="make-con">
+                <div class="de_left">
+                    <div class="creation">
+                        <th:block sec:authorize="hasAnyRole('ADMIN','MANAGER')">
+                            <a th:href="@{/department/write}">부서생성</a>
+                            <th:block sec:authorize="hasRole('ADMIN')">
+                                <a th:href="@{/department/top/write}">상위부서생성</a>
+                            </th:block>
+                        </th:block>
+                    </div>
+                    <h1><a th:href="@{/department/top/deList}">부 서 목 록</a></h1>
+                    <div class="top">
+                        <ul th:each="top : ${list}">
+                            <a th:href="@{/department/top/detail/{id}(id=${top.id})}" id="topDe">
+                                <li th:text="${top.topDepartmentName}"></li>
+                            </a>
+                            <ul th:each="de : ${top.departmentEntityList}">
+                                <a th:href="@{/department/detail/{id}(id=${de.id})}" id="lowDe">
+                                    <li th:text="${de.departmentName}"></li>
+                                </a>
+                            </ul>
+                        </ul>
+                    </div>
+                </div>
+                <div class="de_right">
+                    <h2>부서 생성</h2>
+                    <ul>
+                        <form th:action="@{/department/deWrite}" method="POST" th:object="${departmentDto}"
+                              enctype="multipart/form-data">
+                            <li>
+                                <label for="departmentName">부서명</label>
+                                <input type="text" name="departmentName" id="departmentName">
+                            </li>
+                            <li>
+                                <p th:if="${#fields.hasErrors('departmentName')}"
+                                   th:errors="*{departmentName}" class="error"></p>
+                            </li>
+                            <li>
+                                <label for="topDepartmentEntity">상위부서</label>
+                                <select name="topDepartmentEntity" id="topDepartmentEntity">
+                                    <option value="">부서명</option>
+                                    <th:block th:each="de : ${list}">
+                                        <option th:value="${de.id}" th:text="${de.topDepartmentName}"></option>
+                                    </th:block>
+                                </select>
+                            </li>
+                            <li>
+                                <p th:if="${#fields.hasErrors('topDepartmentEntity')}"
+                                   th:errors="*{topDepartmentEntity}" class="error"></p>
+                            </li>
+                            <li>
+                                <th:block sec:authorize="hasAnyRole('ADMIN','MANAGER')">
+                                    <input type="submit" value="생성" name="btn">
+                                </th:block>
+                            </li>
+                        </form>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

@@ -1,0 +1,125 @@
+@import url(../common/reset.css);
+
+.airplaneUpdate{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.airplaneUpdate .airplaneUpdate-con{
+    margin-top: 100px;
+    padding: 20px;
+    border: 1px solid #333;
+    border-radius: 5px 5px;
+    box-shadow: 3px 3px #333333;
+}
+
+.airplaneUpdate .airplaneUpdate-con>h1{
+    color: #666666;
+    text-align: center;
+}
+
+ .airplaneUpdate .airplaneUpdate-con ul {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.airplaneUpdate   .airplaneUpdate-con ul li select {
+    width: 300px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 7px 7px;
+}
+
+.airplaneUpdate .airplaneUpdate-con ul li {
+    display: flex;
+    justify-content: space-between;
+    /*gap: 5px;*/
+    /*border: 1px solid #ccc;*/
+    box-sizing: border-box;
+}
+
+.airplaneUpdate .airplaneUpdate-con ul li {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-right: 10px;
+}
+
+.airplaneUpdate .airplaneUpdate-con ul li label {
+    width: 200px;
+    color: #666;
+    padding: 10px 0;
+    font-size: 20px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.airplaneUpdate .airplaneUpdate-con ul li input[type=datetime-local]{
+    width: 300px;
+    height: 30px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 7px 7px;
+    box-sizing: border-box;
+}
+
+.airplaneUpdate .airplaneUpdate-con ul li.li2 {
+    border: 0;
+    border-top: 1px solid black;
+    color: white;
+    cursor: pointer;
+    /*gap: 5px;*/
+}
+.airplaneUpdate .airplaneUpdate-con ul li input[type=submit]{
+    background-color: white;
+    margin-top: 10px;
+    font-size: 25px;
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 5px 5px;
+}
+
+.airplaneUpdate .airplaneUpdate-con ul li input[type=submit]:hover{
+    background-color: #3767a6;
+    color: white;
+}
+
+.airplaneUpdate .airplaneUpdate-con ul li input[type=button]{
+    width: 80px;
+    margin-left: 20px;
+    background-color: white;
+    cursor: pointer;
+    padding: 5px;
+    border: 1px solid #333;
+    border-radius: 3px 3px;
+}
+
+.airplaneUpdate .airplaneUpdate-con ul li input[type=button]:hover{
+    background-color: #3767a6;
+    color: white;
+}
+
+.airplaneUpdate .airplaneUpdate-con ul li input[type=text] {
+    width: 300px;
+    height: 30px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 7px 7px;
+    box-sizing: border-box;
+}
+.airplaneUpdate .airplaneUpdate-con ul li input.address{
+    width: 200px;
+    height: 30px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 7px 7px;
+    box-sizing: border-box;
+}
+
+.airplaneUpdate .airplaneUpdate-con ul li.li2{
+    margin-bottom: 10px;
+}

@@ -1,0 +1,146 @@
+@import url(../common/reset.css);
+
+.airplaneDetail{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.airplaneDetail .airplaneDetail-con{
+    margin-top: 100px;
+    padding: 20px;
+    border: 1px solid #333;
+    border-radius: 5px 5px;
+    box-shadow: 3px 3px #333333;
+}
+
+.airplaneDetail .airplaneDetail-con>h1{
+    color: #666666;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+ .airplaneDetail .airplaneDetail-con ul {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.airplaneDetail .airplaneDetail-con ul li {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-right: 10px;
+    margin-bottom: 5px;
+}
+
+.airplaneDetail .airplaneDetail-con ul li ul li{
+    color: #666;
+    padding: 5px;
+    font-size: 20px;
+    text-align: right;
+    box-sizing: border-box;
+}
+
+.airplaneDetail .airplaneDetail-con ul li label {
+    width: 150px;
+    color: #666;
+    padding: 5px;
+    font-size: 20px;
+    text-align: right;
+    box-sizing: border-box;
+}
+
+.airplaneDetail .airplaneDetail-con ul li.area label{
+    width: 100px;
+    color: #666;
+    padding: 5px;
+    font-size: 13px;
+    text-align: right;
+    box-sizing: border-box;
+}
+
+.airplaneDetail .airplaneDetail-con ul li.area input[type=text] {
+    width: 200px;
+    /*height: 30px;*/
+    padding: 5px;
+    font-size: 13px;
+    text-align: left;
+    color: #777;
+    border: 0;
+    box-sizing: border-box;
+    font-family: 'TTLaundryGothicB';
+}
+
+.airplaneDetail .airplaneDetail-con ul li.li2 {
+    border: 0;
+    border-top: 1px solid black;
+    color: white;
+    cursor: pointer;
+    /*gap: 5px;*/
+}
+.airplaneDetail .airplaneDetail-con ul li input[type=text] {
+    width: 200px;
+    /*height: 30px;*/
+    padding: 5px;
+    font-size: 20px;
+    text-align: center;
+    color: #777;
+    border: 0;
+    box-sizing: border-box;
+}
+
+.custom-marker {
+    background-color: #324153;
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+    font-size: 14px;
+    text-align: center;
+    white-space: nowrap;
+}
+.custom-marker:after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #324153; /* 삼각형 색상은 여기서 조절합니다 */
+}
+
+
+.infowindow {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+    color: black;
+    text-align: center;
+    white-space: nowrap;
+
+}
+
+.airplaneDetail .airplaneDetail-con .delete{
+    border: 1px solid #333333;
+    float : right;
+    background-color: #96b3d9;
+    padding: 5px;
+    border-radius: 5px 5px;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+
+.airplaneDetail .airplaneDetail-con .update{
+    border: 1px solid #333333;
+    float : left;
+    background-color: #96b3d9;
+    padding: 5px;
+    border-radius: 5px 5px;
+    box-sizing: border-box;
+    margin-top: 10px;
+}

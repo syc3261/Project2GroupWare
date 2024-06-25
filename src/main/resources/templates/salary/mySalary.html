@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/adminLayout}">
+<th:block layout:fragment="title">
+    <!-- 각 페이지 마다 변경 -->
+    <title>vacationCreate</title>
+</th:block>
+<th:block layout:fragment="css">
+    <!-- 각 페이지 마다 변경 -->
+    <link rel="stylesheet" th:href="@{/css/salary/mySalary.css}">
+</th:block>
+<th:block layout:fragment="script">
+    <!-- 각 페이지 마다 변경 -->
+</th:block>
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+        <div class="mySalary">
+            <div class="mySalary-con">
+                <h1>[[${salaryDtoList[0].memberEntity.name}]]의 급여</h1>
+                <table id="myTable">
+                    <thead >
+                    <tr>
+                        <th onclick="sortTable(0)">이름</th>
+                        <th onclick="sortTable(1)">부서</th>
+                        <th onclick="sortTable(2)">직급</th>
+                        <th onclick="sortTable(3)">급여 (&#8361)</th>
+                        <th onclick="sortTable(4)">급여일</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="salary : ${salaryDtoList}">
+                        <td th:text="${salary.memberEntity.name}"></td>
+                        <td th:text="${salary.memberEntity.departmentEntity.departmentName}"></td>
+                        <td th:text="${salary.memberEntity.positionEntity.positionName}"></td>
+                        <td th:text="${#numbers.formatInteger(salary.totalPay, 3, 'COMMA') + '원'}"></td>
+                        <td th:text="${salary.paymentDate}"></td>
+<!--                        <td><a th:href="@{/salary/update/{id}(id = ${salary.id})}">급여조정</a></td>-->
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

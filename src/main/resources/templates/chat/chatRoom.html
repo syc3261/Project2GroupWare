@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>webSocket</title>
+    <link rel="stylesheet" th:href="@{/css/chat/chatRoom.css}">
+    <script th:src="@{/js/chat/chatRoom.js}" defer></script>
+</head>
+<body>
+<div class="chat">
+    <div class="chat-con">
+        <h1 class="title"><a th:href="@{/}"><img th:src="@{/images/logo.png}" alt="logo"></a></h1>
+        <div class="connect">
+            <input type="hidden" name="id" id="id" th:value="${member.id}">
+            <input type="text" name="userId" id="userId" th:value="${member.name}" placeholder="접속명">
+            <input type="button" value="Connect" id="connectBtn">
+        </div>
+        <div class="chatWindow">
+            <div class="chatWindow-con">
+
+            </div>
+        </div>
+        <div class="footChat">
+            <input type="text" id="msg" placeholder="chat input~">
+            <input type="button" value="전송" id="sendBtn">
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/adminLayout}">
+<th:block layout:fragment="title">
+    <!-- 각 페이지 마다 변경 -->
+</th:block>
+<th:block layout:fragment="css">
+    <!-- 각 페이지 마다 변경 -->
+    <link rel="stylesheet" th:href="@{/css/salary/index.css}">
+</th:block>
+<th:block layout:fragment="script">
+    <!-- 각 페이지 마다 변경 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js" defer></script>
+    <script th:src="@{/js/autoDirection.js}" defer></script>
+</th:block>
+
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+        <h1>급여 관리</h1>
+        <div class="salary">
+            <div class="salary-con">
+                <div class="top">
+                    <table id="myTable">
+                        <thead>
+                        <tr>
+                            <th onclick="sortTable(0)">이름</th>
+                            <th onclick="sortTable(1)">부서</th>
+                            <th onclick="sortTable(2)">직급</th>
+                            <th onclick="sortTable(3)">급여 (&#8361)</th>
+                            <th onclick="sortTable(4)">급여일</th>
+                            <th onclick="sortTable(5)">급여조정</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="salary : ${salaryDtoPage}">
+                            <td th:text="${salary.memberEntity.name}"></td>
+                            <td th:text="${salary.memberEntity.departmentEntity.departmentName}"></td>
+                            <td th:text="${salary.memberEntity.positionEntity.positionName}"></td>
+                            <th:block th:if="${salary.memberEntity.positionEntity.positionName} =='대표이사'">
+                                <td>-</td>
+                            </th:block>
+                            <th:block th:unless="${salary.memberEntity.positionEntity.positionName} =='대표이사'">
+                                <td th:text="${#numbers.formatInteger(salary.totalPay, 3, 'COMMA') + '원'}"></td>
+                            </th:block>
+                            <td th:text="${salary.paymentDate}"></td>
+                            <td><a th:href="@{/salary/update/{id}(id = ${salary.id})}">급여조정</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="paging">
+                    <ul>
+                        <li>
+                        <span th:if="${salaryDtoPage.pageable.pageNumber+1 eq 1}"
+                              class="span0">  &laquo </span>
+                            <span th:unless="${salaryDtoPage.pageable.pageNumber+1 eq 1}">
+                                            <a th:href="@{/salary/index(page=0,search=${param.search},
+                                                subject = ${param.subejct})}"
+                                               class="span1">  &laquo </a></span>
+                        </li>
+                        <li>
+                            <span th:if="${salaryDtoPage.pageable.pageNumber+1 eq 1}" class="span0">&lt</span>
+                            <span th:unless="${salaryDtoPage.pageable.pageNumber+1 eq 1}">
+                            <a th:href="@{/salary/index(page=${salaryDtoPage.pageable.pageNumber-1}
+                            ,search = ${param.search}, subject = ${param.subject})}" class="span1">&lt</a>
+                            </span>
+                        </li>
+
+                        <li th:each="i : ${#numbers.sequence(startPage, endPage)}" class="block">
+                                    <span th:if="${salaryDtoPage.pageable.pageNumber +1 == i}" th:text="${i}"
+                                          class="now"></span>
+                            <a th:unless="${salaryDtoPage.pageable.pageNumber+1 == i}"
+                               th:href="@{/salary/index(page=${i-1}
+                                    ,search=${param.search}, subject=${param.subject})}" th:text="${i}"></a>
+                        </li>
+
+                        <li>
+                            <span th:if="${salaryDtoPage.totalPages == salaryDtoPage.pageable.pageNumber+1}"
+                                  class="span0">&gt</span>
+                            <span
+                                th:unless="${salaryDtoPage.totalPages == salaryDtoPage.pageable.pageNumber+1}">
+                                    <a th:href="@{/salary/index(page=${salaryDtoPage.pageable.pageNumber+1}
+                                    ,search=${param.search},subject=${param.subject})}" class="span1">&gt</a>
+                                </span>
+                        </li>
+                        <li>
+                            <span th:if="${salaryDtoPage.totalPages == salaryDtoPage.pageable.pageNumber+1}"
+                                  class="span0">
+                                        &raquo
+                                    </span>
+                            <span
+                                th:unless="${salaryDtoPage.totalPages == salaryDtoPage.pageable.pageNumber+1}">
+                                        <a th:href="@{/salary/index(page=${salaryDtoPage.totalPages-1}
+                                        ,search=${param.search}, subject=${param.subject})}" class="span1">
+                                            &raquo
+                                        </a>
+                                    </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

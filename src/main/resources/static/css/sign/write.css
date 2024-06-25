@@ -1,0 +1,69 @@
+@import url(/css/common/reset.css);
+.adminContainer{
+      position: absolute;
+      min-height: calc(100vh - 75px);
+      width: calc(100% - 230px);
+      right: 0;
+      top: 75px;
+      background-color: #fff;
+      border-radius: 10px 0 0 0;
+}
+
+.write {
+    width: 100%;
+    height: 100%;
+}
+
+.write-con {
+    border: 1px solid #000;
+    padding: 20px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+}
+
+.write .write-con form {
+    width: 80vh;
+}
+
+.approval-form {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.approval-form th,
+.approval-form td {
+    border: 1px solid #000;
+    padding: 10px;
+    text-align: left;
+}
+
+.approval-form th {
+    background-color: #3767a6;
+    text-align: center;
+}
+
+.approval-form input[type="text"],
+.approval-form textarea,
+.approval-form select,
+.approval-form input[type="file"] {
+    width: 70%;
+    padding: 5px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    resize: none;
+
+}
+
+.approval-form input[type="submit"] {
+    background-color: #96b3d9;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-family: 'TTLaundryGothicB';
+}
+
+.approval-form input[type="submit"]:hover {
+    background-color: #3767a6;
+}

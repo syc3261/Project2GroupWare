@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/adminLayout}">
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+
+<th:block layout:fragment="title">
+  <!-- 각 페이지 마다 변경 -->
+</th:block>
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/board/write.css}">
+
+</th:block>
+<th:block layout:fragment="script">
+  <!-- 각 페이지 마다 변경 -->
+</th:block>
+
+<th:block layout:fragment="adminContainer">
+  <div class="adminContainer">
+    <div class="write">
+      <div class="write-con">
+
+        <form th:action="@{/board/write}" method="post" enctype="multipart/form-data"
+              th:object="${boardDto}">
+          <ul>
+            <li>
+            <input type="hidden" name="memberId" id="memberId" th:value="${memberId}">
+            </li>
+            <li class="board-title">
+              <h2>게시판 글쓰기</h2>
+            </li>
+            <div class="header-box">
+
+              <div class="board-box">
+                <div class="board-header">
+
+
+
+                  <div class="board-categoly">
+                    <li>
+                      <label for="boardSeparateId"></label>
+                      <select name="boardSeparateId" id="boardSeparateId">
+                        <option hidden>게시판을 선택해주세요</option>
+                        <th:block sec:authorize="hasAnyRole('ADMIN')">
+                        <option value="1">공지사항</option>
+                        </th:block>
+                        <option value="2"> 자유게시판</option>
+                        <option value="3">수다방</option>
+                        <option value="4">Q&A</option>
+                      </select>
+                    </li>
+  
+<!--                                    <li>-->
+<!--                                      <input type="text" name="memberId" id="memberId" th:value="${memberId}">-->
+<!--                                    </li>-->
+  
+                    <li>
+                      <label for="writer"></label>
+                      <input type="text" name="writer" id="writer" th:value="${memberName}" readonly>
+<!--                      <input type="text" name="writer" id="writer" placeholder="작성자를 입력해주세요">-->
+                    </li>
+                  </div> 
+                  
+               
+
+                </div>
+
+
+                <ul>
+                  <li class="title">
+                    <label for="title"></label>
+                    <input type="text" name="title" id="title" placeholder="제목을 입력하세요">
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="board-join">
+              <ul>
+                <li>
+                  <label for="boardFile">
+                    <div class="btn-upload">파일 업로드하기
+
+                      <div class="upload-file"></div> 
+                    </div>
+                 
+                  </label>
+                  <input type="file" name="boardFile" id="boardFile">
+                </li>
+
+                <li>
+                  <input type="submit" value="등록">
+                </li>
+              </ul>
+
+            </div>
+
+
+            <div class="textarea-box">
+              <ul>
+
+                <li class="textarea">
+                  <textarea name="content" placeholder="내용을 입력하세요" id="content" cols="100" rows="30"></textarea>
+                </li>
+              </ul>
+            </div>
+
+          </ul>
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+</th:block>
+</html>

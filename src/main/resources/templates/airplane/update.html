@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/adminLayout}">
+<th:block layout:fragment="title">
+    <!-- 각 페이지 마다 변경 -->
+</th:block>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/airplane/airplaneUpdate.css}">
+</th:block>
+<th:block layout:fragment="script">
+    <!-- 각 페이지 마다 변경 -->
+</th:block>
+
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+        <div class="airplaneUpdate">
+            <div class="airplaneUpdate-con">
+                <form th:action="@{/airplane/update}" method="post">
+                    <ul>
+                        <li>
+                            <label for="id" hidden="hidden">번호</label>
+                            <input type="hidden" id="id" name="id" th:value="${airplaneDto.id}">
+                        </li>
+
+                        <li>
+                            <label for="toTime" hidden="hidden">출발시간</label>
+                            <input type="hidden" id="toTime" name="toTime" th:value="${airplaneDto.toTime}">
+                        </li>
+
+                        <li>
+                            <label for="fromTime" hidden="hidden">도착시간</label>
+                            <input type="hidden" id="fromTime" name="fromTime" th:value="${airplaneDto.fromTime}">
+                        </li>
+
+                        <li>
+                            <label for="toArea" hidden="hidden">출발지</label>
+                            <input type="hidden" id="toArea" name="toArea" th:value="${airplaneDto.toArea}">
+                        </li>
+                        <li>
+                            <label for="fromArea" hidden="hidden">출발지</label>
+                            <input type="hidden" id="fromArea" name="fromArea" th:value="${airplaneDto.fromArea}">
+                        </li>
+
+                        <li>
+                            <label for="timeTaken" hidden="hidden">운행시간</label>
+                            <input type="hidden" id="timeTaken" name="timeTaken" th:value="${airplaneDto.timeTaken}">
+                        </li>
+                        <li>
+                            <label for="airplane" hidden="hidden">비행기</label>
+                            <input type="hidden" id="airplane" name="airplane" th:value="${airplaneDto.airplane}">
+                        </li>
+
+                        <li>
+                            <label for="status">상태</label>
+                        </li>
+
+                        <li>
+                            <select name="status" id="status">
+                                <option value="정상">정상</option>
+                                <option value="지연">지연</option>
+                            </select>
+                        </li>
+
+                        <li>
+                            <label for="pilot">기장</label>
+                        </li>
+
+                        <li>
+                            <select name="memberId" id="pilot">
+                                <option th:each="pilot : ${memberDtoList}"
+                                        th:value="${pilot.id}"
+                                        th:text="${pilot.name}">
+                                </option>
+                            </select>
+                        </li>
+
+                        <li class="li2">
+                            <input type="submit" value="항공편 수정">
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

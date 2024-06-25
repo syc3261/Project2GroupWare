@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:fragment="headFragment">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/common/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/chatbot/chat-bot.css}">
+    <script src="https://kit.fontawesome.com/593c055bad.js" crossorigin="anonymous"></script>
+
+    <!-- chat bot-->
+    <script th:src="@{/webjars/sockjs-client/sockjs.min.js}"></script>
+    <script th:src="@{/webjars/stomp-websocket/stomp.min.js}"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js" defer></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script th:src="@{/js/chatbot/chat.js}" defer></script>
+    <!-- chat bot-->
+    <!--  js 를 사용  -->
+<!--    <script th:src="@{/js/department/weather.js}" defer></script>-->
+    <!--  ajax 를 사용  -->
+    <script th:src="@{/js/department/api/weather.js}" defer></script>
+    <th:block layout:fragment="title">
+        <!-- 각 페이지 마다 변경 -->
+    </th:block>
+    <th:block layout:fragment="css">
+        <!-- 각 페이지 마다 변경 -->
+    </th:block>
+    <th:block layout:fragment="script">
+        <!-- 각 페이지 마다 변경 -->
+    </th:block>
+</head>
+</html>
+
+

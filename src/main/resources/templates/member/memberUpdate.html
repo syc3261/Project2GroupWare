@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/adminLayout}">
+<th:block layout:fragment="title">
+    <!-- 각 페이지 마다 변경 -->
+    <title>memberDetailUpdate</title>
+</th:block>
+<th:block layout:fragment="css">
+    <!-- 각 페이지 마다 변경 -->
+    <link rel="stylesheet" th:href="@{/css/member/memberUpdate.css}">
+</th:block>
+<th:block layout:fragment="script">
+    <!-- 각 페이지 마다 변경 -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script th:src="@{/js/member/updateAddress.js}" defer></script>
+    <script th:src="@{/js/member/departmentUpdate.js}" defer></script>
+    <script th:src="@{/js/member/member.js}" defer></script>
+</th:block>
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+        <div class="memberDetail" id="memberDetail">
+            <div class="detail-form">
+                <h3>회원수정</h3>
+                <form th:action="@{/member/memberUpdate}" method="post" enctype="multipart/form-data">
+
+                    <ul class="detail-ul">
+                        <div class="leftDetail">
+                            <ul>
+                                <li>
+                                    <th:block th:if="${memberDto.memberAttachFile == 1}">
+                                        <img th:src="@{|/upload/${memberDto.memberFileName}|}" alt="file"
+                                             style="width: 200px; height: 350px;border-radius: 10px;">
+                                    </th:block>
+                                    <th:block th:unless="${memberDto.memberAttachFile == 1}">
+                                        <img src="http://placehold.co/600X500?text=NOIMAGE" alt="이미지대체문구"
+                                             style="width: 200px; height: 350px;border-radius: 10px;">
+                                    </th:block>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="rightDetail">
+                            <ul>
+                                <li>
+                                    <label for="id">id</label>
+                                    <input type="text" name="id" id="id" th:value="${memberDto.id}" readonly>
+                                </li>
+                                <li>
+                                    <label for="name">이름</label>
+                                    <input type="text" name="name" id="name" th:value="${memberDto.name}">
+                                </li>
+                                <li>
+                                    <label for="userPw">비밀번호</label>
+                                    <input type="text" name="userPw" id="userPw" th:value="${memberDto.userPw}">
+                                </li>
+                                <li>
+                                    <label for="userEmail">이메일</label>
+                                    <input type="email" name="userEmail" id="userEmail"
+                                           th:value="${memberDto.userEmail}">
+                                </li>
+                                <li>
+                                    <label for="role">권한</label>
+                                    <select id="role" name="role">
+                                        <option th:value="MEMBER" th:selected="${memberDto.role.name() == 'MEMBER'}">
+                                            MEMBER
+                                        </option>
+                                        <option th:value="MANAGER" th:selected="${memberDto.role.name() == 'MANAGER'}">
+                                            MANAGER
+                                        </option>
+                                        <option th:value="ADMIN" th:selected="${memberDto.role.name() == 'ADMIN'}">ADMIN
+                                        </option>
+                                    </select>
+                                </li>
+
+
+                                <li>
+                                    <label for="positionId">직급</label>
+                                    <select id="positionId" name="positionId">
+                                        <option th:value="1" th:selected="${memberDto.positionEntity.positionName == '대표이사'}">대표이사
+                                        </option>
+                                        <option th:value="2" th:selected="${memberDto.positionEntity.positionName == '부장'}">부장
+                                        </option>
+                                        <option th:value="3" th:selected="${memberDto.positionEntity.positionName == '사원'}">사원
+                                        </option>
+<!--                                        <option th:value="3" th:selected="${memberDto.positionEntity.id > 3}">직급을 변경해주세요-->
+<!--                                        </option>-->
+                                    </select>
+                                </li>
+                                <li>
+                                    <label for="departmentId">부서</label>
+                                    <!-- 부서 이름을 보여주는 입력란 -->
+                                    <input type="text" id="departmentName" name="departmentName"
+                                           th:value="${memberDto.departmentEntity.departmentName}">
+                                    <!-- 실제 부서의 ID를 나타내는 숨겨진 입력란 -->
+                                    <input type="hidden" id="departmentId" name="departmentId"
+                                           th:value="${memberDto.departmentEntity.id}">
+                                    <button type="button" class="updateDepartment"
+                                            th:onclick="updateDepartmentBtnFn(event)">부서이동
+                                    </button>
+                                </li>
+
+
+                                <li>
+                                    <label for="address">주소</label>
+                                    <input type="text" name="address" id="address" th:value="${memberDto.address}">
+                                    <button type="button" class="updateAddress"
+                                            th:onclick="updateAddressBtnFn(event)">주소변경
+                                    </button>
+                                </li>
+
+
+                                <li>
+                                    <label for="phone">전화번호</label>
+                                    <input type="tel" name="phone" id="phone" oninput="memberPhoneNumberInput()" maxlength="13" th:value="${memberDto.phone}">
+                                </li>
+                                <li class="file">
+                                    <label for="memberFile">사 진</label>
+
+                                    <input type="file" name="memberFile" id="memberFile">
+                                </li>
+                                <li>
+                                    <label for="employeeDate">입사일</label>
+                                    <input type="date" name="employeeDate" id="employeeDate"
+                                           th:value="${memberDto.employeeDate}">
+                                </li>
+                                <li>
+                                    <label for="resignationDate">퇴사일</label>
+                                    <input type="date" name="resignationDate" id="resignationDate"
+                                           th:value="${memberDto.resignationDate}">
+                                </li>
+                                <li class="updateBtn">
+                                    <input type="submit" value="수정하기" id="finalUpdateBtn">
+                                    <a th:href="@{/member/memberDelete/{id}(id=${memberDto.id})}">회원 탈퇴</a>
+                                    <a th:href="@{/member/memberList}">목 록</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </ul>
+
+
+                    <div class="updateAddress11" style="display:none" id="updateAddress">
+                        <div class="updateAddress-con">
+
+                            <button class="close-btn" onclick="hidePopup()">×</button>
+                            <script>
+                                function hidePopup() {
+                                    document.getElementById('updateAddress').style.display = 'none';
+                                }
+                            </script>
+
+                            <li>
+                                <label for="combinedAddress">주 소</label>
+                            </li>
+                            <li>
+                                <div class="address22">
+                                    <input type="text" class="address22-con1" id="sample6_postcode" placeholder="우편번호">
+                                    <input type="button" class="address22-con2" onclick="sample6_execDaumPostcode()"
+                                           value="우편번호 찾기">
+                                </div>
+                                <input type="text" id="sample6_address" placeholder="주소"><br>
+                                <input type="text" id="sample6_detailAddress" placeholder="상세주소">
+                                <input type="hidden" id="combinedAddress" placeholder="결합된 주소">
+                                <input type="button" id="updateBtn" value="주소수정">
+
+                            </li>
+                        </div>
+                    </div>
+
+                    <div class="updateDepartment11" style="display:none" id="updateDepartment">
+                        <div class="updateDepartment-con">
+                            <button class="close-btn" onclick="hidePopup()">×</button>
+                            <script>
+                                function hidePopup() {
+                                    document.getElementById('updateDepartment').style.display = 'none';
+                                }
+                            </script>
+                            <h3>부서변경</h3>
+                            <ul>
+                                <li>
+                                    <select name="departmentEntity.topDepartmentEntity" id="topDepartmentSelect">
+                                        <option value="">상위 부서를 선택하세요</option>
+                                        <th:block th:each="topDepartment : ${list}">
+                                            <option th:value="${topDepartment.id}"
+                                                    th:utext="${topDepartment.topDepartmentName}"
+                                                    th:attr="data-department-list=${topDepartment.departmentEntityList}"></option>
+                                        </th:block>
+                                    </select>
+                                </li>
+
+                                <li>
+                                    <select name="departmentEntity" id="departmentSelect">
+                                        <option value="">부서를 선택하세요</option>
+                                    </select>
+                                    <button type="button"  class="deBtn" onclick="hidePopup()">
+                                        부서변경
+                                    </button>
+                                </li>
+                                
+                            </ul>
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+</th:block>
+
+</html>

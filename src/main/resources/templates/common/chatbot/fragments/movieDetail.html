@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<div th:fragment="movieDetailFragment">
+    <div class="part" th:if="${msg.answerDto.movieInfo} != null">
+        <p>
+
+            개봉여부: <span th:text="${msg.answerDto.movieInfo.prdtStatNm} "></span> <br>
+            개봉일: <span th:text="${msg.answerDto.movieInfo.openDt} "></span> <br>
+            상영시간: <span th:text="${msg.answerDto.movieInfo.showTm} "></span>분 <br>
+        </p>
+    </div>
+    <div class="part" th:unless="${msg.answerDto.movieInfo} != null">
+        <p>
+            <span>영화 정보가 존재하지 않습니다.</span>
+        </p>
+    </div>
+</div>
+</html>

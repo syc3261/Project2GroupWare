@@ -1,0 +1,265 @@
+.adminContainer .movie {
+  padding: 80px;
+  display: flex;
+  justify-content: center;
+}
+
+.adminContainer .movie .movie-con{
+  width: 1400px;
+  height: 100%;
+}
+
+.adminContainer .movie .movie-con h1{
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+
+.adminContainer .movie .movie-con .button-list{
+  display: flex;
+  height: 100px;
+  gap: 50px;
+  margin-bottom: 40px;
+}
+
+.adminContainer .movie .movie-con .button-list .con{
+    display: flex;
+    justify-content: flex-end; /* 가로 방향으로 끝으로 정렬 */
+
+}
+.adminContainer .movie .movie-con .button-list .con-list{
+  display: flex;
+  gap: 10px; /* 아이템 사이에 간격을 주고 싶을 때 사용 */
+}
+
+.adminContainer .movie .movie-con .button-list :nth-child(1) {
+  flex: 1;
+}
+.adminContainer .movie .movie-con .button-list :nth-child(2) {
+  flex: 1;
+}
+
+.adminContainer .movie .movie-con .button-list :nth-child(3) {
+  flex: 1;
+}
+
+.adminContainer .movie .movie-con .button-list .con {
+
+  margin-top: 60px;
+  margin-right: 100px;
+}
+ 
+.adminContainer .movie .movie-con .grid .grid-con img{
+  transition: all 0.4s linear(-2 -80%, 1 100%);
+}
+
+.adminContainer .movie .movie-con .grid .sub-con:hover img{
+  transform: scale(1.1);
+
+}
+
+.adminContainer .movie .movie-con thead{
+  height: 40px;
+  border-bottom: 1px solid rgb(206, 206, 194);
+
+}
+
+.adminContainer .movie .movie-con tr td{
+  height: 40px;
+  border-bottom: 1px solid beige;
+  text-align: center;
+
+}
+
+
+
+.adminContainer .movie .movie-con table{
+
+
+}
+
+
+.adminContainer .movie .movie-con .movie_table{
+  width: inherit;
+
+}
+
+.adminContainer .movie .movie-con .boxOffice_table{
+  width: inherit;
+
+}
+
+.adminContainer .movie .movie-con .box_movie_table{
+  width: inherit;
+
+}
+
+/* .adminContainer .movie .movie-con .grid {
+  display: flex;
+} */
+/*금일 css*/
+.adminContainer .movie .movie-con .grid {
+  margin-top: 30px;
+  display: flex;
+
+}
+
+.adminContainer .movie .movie-con .grid .grid-con {
+  width: 1300px;
+}
+
+.adminContainer .movie .movie-con .grid .grid-con .span-on{
+    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 300px);
+    width: 1400px;
+}
+
+.adminContainer .movie .movie-con .grid .grid-con .span-on img{
+    width:200px
+    height:400px
+}
+
+.adminContainer .movie .movie-con .grid .grid-con .span-on .sub-con{
+  border: 1px solid;
+
+}
+.menuBtn{
+justify-content: end;
+    gap: 10px;
+}
+
+
+/*주간 css*/
+.adminContainer .movie .movie-con .grid1 {
+  margin-top: 30px;
+  display: flex;
+
+}
+
+.adminContainer .movie .movie-con .grid1 .grid-con {
+  width: 1300px;
+}
+
+.adminContainer .movie .movie-con .grid1 .grid-con .span-on{
+    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 300px);
+    width: 1400px;
+}
+
+.adminContainer .movie .movie-con .grid1 .grid-con .span-on img{
+    width:200px
+    height:400px
+}
+
+.adminContainer .movie .movie-con .grid1 .grid-con .span-on .sub-con{
+  border: 1px solid;
+
+}
+.menuBtn2{
+justify-content: end;
+    gap: 10px;
+}
+
+}*/
+
+
+#chat-question span i{
+    display: block;
+    margin-top:-2px;
+    width: 30px;
+    height: 30px;
+    background-image: url("/images/chat.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 모달 스타일 */
+.detailModal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* 모달 콘텐츠 */
+.detailModal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  max-width: 500px;
+}
+
+/* 모달 닫기 버튼 */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+/* 영화 정보 스타일 */
+.detailModal-content span {
+  display: block;
+  margin-bottom: 10px;
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<div th:fragment="movieFragment">
+    <div class="part" th:if="${msg.answerDto.weeklyBoxOffice} != null">
+        <p>
+
+            순위: <span th:text="${msg.answerDto.weeklyBoxOffice.rank} "></span> <br>
+
+            영화이름: <span class="getName" th:text="${msg.answerDto.weeklyBoxOffice.movieNm} "></span> <br>
+        <div class="answerBtn">
+            <button onclick="findDetail()"><span th:text="${msg.answerDto.weeklyBoxOffice.movieNm} "></span> 상세보기</button>
+        </div>
+        <script>
+            function findDetail() {
+                var movieNm = document.querySelector('.getName').innerHTML.trim(); // 영화 제목 가져오기
+                var questionInput = document.getElementById('question'); // 입력 필드 가져오기
+                questionInput.value = movieNm + " 상세 정보"; // 입력 필드에 값 설정
+                var sendButton = document.getElementById('btn-msg-send'); // 전송 버튼 가져오기
+                sendButton.click(); // 전송 버튼 클릭
+            }
+        </script>
+
+        </p>
+    </div>
+    <div class="part" th:unless="${msg.answerDto.weeklyBoxOffice} != null">
+        <p>
+            <span>영화 정보가 존재하지 않습니다.</span>
+        </p>
+    </div>
+</div>
+</html>

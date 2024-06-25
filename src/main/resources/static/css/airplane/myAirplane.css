@@ -1,0 +1,88 @@
+@import url(../common/reset.css);
+@import url(../common/paging.css);
+
+.adminContainer .airplaneBtn{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 30px;
+}
+
+.adminContainer .airplaneBtn button {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 30px;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+
+.adminContainer .airplaneBtn .myAirplaneBtn {
+    width: 20%;
+    border: 1px solid #3767a6;
+    border-radius: 5px 5px;
+    color: #3767a6;
+}
+
+.adminContainer .airplaneBtn .todayMyAirplaneBtn {
+    width: 20%;
+    border: 1px solid #ccc;
+    border-radius: 5px 5px;
+    color: #ccc;
+}
+
+
+.adminContainer .myAirplane .myAirplane-con{
+    height: calc( 100vh - 100px - 150px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.adminContainer .myAirplane .myAirplane-con table{
+    text-align: center;
+    padding: 0 20px;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.adminContainer .myAirplane .myAirplane-con table th{
+    font-size: 20px;
+    padding: 10px;
+    border-bottom: 1px solid #333;
+}
+
+.adminContainer .myAirplane .myAirplane-con table td{
+    font-size: 15px;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+.adminContainer .myAirplane .todayMyAirplane-con{
+    display: flex;
+    height: calc( 100vh - 100px - 150px);
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.adminContainer .myAirplane .todayMyAirplane-con table{
+    text-align: center;
+    padding: 0 20px;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.adminContainer .myAirplane .todayMyAirplane-con table th{
+    font-size: 20px;
+    padding: 10px;
+    border-bottom: 1px solid #333;
+}
+
+.adminContainer .myAirplane .todayMyAirplane-con table td{
+    font-size: 15px;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+}

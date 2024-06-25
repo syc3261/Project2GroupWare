@@ -1,0 +1,99 @@
+@import url(../common/reset.css);
+
+.salaryUpdate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.salaryUpdate .salaryUpdate-con {
+    margin-top: 200px;
+    padding: 20px;
+    border: 1px solid #333;
+    border-radius: 5px 5px;
+    box-shadow: 3px 3px #333333;
+}
+
+.salaryUpdate .salaryUpdate-con > h1 {
+    color: #666666;
+    text-align: center;
+}
+
+.salaryUpdate .salaryUpdate-con ul {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.salaryUpdate .salaryUpdate-con ul li select {
+    width: 300px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 7px 7px;
+}
+
+.salaryUpdate .salaryUpdate-con ul li {
+    display: flex;
+    justify-content: space-between;
+    /*gap: 5px;*/
+    /*border: 1px solid #ccc;*/
+    box-sizing: border-box;
+}
+
+.salaryUpdate .salaryUpdate-con ul li {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-right: 10px;
+}
+
+.salaryUpdate .salaryUpdate-con ul li input[type=text] {
+    width: 300px;
+    height: 30px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 7px 7px;
+    box-sizing: border-box;
+}
+
+.salaryUpdate .salaryUpdate-con ul li label {
+    width: 200px;
+    color: #666;
+    padding-top: 10px;
+    font-size: 20px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.salaryUpdate .salaryUpdate-con ul li input[type=date] {
+    width: 300px;
+    height: 30px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 7px 7px;
+    box-sizing: border-box;
+}
+
+.salaryUpdate .salaryUpdate-con ul li.li2 {
+    border: 0;
+    border-top: 1px solid black;
+    color: white;
+    cursor: pointer;
+    /*gap: 5px;*/
+}
+
+.salaryUpdate .salaryUpdate-con ul li input[type=submit] {
+    background-color: white;
+    margin-top: 10px;
+    font-size: 25px;
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 5px 5px;
+}
+
+.salaryUpdate .salaryUpdate-con ul li input[type=submit]:hover {
+    background-color: #3767a6;
+    color: white;
+}

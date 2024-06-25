@@ -1,0 +1,70 @@
+server:
+  port: 8095
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  datasource:
+    sql-script-encoding: utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/GroupAirTeam?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 1234
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    cache: false
+
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update # create, update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+
+
+  profiles:
+    include: oauth2
+
+  main:
+    allow-bean-definition-overriding: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
+
+filePath: file:///c:/groupAir/
+
+navar.api.client-id: FlR_0mjyLZ4jddlkIcaD
+navar.api.client-secret: 69KHv1Uryd
+
+# mybatis
+mybatis:          # /resources/mapper(???)/*.xml (xml??)
+  mapper-locations: classpath:mapper/*.xml               #MyBatis XML 경로 설정
+#  type-aliases-package: org.spring.mybatis1.dto   #????
+
+mail:
+  host: smtp.gmail.com
+  port: 587
+  username: 1thsdpdms1@gmail.com
+  password: cbro rcet scuz futh
+  properties:
+    mail:
+      smtp:
+        starttls:
+          enable: true
+        auth: true
+

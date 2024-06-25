@@ -1,0 +1,139 @@
+@import url(../common/reset.css);
+/* 관리자 컨테이너 스타일 */
+.adminContainer{
+    position: absolute;
+    min-height: calc(100vh - 75px);
+    width: calc(100% - 230px);
+    right: 0;
+    top: 75px;
+    background-color: #fff;
+    border-radius: 10px 0 0 0;
+}
+
+/* 결재함 리스트(signList) 스타일 */
+.signList {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* 결재함 리스트 컨텐츠(signList-con) 스타일 */
+.signList-con {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 검색 영역 스타일 */
+.search {
+    margin-bottom: 20px;
+}
+
+.search select,
+.search input[type="text"] {
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* 페이지 네이션 스타일 */
+.paging {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.paging ul {
+    list-style: none;
+    padding: 0;
+}
+
+.paging ul li {
+    display: inline;
+    margin: 0 5px;
+}
+
+.paging ul li a,
+.paging ul li span {
+    padding: 8px 12px;
+    text-decoration: none;
+    color: black;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.paging ul li a:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.paging ul li .now {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* 반응형 조정 */
+@media (max-width: 768px) {
+    .search select,
+    .search input[type="text"],
+    .search input[type="submit"] {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    table, th, td {
+        display: block;
+    }
+
+    th, td {
+        text-align: right;
+    }
+
+    th::before, td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+    }
+
+    .paging ul li {
+        display: block;
+        text-align: center;
+    }
+}

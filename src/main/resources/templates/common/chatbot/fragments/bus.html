@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<div th:fragment="busFragment">
+    <div class="part" th:if="${msg.answerDto.bus} != null">
+        <p>
+            <span th:text="${msg.answerDto.bus.busRouteNm} + ' 번 버스'"></span>  <br>
+            첫차 <span th:text="${msg.answerDto.bus.firstBusTm}"></span> <br>
+            막차 <span th:text="${msg.answerDto.bus.lastLowTm}"></span> <br>
+            기점: <span th:text="${msg.answerDto.bus.stStationNm}"></span> <br>
+            종점: <span th:text="${msg.answerDto.bus.edStationNm}"></span> <br>
+            배차: <span th:text="${msg.answerDto.bus.term} + '분'"></span> <br>
+                    <span th:text="${msg.answerDto.bus.corpNm}"></span><br>
+        </p>
+    </div>
+    <div class="part" th:unless="${msg.answerDto.bus} != null">
+        <p>
+            <span>버스 정보를 입력해주세요.</span>
+        </p>
+    </div>
+</div>
+</html>
+
+

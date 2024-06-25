@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/adminLayout}">
+
+<th:block layout:fragment="title">
+  <!-- 각 페이지 마다 변경 -->
+</th:block>
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/board/boardUpdate.css}">
+<!--  <link rel="stylesheet" th:href="@{/css/board/update.css}">-->
+  <!-- 각 페이지 마다 변경 -->
+
+</th:block>
+<th:block layout:fragment="script">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script th:src="@{/js/board/reply.js}" defer></script>
+  <!-- 각 페이지 마다 변경 -->
+</th:block>
+
+<th:block layout:fragment="adminContainer">
+  <div class="adminContainer">
+
+    <div class="update">
+
+      <div class="update-con">
+
+        <div class="top">
+          <div class="update-form">
+
+            <form th:action="@{/board/boardUpdate}" method="post" enctype="multipart/form-data">
+              <div class="left-img">
+                <div class="left-img-con">
+                  <th:block th:if="${board.boardAttachFile==1}"> <!--  이미지 표시 -->
+                    <img th:src="@{|/upload/${board.boardNewFile}|}" alt="이미지대체문구">
+                  </th:block>
+                  <th:block th:unless="${board.boardAttachFile==1}">  <!--  이미지 표시 -->
+                    <img src="https://placehold.co/300x300?text=NOIMAGE" alt="이미지대체문구">
+                  </th:block>
+                </div>
+
+
+              </div>
+              <ul class="update-label">
+                <li>
+                  게시판 수정페이지
+                </li>
+               
+
+
+                <li>
+                  <label for="title">제목</label>
+                  <input type="text" name="title" id="title" th:value="${board.title}">
+                </li>
+                <li>
+                  <label for="writer">작성자</label>
+                  <input type="text" name="writer" id="writer" th:value="${board.writer}">
+                </li>
+               
+                <li>
+                  <label for="hit">조회수</label>
+                  <input type="text" name="hit" id="hit" th:value="${board.hit}">
+                </li>
+                <li>
+                  <label>작성시간</label>
+                  <span  th:text="${board.createTime}"></span>
+                </li>
+                <li>
+                  <label>수정시간</label>
+                  <span  th:text="${board.updateTime}"></span>
+                </li>
+              
+
+                <li>
+                  <div class="board-join">
+                    <ul>
+                      <li>
+                        <label for="boardFile">
+                          <div class="btn-upload">파일 업로드하기
+
+                            <div class="upload-file"></div>
+                          </div>
+
+                        </label>
+                        <input type="file" name="boardFile" id="boardFile">
+                      </li>
+
+                      <li>
+                        <input type="submit" value="등록">
+                      </li>
+                    </ul>
+
+                  </div>
+
+                </div>
+              </ul>
+              <div class="content">
+                <!-- <li>
+                  <label for="content">내용</label>
+                </li> -->
+                <li class="content-con">
+                  <textarea name="content" id="content" cols="125" rows="12" th:text="${board.content}"></textarea>
+                </li>
+
+              </div>
+              <div class="btn-content">
+              <li class="btns">
+
+                <!--  로그인 상태일때     -->
+                <th:block sec:authorize="isAuthenticated()">
+                  <!--ADMIN -->
+                  <th:block sec:authorize="hasAnyRole('ADMIN')">
+
+                    <th:block th:if="${board.memberEntity.userEmail==myUserDetails.username}">
+                      <input type="submit" value="수정" class="btn1">
+                    </th:block>
+                    <a th:href="@{/board/delete/{id}(id=${board.id})}" class="btn1">삭제</a>
+
+                  </th:block>
+                  <!--ADMIN -->
+
+                  <th:block th:if="${board.memberEntity.userEmail==myUserDetails.username}">
+                    <th:block sec:authorize="hasAnyRole('MANAGER' ,'MEMBER')">
+<!--                      <a th:href="@{/board/boardUpdate/{id}(id=${board.id})}">수정</a>-->
+                      <input type="submit" value="수정" class="btn1">
+                      <a th:href="@{/board/delete/{id}(id=${board.id})}" class="btn1">삭제</a>
+                    </th:block>
+                  </th:block>
+
+                  <a th:href="@{/board/boardList}" class="btn1">목록</a>
+
+                </th:block>
+                  <!--로그인 상태 정보  email 과 username 비교 -->
+                <!--  <th:block th:if="${board.memberEntity.userEmail==myUserupdates.username}">
+                  <th:block sec:authorize="hasAnyRole('MANAGER','MEMBER')">
+
+                      <input type="submit" value="수정" class="btn1">
+                    <a th:href="@{/board/delete/{id}(id=${board.id})}" class="btn1">삭제</a>
+                    <a th:href="@{/board/boardList}">목록</a>
+                </th:block>
+
+                </th:block>-->
+
+
+
+
+
+
+<!--                <a th:href="@{/board/delete/{id}(id=${board.id})}" class="btn1">삭제</a>&ndash;&gt;-->
+<!--                <th:block-->
+<!--                    th:if="${board.memberEntity.userEmail==myUserupdates.username}">-->
+<!--                      <th:block sec:authorize="hasAnyRole('MANAGER',MEMBER)">-->
+<!--                    <a th:href="@{/board/delete/{id}(id=${board.id})}" class="btn1">삭제</a>-->
+
+                        <li>
+                <input type="hidden" name="id" id="id" th:value="${board.id}" readonly style="display:none;">
+              </li>
+
+
+              <li>
+                <!-- <label for="memberId">회원 아이디</label> -->
+                <input type="hidden" name="memberId" id="memberId" th:value="${board.memberEntity.id}" readonly style="display:none;">
+              </li>
+
+              <li>
+                <!-- <label for="boardSeparateId">카테고리 ID</label>       -->
+                     <!-- board.getMemberEntity().id -->
+                <input type="hidden" name="boardSeparateEntity.id" id="boardSeparateId"
+                       th:value="${board.boardSeparateEntity.id}" readonly style="display:none;">
+              </li>
+
+
+            </form>
+
+        </div>
+
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</th:block>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/adminLayout}">
+
+<th:block layout:fragment="title">
+
+</th:block>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/sign/detail.css}">
+</th:block>
+<th:block layout:fragment="script">
+</th:block>
+
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+        <div class="detail">
+            <div class="detail-con">
+                <form th:action="@{/sign/signOk}" method="post" th:object="${sign}" enctype="multipart/form-data">
+                    <table class="detail-form">
+                        <tr>
+                            <th colspan="2">품의서</th>
+                            <th>&nbsp;</th>
+                            번호:
+                            <input type="hidden" name="id" th:value="${sign.id}">
+                            <th>[[${sign.id}]]</th>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">&nbsp;</td>
+                            <td>성명</td>
+                            <td>부서</td>
+                            <td>직급</td>
+                        </tr>
+                        <tr>
+                            기안자:
+                            <input type="hidden" name="approve" th:value="${sign.approve}">
+                            <td>[[${sign.approve}]]</td>
+                            부서:
+                            <input type="hidden" name="deptName" th:value="${sign.deptName}">
+                            <td>[[${sign.deptName}]]</td>
+                            직급:
+                            <input type="hidden" name="level" th:value="${sign.level}">
+                            <td>[[${sign.level}]]</td>
+                            <input type="hidden" name="employee_id" th:value="${sign.employee_id}">
+                        </tr>
+                        <tr><input type="hidden" name="title" th:value="${sign.title}">
+                            <td colspan="4">제목 <span>[[${sign.title}]]</span></td>
+                        </tr>
+                        <tr><input type="hidden" name="content" th:value="${sign.content}">
+                            <td colspan="4">[[${sign.content}]] <span
+                                style="display: block; width: 100%; height: 300px; overflow-y: auto; overflow-y: auto; white-space: pre-wrap;"></span>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">위와 같은 품의사유로, 검토 후 결재 바랍니다.</td>
+                        </tr>
+
+                        <tr>
+                            <!-- admin 버전 -->
+                            <!--                        <tr>-->
+                            <!--                            <div sec:authorize="hasRole('ADMIN')">-->
+                            <!--&lt;!&ndash;                                <div sec:authorize="hasRole('MANAGER')">&ndash;&gt;-->
+                            <!--                                    <td colspan="4">처리상태-->
+                            <!--                                        <select th:value="${sign.subContent}" name="subContent" id="subContent">-->
+                            <!--                                            <option value="승인">승인</option>-->
+                            <!--                                            <option value="반려">반려</option>-->
+                            <!--                                        </select>-->
+                            <!--                                    </td>-->
+                            <!--                            </div>-->
+                            <!--                    </tr>   -->
+
+
+                            <!-- 부장(직급)버전-->
+                        <tr th:if="${position} == '부장'">
+                            <td colspan="4">처리상태
+                                <select th:value="${sign.subContent}" name="subContent" id="subContent">
+                                    <option value="미결재">미결재</option>
+                                    <option value="승인">승인</option>
+                                    <option value="반려">반려</option>
+
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+
+
+                            <td colspan="4">
+                                <div style="text-align: center;">
+                                    최종승인자: <input type="hidden" name="lastApprover" th:value="${sign.lastApprover}">
+                                    <span>[[${sign.lastApprover}]]</span>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4">
+                                비고 :
+
+                                <div sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')">
+<!--                                <div sec:authorize="hasRole('ADMIN')">-->
+<!--                                    <div sec:authorize="hasRole('MANAGER')">-->
+                                    <label for="rejectReason"></label>
+                                <input type="text" name="rejectReason" id="rejectReason"
+                                       style="width: 100%; height: 70px;">
+
+
+                                </div>
+                                <span>[[${sign.rejectReason}]]</span>
+
+                            </td>
+                        </tr>
+
+
+                        <!--                        <tr>-->
+                        <!--                            <td colspan="4"><span th:text="${sign.rejectReason}"></span></td>-->
+                        <!--                            <span>-->
+                        <!--                            <label for="rejectReason">반려사유</label><input type="text" name="rejectReason"-->
+                        <!--                                                                         id="rejectReason"-->
+                        <!--                                                                         th:value="${sign.rejectReason}">-->
+                        <!--                        </span>-->
+                        <!--                        </tr>-->
+                        &nbsp;
+
+                        <!--                        </tr>-->
+                        <!--                        <tr>-->
+                        <!--                            <td colspan="4">-->
+                        <!--                                <label for="signFile">파일</label>-->
+                        <!--                                <input type="file" name="signFile" id="signFile">-->
+                        <!--                            </td>-->
+                        <!--                        </tr>-->
+                        <tr>
+
+                            <div sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')">
+<!--                            <div sec:authorize="hasRole('ADMIN')">-->
+<!--                                <div sec:authorize="hasRole('MANAGER')">-->
+                                    <td colspan="4">
+                                        <input type="submit" value="제출" style="width: 100%;">
+
+
+
+                                </td>
+                            </div>
+
+
+                        </tr>
+
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

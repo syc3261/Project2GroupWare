@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/adminLayout}">
+<th:block layout:fragment="title">
+    <title>공항버스 API</title>
+</th:block>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/api/airplaneBusApi.css}">
+</th:block>
+<th:block layout:fragment="script">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=91a3f87bcaa1f50b354e0b8952c45270&libraries=services,clusterer,drawing">
+    </script>
+    <script th:src="@{/js/api/airplaneBus.js}" defer></script>
+</th:block>
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+        <div class="bus">
+            <div class="bus-con">
+                <h1 class="bus-title"><img th:src="@{/images/bus1.png}" alt="bus" height="32px">인천공항 버스 정보 조회</h1>
+                <div class="search">
+                    <select class="airplaneBusSearch" name="airplaneBusSearch" id="airplaneBusSearch">
+                        <option value="1">서울</option>
+                        <option value="2">경기</option>
+                        <option value="3">인천</option>
+                        <option value="4">강원</option>
+                        <option value="5">충청</option>
+                        <option value="6">경상</option>
+                        <option value="7">전라</option>
+                    </select>
+                    <button onclick="busSearch()">버스 노선 조회</button>
+                </div>
+                <div class="table-css">
+                    <table class="bus-table1">
+                        <thead>
+                        <tr>
+                            <th>종점</th>
+                            <th>버스</th>
+                            <th style="width: 100px">공항행 첫차</th>
+                            <th style="width: 100px">공항행 막차</th>
+                            <th style="width: 100px">T1종점행첫차</th>
+                            <th style="width: 100px">T1종점행막차</th>
+                            <th style="width: 100px">T2종점행첫차</th>
+                            <th style="width: 100px">T2종점행막차</th>
+                            <th>(&#8361)성인 요금</th>
+                            <th style="width: 70px">버스 등급</th>
+                            <th>운수회사명</th>
+                            <th>T1승차위치</th>
+                            <th>T2승차위치</th>
+                        </tr>
+                        </thead>
+                        <tbody id="bus1">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="airplaneBusStationInfo" style="display: none">
+                    <span class="airplaneClose">X</span>
+                    <div class="startEnd">
+
+                    </div>
+                    <div class="airplaneBusStationInfo-con" id="airplaneBusStationInfo-con">
+
+                    </div>
+                </div>
+                <script>
+                    $('.airplaneClose').click(function () {
+                        $('.airplaneBusStationInfo').css('display', 'none');
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

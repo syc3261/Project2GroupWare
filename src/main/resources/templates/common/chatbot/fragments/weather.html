@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<div th:fragment="weatherFragment">
+    <div class="part" th:if="${msg.answerDto.weather} != null">
+        <p>
+            <!--            현재기온: <span th:text="${msg.answerDto.weather.temp} -273.15"></span> <br>-->
+            <!--            최저기온: <span th:text="${msg.answerDto.weather.temp_min} -273.15"></span> <br>-->
+            <!--            최고기온: <span th:text="${msg.answerDto.weather.temp_max} -273.15"></span> <br>-->
+        <table>
+            <tr>
+                <th>현재기온</th>
+                <th class="min_T">최저기온</th>
+                <th class="max_T">최고기온</th>
+            </tr>
+            <tr>
+                <td th:text="${msg.answerDto.weather.temp}"></td>
+                <td class="min_T" th:text="${msg.answerDto.weather.temp_min}"></td>
+                <td class="max_T" th:text="${msg.answerDto.weather.temp_max}"></td>
+            </tr>
+        </table>
+        </p>
+    </div>
+    <div class="part" th:unless="${msg.answerDto.weather} != null">
+        <p>
+            <span>날씨 정보가 존재하지 않습니다.</span>
+        </p>
+    </div>
+</div>
+</html>
+
+

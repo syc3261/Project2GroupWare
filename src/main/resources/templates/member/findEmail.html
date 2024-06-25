@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/member/findEmail.css}">
+    <script th:src="@{/js/member/checkEmail.js}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js" defer></script>
+</head>
+<body>
+<div class="adminContainer">
+
+    <div class="findEmail">
+        <div class="findEmail-con">
+
+            <h1>이메일 찾기</h1>
+
+            <li class="find">
+                <label for="name" class="label1">이 름:</label>
+                <div id="name_input">
+                    <input type="text" name="name" id="name" placeholder="이름 입력">
+                </div>
+                <br>
+            </li>
+
+            <li class="find">
+                <label for="phone" class="label1">전화번호:</label>
+                <div id="phone_input">
+                    <input type="text" name="phone" id="phone"
+                           oninput="memberPhoneNumberInput()" maxlength="13" placeholder="전화번호 입력">
+                </div>
+                <br>
+            </li>
+            <li class="btn">
+                <button type="button" id="findEmailBtn" name="findEmailBtn" onclick="findEmail()">이메일 찾기</button>
+                <br>
+                <div id="result" style="display: none"></div>
+            </li>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

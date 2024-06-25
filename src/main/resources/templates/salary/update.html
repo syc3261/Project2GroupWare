@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/adminLayout}">
+<th:block layout:fragment="title">
+    <!-- 각 페이지 마다 변경 -->
+    <title>vacationCreate</title>
+</th:block>
+<th:block layout:fragment="css">
+    <!-- 각 페이지 마다 변경 -->
+    <link rel="stylesheet" th:href="@{/css/salary/update.css}">
+</th:block>
+<th:block layout:fragment="script">
+    <!-- 각 페이지 마다 변경 -->
+</th:block>
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+        <div class="salaryUpdate">
+            <div class="salaryUpdate-con">
+                <h1>[[${salaryDto.memberEntity.name}]]의 급여</h1>
+                <form th:action="@{/salary/update}" method="post">
+                    <ul>
+                        <li>
+                            <label for="employeeId" hidden="hidden">회원 번호</label>
+                            <input type="hidden" id="employeeId" name="employeeId" th:value="${salaryDto.memberEntity.id}">
+                        </li>
+                        <li>
+                            <label for="id" hidden="hidden">급여 번호</label>
+                            <input type="hidden" id="id" name="id" th:value="${salaryDto.id}">
+                        </li>
+                        <li>
+                            <label for="paymentDate">급여일</label>
+                            <input type="date" id="paymentDate" name="paymentDate" th:value="${salaryDto.paymentDate}" readonly>
+                        </li>
+                        <th:block sec:authorize="hasAnyRole('ADMIN')">
+                        <li>
+                            <label for="pay">기본수당</label>
+                            <input type="text" id="pay" name="pay" th:value="${salaryDto.pay}">
+                        </li>
+                        </th:block>
+                        <th:block sec:authorize="hasAnyRole('MEMBER','MANAGER')">
+                        <li>
+                            <label for="myPay">기본수당</label>
+                            <input type="text" id="myPay" name="pay" th:value="${salaryDto.pay}" readonly>
+                        </li>
+                        </th:block>
+
+                        <li>
+                            <label for="incentive">추가수당</label>
+                            <input type="text" id="incentive" name="incentive" th:value="${salaryDto.incentive}" readonly>
+                        </li>
+
+                        <th:block sec:authorize="hasAnyRole('ADMIN')">
+                        <li class="li2">
+                            <input type="submit" value="급여 조정">
+                        </li>
+                        </th:block>
+                        <th:block sec:authorize="hasAnyRole('MEMBER','MANAGER')">
+
+                        </th:block>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

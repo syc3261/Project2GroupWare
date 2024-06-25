@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/adminLayout}">
+<th:block layout:fragment="title">
+    <!-- 각 페이지 마다 변경 -->
+</th:block>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/airplane/pilot.css}">
+</th:block>
+<th:block layout:fragment="script">
+    <!-- 각 페이지 마다 변경 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js" defer></script>
+    <script th:src="@{/js/autoDirection.js}" defer></script>
+</th:block>
+
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+        <h1>기장님</h1>
+        <div class="pilot">
+            <div class="pilot-con">
+                <div class="top">
+                    <table id="myTable">
+                        <thead>
+                        <tr>
+                            <th onclick="sortTable(0)">번호</th>
+                            <th onclick="sortTable(1)">직급</th>
+                            <th onclick="sortTable(2)">이름</th>
+                            <th onclick="sortTable(3)">이메일</th>
+                            <th onclick="sortTable(4)">전화번호</th>
+                            <th>운행 정보</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="pilot : ${memberDtoPage}">
+                            <td th:text="${pilot.id}"></td>
+                            <td th:text="${pilot.positionEntity.positionName}"></td>
+                            <td th:text="${pilot.name}"></td>
+                            <td th:text="${pilot.userEmail}"></td>
+                            <td th:text="${pilot.phone}"></td>
+                            <td><a th:href="@{/airplane/myAirplane/{id}(id=${pilot.id})}">운행정보 보기</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="paging">
+                    <ul>
+                        <li>
+                           <span th:if="${memberDtoPage.pageable.pageNumber+1 eq 1}" class="span0">  &laquo </span>
+                            <span th:unless="${memberDtoPage.pageable.pageNumber+1 eq 1}">
+                            <a th:href="@{/airplane/pilot(page=0,search=${param.search},subject = ${param.subejct})}"
+                            class="span1">  &laquo</a></span>
+                        </li>
+                        <li>
+                            <span th:if="${memberDtoPage.pageable.pageNumber+1 eq 1}" class="span0">&lt</span>
+                            <span th:unless="${memberDtoPage.pageable.pageNumber+1 eq 1}">
+                            <a th:href="@{/airplane/pilot(page=${memberDtoPage.pageable.pageNumber-1}
+                            ,search = ${param.search}, subject = ${param.subject})}" class="span1">&lt</a>
+                            </span>
+                        </li>
+
+                        <li th:each="i : ${#numbers.sequence(startPage, endPage)}" class="block">
+                                    <span th:if="${memberDtoPage.pageable.pageNumber +1 == i}" th:text="${i}"
+                                          class="now"></span>
+                            <a th:unless="${memberDtoPage.pageable.pageNumber+1 == i}"
+                               th:href="@{/airplane/pilot(page=${i-1}
+                                    ,search=${param.search}, subject=${param.subject})}" th:text="${i}"></a>
+                        </li>
+
+                        <li>
+                                <span th:if="${memberDtoPage.totalPages == memberDtoPage.pageable.pageNumber+1}"
+                                      class="span0">&gt</span>
+                            <span
+                                th:unless="${memberDtoPage.totalPages == memberDtoPage.pageable.pageNumber+1}">
+                                    <a th:href="@{/airplane/pilot(page=${memberDtoPage.pageable.pageNumber+1}
+                                    ,search=${param.search},subject=${param.subject})}" class="span1">&gt</a>
+                                </span>
+                        </li>
+                        <li>
+                                    <span th:if="${memberDtoPage.totalPages == memberDtoPage.pageable.pageNumber+1}"
+                                          class="span0">
+                                        &raquo
+                                    </span>
+                            <span
+                                th:unless="${memberDtoPage.totalPages == memberDtoPage.pageable.pageNumber+1}">
+                                        <a th:href="@{/airplane/pilot(page=${memberDtoPage.totalPages-1}
+                                        ,search=${param.search}, subject=${param.subject})}" class="span1">
+                                            &raquo
+                                        </a>
+                                    </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

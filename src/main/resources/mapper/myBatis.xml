@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- Mapper를 사용하는 Repository의 전체 경로 -->
+<mapper namespace="org.spring.groupAir.bus.repository.BusMapperRepository">
+    <!-- SQL -->
+    <!-- id -> 매서드명,  parameterType-> 파라미터 타입 -->
+    <select id="busList" parameterType="string" resultType="org.spring.groupAir.bus.entity.BusEntity">
+        select * from bus where bus_route_id = #{busRouteId}
+    </select>
+
+    <select id="busRoute" parameterType="string" resultType="org.spring.groupAir.bus.entity.BusRouteEntity">
+        select * from bus_route where bus_route_id =#{busRouteId}
+    </select>
+
+    <select id="busDetail" parameterType="string" resultType="org.spring.groupAir.bus.entity.BusDetailEntity">
+        select * from bus_detail where bus_route_id =#{busRouteId}
+    </select>
+
+    <select id="airplaneBusStation" parameterType="Long" resultType="org.spring.groupAir.bus.entity.AirplaneBusStationEntity">
+        select * from airplane_bus_station where airplane_bus_id =#{id}
+    </select>
+
+<!--    <select id="airplaneBusFind" parameterType="String" resultType="org.spring.groupAir.bus.entity.AirplaneBusEntity">-->
+<!--        select * from airplane_bus where busnumber =#{busnumber}-->
+<!--    </select>-->
+
+
+    <delete id="deleteBusStation" parameterType="Long">
+        delete from airplane_bus_station where airplane_bus_id = #{id}
+    </delete>
+</mapper>
+
+

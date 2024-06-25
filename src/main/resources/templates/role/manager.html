@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="~{common/layout/adminLayout}">
+<th:block layout:fragment="title">
+    <!-- 각 페이지 마다 변경 -->
+</th:block>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/role/manager.css}">
+</th:block>
+<th:block layout:fragment="script">
+    <script th:src="@{/js/role/admin.js}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</th:block>
+
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+        <div class="role_manager">
+            <div class="role_manager-con">
+                <div class="commute">
+                    <div class="plus">
+                        <a th:href="@{/commute/workDetail/{id}(id = ${#authentication.principal.memberEntity.id})}">내 출근
+                            기록 &gt </a>
+                    </div>
+                    <div id="clock" class="clock"></div>
+                    <div class="commute-con">
+                    <th:block th:if="${commuteDtoList[commuteDtoList.size()-1].status == '퇴근'}">
+                        <div class="status">퇴근</div>
+                    </th:block>
+                    <th:block th:if="${commuteDtoList[commuteDtoList.size()-1].status == '출근'}">
+                        <div class="status">출근</div>
+                    </th:block>
+                    <th:block th:if="${commuteDtoList[commuteDtoList.size()-1].status == '지각'}">
+                        <div class="status">출근(지각)</div>
+                    </th:block>
+                    <th:block th:if="${commuteDtoList[commuteDtoList.size()-1].status == '조퇴'}">
+                        <div class="status">퇴근(조퇴)</div>
+                    </th:block>
+                    <th:block th:if="${commuteDtoList[commuteDtoList.size()-1].status == '미출근'}">
+                        <div class="status">미출근</div>
+                    </th:block>
+                        <th:block th:if="${commuteDtoList[commuteDtoList.size()-1].status == '휴가'}">
+                            <div class="status">휴가</div>
+                        </th:block>
+                    </div>
+                </div>
+                <div class="department">
+                    <div class="plus">
+                        <a th:href="@{/department/top/deList}"
+                           th:text="${memberDto.departmentEntity.departmentName}+' &gt '"></a>
+                    </div>
+                    <ul class="topDepartment-tree">
+                        <li th:each="top : ${list}">
+                            <ul class="department-tree">
+                                <li>
+                                    <th:block
+                                            th:if="${top.commuteEntityList[top.commuteEntityList.size()-1].status == '출근'} or
+                                            ${top.commuteEntityList[top.commuteEntityList.size()-1].status == '지각'}">
+                                        <img th:src="@{/images/commute/correct.png}" alt="대체이미지" height="20px">
+                                        <span th:text="${top.name}" style="background-color: #4bae4f"></span>
+                                    </th:block>
+                                    <th:block
+                                            th:unless="${top.commuteEntityList[top.commuteEntityList.size()-1].status == '출근'} or
+                                            ${top.commuteEntityList[top.commuteEntityList.size()-1].status == '지각'}">
+                                        <img th:src="@{/images/commute/exclamation.png}" alt="대체이미지" height="20px">
+                                        <span th:text="${top.name}" style="background-color: #ff2147"></span>
+                                    </th:block>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="schedule">
+                    <div class="plus">
+                        <a th:href="@{/my/schedule/{id}(id=${#authentication.principal.memberEntity.id})}">오늘의 일정 &gt </a>
+                    </div>
+                    <div class="schedule-con">
+                        <table>
+                            <tr th:each="schedule : ${scheduleDtoList}">
+                                <td><img th:src="@{/images/scCheck.png}" alt="대체이미지" height="30px"></td>
+                                <td th:text="${schedule.content}"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="sign">
+                    <div class="plus">
+                        <a th:href="@{/sign/signList}">내게 온 결재 &gt </a>
+                    </div>
+                    <div class="sign-con">
+                        <div class="signs">
+                        미 결 재 : [[${notSign}]]개
+                        </div>
+                        <div class="signs">
+                        승 인 : [[${signOk}]]개
+                        </div>
+                        <div class="signs">
+                        반 려 : [[${signNo}]]개
+                        </div>
+                    </div>
+                </div>
+                <div class="airplane">
+                    <div class="plus">
+                        <a th:href="@{/airplane/myAirplane/{id}(id = ${#authentication.principal.memberEntity.id})}">항공편 &gt </a>
+                    </div>
+                    <div class="airplane-con">
+                        <div class="airplanes">
+                            <img th:src="@{/images/airplane/airplane.png}" alt="대체이미지" height="40px">
+                            내 항공편 : [[${myAirplaneCount}]]개
+                        </div>
+                        <div class="airplanes">
+                            <img th:src="@{/images/airplane/green.png}" alt="대체이미지" height="40px">
+                            오늘의 항공편 : [[${todayMyAirplaneCount}]]개
+                        </div>
+                    </div>
+                </div>
+                <div class="member">
+                    <div class="plus">
+                        <a th:href="@{/member/memberUpdate/{id}(id = ${#authentication.principal.memberEntity.id})}">내
+                            정보 &gt </a>
+                    </div>
+                    <div class="member-con">
+                        <div class="userImage">
+                            <th:block th:if="${#authentication.principal.memberEntity.memberAttachFile == 1}">
+                                <img th:src="@{|/upload/${#authentication.principal.memberEntity.memberFileName}|}"
+                                     alt="photo" height="100px">
+                            </th:block>
+                            <th:block th:unless="${#authentication.principal.memberEntity.memberAttachFile == 1}">
+                                <img th:src="@{/images/work.png}" alt="이미지대체문구" height="100px">
+                            </th:block>
+                        </div>
+                        <div class="userDetail">
+                            부 서 : [[${memberDto.departmentEntity.departmentName}]] <br>
+                            직 급 : [[${memberDto.positionEntity.positionName}]]<br>
+                            이 메 일 : [[${memberDto.userEmail}]]<br>
+                            이 름 : [[${memberDto.name}]]
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

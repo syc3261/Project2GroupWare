@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<title>index</title>
+<body>
+<div class="login">
+    <div class="login-con">
+        <div class="logo">
+            <a th:href="@{/}">
+                <img th:src="@{/images/logo.png}" alt="logo">
+            </a>
+        </div>
+        <h1 class="title">로그인</h1>
+        <form th:action="@{/memberLogin}" method="post">
+            <ul>
+                <li>
+                    <label for="userEmail">Email</label>
+                    <input type="email" name="userEmail" id="userEmail" placeholder="이메일를 입력하세요" autofocus> <br>
+                </li>
+                <li>
+                    <label for="userPw">Pw</label>
+                    <input type="password" name="userPw" id="userPw" placeholder="비밀번호를 입력하세요"> <br>
+                </li>
+                <li>
+                    <th:block th:if="error">
+                        <p style="color: #ff0000; font-size: 12px;" th:text="${exception}"></p>
+                    </th:block>
+                </li>
+
+                <li class="loginBtn">
+                    <input type="reset" value="초기화">
+                    <input type="submit" value="로그인">
+                </li>
+                <li class="find">
+                    <a th:href="@{/member/findEmail}">아이디 찾기</a>
+                    <a th:href="@{/member/findPassword}">비밀번호 찾기</a>
+                    <a th:href="@{/oauth2/authorization/naver}">NAVER LOGIN</a>
+                </li>
+            </ul>
+        </form>
+
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

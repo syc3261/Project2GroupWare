@@ -1,0 +1,279 @@
+@import url(/css/common/reset.css);
+@import url(/css/common/header.css);
+@import url(/css/common/footer.css);
+
+/*update*/
+.container{
+  width: 100%;
+  height: auto;
+  /* background-color: antiquewhite; */
+}
+
+.container .adminContainer {
+  padding: 20px;
+}
+.update{
+  padding:20px;
+  width: 100%;
+  /* border: 1px solid; */
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+.update .update-con{
+  box-shadow: 1px 1px 1px 2px #eff6ff;
+  flex-basis: 1000px;
+  min-height: calc(100vh - 70px - 70px);
+  border-radius: 10px;
+  border: 1px solid #EBECF1;
+  /* padding: 20px; */
+  /* display: flex;
+  justify-content: center;
+  align-items: flex-start; */
+}
+.update .update-con .top{
+  width: 100%;
+  /* height: 500px; */
+}
+
+.update .update-con .top .update-form{
+  width: 100%;
+  background-color: #eff6ff;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+.update .update-con .top .update-form form{
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.update .update-con .top .update-form form ul input{
+  border: 0;
+
+
+}
+
+
+/*left*/
+.update .update-con .top .update-form  .left{
+  flex:4;
+
+}
+.update .update-con .top .update-form  .left-img img{
+  height: 300px;
+  width: 300px;
+  margin-top: 70px;
+  
+
+}
+
+
+
+
+
+.update .update-con .top .update-form  .left .left-con img{
+ width: 300px;
+ height: 300px;
+ display: block;
+
+}
+/**/
+.update .update-con .top .update-form ul{
+   flex:6;
+   display: flex;
+   flex-direction: column;
+   gap: 5px;
+  
+   box-sizing: border-box;
+}
+.update .update-con  .top .update-form ul li{
+  padding: 10px 0;
+  display: flex;
+  /* justify-content: space-between; */
+  gap: 5px;
+  font-size: 18px;
+}
+.update .update-con .top .update-form ul li:nth-child(1){
+  padding: 5px 0;
+  /* justify-content: center; */
+  font-size: 30px;
+  font-weight: bold;
+  /* background-color: black; */
+  color: #000000;
+
+}
+.update .update-con .top .update-form .board-join ul{
+    font-size: 16px;
+    justify-content: space-between;
+    display: flex;
+    width: 600px;
+    flex-direction: row;
+  
+}
+
+.update .update-con .top .update-form .board-join input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip:rect(0,0,0,0);
+  border: 0;
+}
+
+.update .update-con .top .update-form .board-join label{
+
+  font-size: 14px;
+  height: 20px;
+}
+
+.update .update-con .top .update-form .board-join label .btn-upload{
+
+  padding: 3px;
+}
+
+
+
+
+.update .update-con .top .update-form ul li label{
+  box-shadow: 1px 1px 1px 1px;
+  border-radius: 5px;
+  text-align: center;
+  width: 100px;
+  padding: 4px;
+  /* background: skyblue; */
+  /* flex:1; */
+}
+
+.update .update-con .top .update-form ul.update-label{
+ padding: 10px;
+}
+.update .update-con .top .update-form ul li input[type=text]{
+  flex:3;
+}
+.update .update-con .top .update-form ul li select{
+  flex:3;
+  text-align: center;
+}
+.update .update-con .top .update-form ul li textarea{
+ 
+  flex:1;
+  resize: none;
+}
+.update .update-con .top .update-form ul li input[type=submit]{
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 1px;
+    font-size: 16px;
+    font-weight: bold;
+    flex: 1;
+    padding: 6px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    color: #000000;
+    cursor: pointer;
+}
+
+.update .update-con .top .update-form ul li input[type=submit]:hover{
+
+    background-color: #eff6ff;
+}
+
+.update .update-con .top .update-form ul li:last-child{
+  display: flex;
+  /*justify-content: space-between;*/
+  gap:5px;
+}
+
+.update .update-con .top .update-form ul li:last-child .btn1{
+  flex:1;
+  display: block;
+  background-color: #cfc4c4bd;
+  color: #ffffff;
+  border: 0;
+  cursor: pointer;
+  text-align: center;
+  height: 30px;
+  font-size: 14px;
+}
+.update .update-con .top .update-form ul li:last-child a{
+  line-height: 30px;
+}
+
+/*bottom 댓글 */
+.update .update-con .bottom{
+  width: 100%;
+  height: 100px;
+  background-color: #ffffff;
+
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+
+}
+
+
+
+.update .update-con .content:nth-child(2) li{
+  display: flex;
+  justify-content: center;
+
+}
+.update .update-con .btn-content{
+  display: flex;
+  justify-content: center;
+}
+
+.update .update-con .content li.content-con {
+  display: flex;
+  justify-content: center;
+}
+
+.update .update-con .content li.content-con textarea{
+  border-radius: 10px;
+  padding: 30px;
+  border: 1px solid #EBECF1;
+}
+
+
+
+.update .update-con .btn-content li.btn1{
+  /*  flex:1;*/
+  /*  gap: 200px;*/
+    border: 1px solid ;
+    border-radius: 10px;
+    padding: 5px;
+    cursor:pointer;
+  
+  }
+
+.update .update-con .btn-content .btn1{
+/*  flex:1;*/
+/*  gap: 200px;*/
+  border: 1px solid ;
+  box-shadow: 1px 1px 1px 1px;
+  border-radius: 10px;
+  padding: 6px;
+  cursor:pointer;
+  font-size: 18px;
+  font-family: 'TTLaundryGothicB';
+  background-color: white;
+}
+
+.update .update-con .btn-content .btn1:hover{
+
+  background-color:#eff6ff;
+
+}
+
+
+.update .update-con .btn-content li.btns{
+  padding: 10px;
+  justify-content: center;
+  display: flex;
+  gap: 100px;
+ /* width: 961px; */
+}

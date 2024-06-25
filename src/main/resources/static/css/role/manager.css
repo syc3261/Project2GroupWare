@@ -1,0 +1,252 @@
+@import url(../common/reset.css);
+
+.role_manager {
+
+}
+
+.role_manager .role_manager-con {
+    width: 100%;
+    height: calc(100vh - 75px - 92px);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+.role_manager .role_manager-con .plus{
+    font-size: 30px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    /*height: 100%;*/
+    align-self: start; /* 상단으로 이동 */
+    grid-row: 1; /* 첫 번째 행에 배치 */
+    grid-column: span 3; /* 모든 열을 차지 */
+    box-sizing: border-box;
+}
+
+.role_manager .role_manager-con .plus:hover a{
+    text-decoration: underline;
+    text-underline-offset: 10px;
+    transition: 0.5s;
+    box-sizing: border-box;
+    color: #3767a6;
+}
+
+
+.role_manager .role_manager-con .commute {
+    margin: 30px;
+    /*padding: 20px;*/
+    border: 1px solid #cccccc;
+    border-radius: 10px 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 25px;
+}
+.role_manager .role_manager-con .commute .commute-con{
+    height: 100%;
+}
+
+.role_manager .role_manager-con .commute:hover{
+    background-color: #eff6ff;
+    box-shadow: 1px 1px #333333;
+}
+
+.role_manager .role_manager-con .commute .clock {
+    width: 100%;
+    text-align: center;
+    font-size: 40px;
+    padding-top: 40px;
+}
+
+
+
+.role_manager .role_manager-con .commute .status {
+    text-align: center;
+    font-size: 40px;
+}
+
+.role_manager .role_manager-con .department {
+    margin: 30px;
+    /*padding: 20px;*/
+    border: 1px solid #cccccc;
+    border-radius: 10px 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    gap: 20px;
+    padding: 25px;
+}
+
+.role_manager .role_manager-con .department:hover{
+    background-color: #eff6ff;
+    box-shadow: 1px 1px #333333;
+}
+
+.role_manager .role_manager-con .department ul.topDepartment-tree {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    width: 100%;
+    text-align: center;
+    /*padding-bottom: 100px;*/
+}
+
+.role_manager .role_manager-con .department ul.topDepartment-tree li {
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.role_manager .role_manager-con .department .department-tree li span {
+    border-radius: 5px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.role_manager .role_manager-con .department ul.topDepartment-tree li ul li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.role_manager .role_manager-con .schedule {
+    margin: 30px;
+    /*padding: 20px;*/
+    border: 1px solid #cccccc;
+    border-radius: 10px 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 25px;
+}
+
+.role_manager .role_manager-con .schedule:hover{
+    background-color: #eff6ff;
+    box-shadow: 1px 1px #333333;
+}
+
+.role_manager .role_manager-con .schedule .schedule-con{
+    height: 100%;
+    overflow: auto; /* 스크롤 활성화 */
+    padding-bottom: 40px;
+}
+.role_manager .role_manager-con .schedule .schedule-con table{
+    width: 100%;
+    height: 100%;
+}
+
+.role_manager .role_manager-con .schedule .schedule-con table td{
+    padding: 5px;
+    font-size: 30px;
+}
+
+
+.role_manager .role_manager-con .sign {
+    margin: 30px;
+    /*padding: 20px;*/
+    border: 1px solid #cccccc;
+    border-radius: 10px 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 25px;
+}
+
+.role_manager .role_manager-con .sign:hover{
+    background-color: #eff6ff;
+    box-shadow: 1px 1px #333333;
+}
+
+.role_manager .role_manager-con .sign .sign-con {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 30px;
+    gap: 20px;
+    height: 100%;
+    padding-top: 30px;
+}
+
+
+.role_manager .role_manager-con .airplane {
+    margin: 30px;
+    /*padding: 20px;*/
+    border: 1px solid #cccccc;
+    border-radius: 10px 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 25px;
+}
+
+.role_manager .role_manager-con .airplane:hover{
+    background-color: #eff6ff;
+    box-shadow: 1px 1px #333333;
+}
+
+.role_manager .role_manager-con .airplane .airplane-con {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    font-size: 40px;
+    height: 100%;
+    padding-bottom: 10px;
+}
+
+.role_manager .role_manager-con .airplane .airplane-con .airplanes {
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.role_manager .role_manager-con .member {
+    margin: 30px;
+    /*padding: 20px;*/
+    border: 1px solid #cccccc;
+    border-radius: 10px 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+}
+
+.role_manager .role_manager-con .member:hover{
+    background-color: #eff6ff;
+    box-shadow: 1px 1px #333333;
+}
+
+.role_manager .role_manager-con .member .member-con {
+    text-align: center;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    gap: 20px;
+}
+
+.role_manager .role_manager-con .member .member-con .members {
+    font-size: 20px;
+}
+

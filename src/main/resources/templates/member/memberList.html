@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{common/layout/adminLayout}">
+<th:block layout:fragment="title">
+    <!-- 각 페이지 마다 변경 -->
+    <title>memberList</title>
+</th:block>
+<th:block layout:fragment="css">
+    <!-- 각 페이지 마다 변경 -->
+    <link rel="stylesheet" th:href="@{/css/member/memberList.css}">
+</th:block>
+<th:block layout:fragment="script">
+    <!-- 각 페이지 마다 변경 -->
+    <script th:src="@{/js/member/memberDetail.js}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</th:block>
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+
+        <div class="memberList">
+            <div class="memberList-con">
+                <div class="top">
+                    <h1>회원조회</h1>
+                    <div class="search">
+                        <form th:action="@{/member/memberList}" method="get">
+                            <select name="subject" id="subject">
+                                <option value="" th:selected="${#strings.isEmpty(param.subject)}"> ::선택::</option>
+                            <option value="name" th:selected="${#strings.equals(param.subject, 'name')}">이름</option>
+                            <option value="userEmail" th:selected="${#strings.equals(param.subject, 'userEmail')}">이메일
+                            </option>
+                            <option value="phone" th:selected="${#strings.equals(param.subject, 'phone')}">전화번호</option>
+                        </select>
+                        <input type="text" name="search" id="search" th:value="${param.search}">
+                        <input type="submit" value="SEARCH">
+
+                    </form>
+                </div>
+                <div class="list">
+                    <table id="table">
+                        <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>이름</th>
+                            <th>부서</th>
+                            <th>직급</th>
+                            <th>권한</th>
+                            <th>전화번호</th>
+                            <th>이메일</th>
+                            <th>입사일</th>
+                            <th>퇴사일</th>
+                            <th>간단보기</th>
+                            <th:block sec:authorize="hasAnyRole('ADMIN')">
+                                <th>상세보기</th>
+                            </th:block>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="member : ${memberList}">
+                            <td th:text="${member.id}"></td>
+                            <td th:text="${member.name}"></td>
+                            <td th:text="${member.departmentEntity.departmentName}"></td>
+                            <td th:text="${member.positionEntity.positionName}"></td>
+                            <td th:text="${member.role}"></td>
+                            <td th:text="${member.phone}"></td>
+                            <td th:text="${member.userEmail}"></td>
+                            <td th:text="${member.employeeDate}"></td>
+                            <td th:text="${member.resignationDate}"></td>
+                            <td>
+                                <button type="button" class="memberDetailBtn"
+                                        th:onclick="memberDetailBtnFn(event, [[${member.id}]])">보기
+                                </button>
+                            </td>
+                            <th:block sec:authorize="hasAnyRole('ADMIN')">
+                                <td><a th:href="@{/member/memberUpdate/{id}(id=${member.id})}">상세조회</a></td>
+                            </th:block>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+                <div class="bottom">
+                        <tfoot>
+                        <tr>
+                            <td colspan="11" class="pagingBorder">
+                                <div class="paging">
+                                    <ul>
+                                        <li>
+                                            <span th:if="${memberList.pageable.pageNumber+1 eq 1}"
+                                                  class="span0"> &laquo </span>
+                                            <span th:unless="${memberList.pageable.pageNumber+1 eq 1}">
+                                            <a th:href="@{/member/memberList(page=0,search=${param.search},
+                                                subject = ${param.subejct})}"
+                                               class="span1"> &laquo </a>
+                                        </span>
+                                        </li>
+                                        <li>
+                                            <span th:if="${memberList.pageable.pageNumber+1 eq 1}"
+                                                  class="span0">&lt</span>
+                                            <span th:unless="${memberList.pageable.pageNumber+1 eq 1}">
+                                            <a th:href="@{/member/memberList(page=${memberList.pageable.pageNumber-1}
+                                            ,search = ${param.search}, subject = ${param.subject})}"
+                                               class="span1">&lt</a>
+                                    </span>
+                                        </li>
+
+                                        <li th:each="i : ${#numbers.sequence(startPage, endPage)}" class="block">
+                                    <span th:if="${memberList.pageable.pageNumber +1 == i}" th:text="${i}"
+                                          class="now"></span>
+                                            <a th:unless="${memberList.pageable.pageNumber+1 == i}"
+                                               th:href="@{/member/memberList(page=${i-1}
+                                    ,search=${param.search}, subject=${param.subject})}" th:text="${i}"></a>
+                                        </li>
+
+                                        <li>
+                                <span th:if="${memberList.totalPages == memberList.pageable.pageNumber+1}"
+                                      class="span0">&gt</span>
+                                            <span
+                                                th:unless="${memberList.totalPages == memberList.pageable.pageNumber+1}">
+                                    <a th:href="@{/member/memberList(page=${memberList.pageable.pageNumber+1}
+                                    ,search=${param.search},subject=${param.subject})}" class="span1">&gt</a>
+                                </span>
+                                        </li>
+                                        <li>
+                                    <span th:if="${memberList.totalPages == memberList.pageable.pageNumber+1}"
+                                          class="span0">
+                                          &raquo
+                                    </span>
+                                            <span
+                                                th:unless="${memberList.totalPages == memberList.pageable.pageNumber+1}">
+                                        <a th:href="@{/member/memberList(page=${memberList.totalPages-1}
+                                        ,search=${param.search}, subject=${param.subject})}" class="span1">
+                                        &raquo
+                                        </a>
+                                    </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="memberDetail" style="display:none" id="memberDetail">
+            <div class="detail-form">
+                <button class="close-btn" onclick="hidePopup()">×</button>
+
+                <h3>회원상세보기</h3>
+
+                <ul>
+                    <li>
+                        <label for="id">id</label>
+                        <input type="text" name="id" id="id" readonly>
+                    </li>
+                    <li>
+                        <label for="userPw">userPw</label>
+                        <input type="text" name="userPw" id="userPw" readonly>
+                    </li>
+                    <li>
+                        <label for="userEmail">userEmail</label>
+                        <input type="email" name="userEmail" id="userEmail">
+                    </li>
+                    <li>
+                        <label for="role">role</label>
+                        <input type="text" name="role" id="role" readonly>
+                    </li>
+                    <li>
+                        <label for="name">name</label>
+                        <input type="text" name="name" id="name">
+                    </li>
+                    <li>
+                        <label for="address">address</label>
+                        <input type="text" name="address" id="address">
+                    </li>
+                    <li>
+                        <label for="phone">phone</label>
+                        <input type="tel" name="phone" oninput="memberPhoneNumberInput()" maxlength="13" id="phone">
+                    </li>
+                    <li>
+                        <label for="employeeDate">employeeDate</label>
+                        <input type="text" name="employeeDate" id="employeeDate">
+                    </li>
+                    <li>
+                        <label for="resignationDate">resignationDate</label>
+                        <input type="text" name="resignationDate" id="resignationDate">
+                    </li>
+
+                    <th:block sec:authorize="hasAnyRole('ADMIN')">
+                        <li class="btnbtn">
+                            <button onclick="memberUpdateBtnFn()">수정하기</button>
+                            <button onclick="memberDelete2BtnFn()">삭제하기</button>
+                        </li>
+                    </th:block>
+
+
+                </ul>
+
+            </div>
+        </div>
+
+
+    </div>
+</th:block>
+</html>

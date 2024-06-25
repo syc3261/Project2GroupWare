@@ -1,0 +1,134 @@
+
+.memberJoin {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* height: calc(100vh - 50px - 200px); */
+}
+
+.memberJoin .memberJoin-con {
+
+    width: 700px;
+
+}
+
+.memberJoin .memberJoin-con h1 {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    box-sizing: border-box;
+}
+
+.memberJoin .memberJoin-con .memberJoin1 {
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.memberJoin .memberJoin-con .memberJoin1 ul {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+}
+
+.memberJoin .memberJoin-con .memberJoin1 ul li {
+
+    display: flex;
+    justify-content: space-between;
+    /*gap: 5px;*/
+    /*border: 1px solid #ccc;*/
+    box-sizing: border-box;
+}
+
+.memberJoin .memberJoin-con .memberJoin1 ul li .label1 {
+    flex: 1;
+    /*background-color: #666666;*/
+    /*color: white;*/
+    color: #666;
+    padding-top: 10px;
+    font-size: 20px;
+    font-family: "나눔고딕 ExtraBold";
+    box-sizing: border-box;
+    /*text-align: center;*/
+}
+
+.memberJoin .memberJoin-con .memberJoin1 ul li input {
+    flex: 3;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 7px 7px;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+.memberJoin .memberJoin-con .memberJoin1 ul li select {
+    flex: 3;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 7px 7px;
+    box-sizing: border-box;
+    font-size: 18px;
+}
+
+.memberJoin .memberJoin-con .memberJoin1 ul li option {
+
+    font-size: 15px;
+}
+
+
+.memberJoin .memberJoin-con .memberJoin1 ul li .showPw {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+
+.memberJoin .memberJoin-con .memberJoin1 ul li span.imp {
+    margin-left: 4px;
+    margin-bottom: 5px;
+    color: red;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px
+}
+
+.memberJoin .memberJoin-con .memberJoin1 ul li.addressCss {
+    display: flex;
+    flex-direction: column;
+}
+
+.memberJoin .memberJoin-con .memberJoin1 ul li.addressCss .address-con {
+    gap: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.memberJoin .memberJoin-con .memberJoin1 ul li.file {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.memberJoin .memberJoin-con .memberJoin1 ul li input[type=file] {
+    border: 0;
+}
+
+.memberJoin .memberJoin-con .memberJoin1 ul li input.submitBtn {
+   display: flex;
+   justify-content: center;
+   height: 50px;
+   background-color: #3767a6;
+   margin: 20px 0;
+
+}
+
+.memberJoin .memberJoin-con .memberJoin1 ul li input.submitBtn input{
+    background-color: #3767a6;
+    color: white;
+    cursor: pointer;
+    border: none;
+    font-size: 16px;
+}

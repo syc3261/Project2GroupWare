@@ -1,0 +1,64 @@
+@import url(/css/common/reset.css);
+
+@font-face {
+    font-family: 'TTLaundryGothicB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/TTLaundryGothicB.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+
+.right {
+    font-family: 'TTLaundryGothicB';
+    display: flex;
+    justify-content: space-between;
+ 
+
+    height: 75px;
+    position: sticky;
+    top: 0;
+
+  
+    padding: 20px 10px;
+    box-sizing: border-box;
+    z-index: 999;
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, .7) 10%, transparent);
+    }
+            
+    .right .logo img{
+        position: relative;
+        top: -10px;
+        right: 5px;
+        z-index: 999;
+        height: 54px;
+        background-color: #fff;
+        border: 2px solid #324153;
+        border-radius: 50px;
+        /* padding: 5px; */
+        /* margin-right: 10px; */
+        box-sizing: border-box;
+    
+    }
+    .right .right-con{
+
+        display: flex;
+        align-items: center;
+        text-align: center;
+    
+    }
+
+
+.right .right-con .top .gnb ul{
+    display: flex;
+    width: 300px;
+}
+
+.right .right-con .top .gnb ul li {
+
+    flex: 1;
+}
+
+
+
+
+

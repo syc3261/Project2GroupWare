@@ -1,0 +1,49 @@
+#content {
+      width: 80vw;
+      text-align: center;
+      margin: 0 auto;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+h1.titleSc {
+    text-align: center;
+    background-color: #3767a6;
+    color: #ffffff;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+h1.title {
+      text-align: center;
+      background-color: #3767a6;
+      color: #ffffff;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 10px;
+      box-sizing: border-box;
+}
+
+#calendar {
+      width: 80vw;
+      height: 80vh;
+      margin: 0 auto
+}
+
+#calendarBox {
+      width: 100%;
+      padding-left: 15%;
+}
+
+.h1,  h1{
+      margin : 0;
+}
+
+.fc-event {
+      border: none !important;
+}

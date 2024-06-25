@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/adminLayout}">
+<th:block layout:fragment="title">
+    <title>날씨예보</title>
+</th:block>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/api/weatherWeek.css}">
+</th:block>
+<th:block layout:fragment="script">
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f956ef011454dabcb2db379b72c4e588"></script>
+    <script th:src="@{/js/api/weatherKakao.js}"></script>
+</th:block>
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+        <div class="api">
+            <h1 class="airTitle">공항 날씨</h1>
+            <div class="weatherShow">
+                <div class="weatherApiPage">
+                    <div class="searchApi">
+                        <div class="searchMenu">
+                            <select name="searchApi" id="searchApi">
+                                <option value="Incheon">인천국제공항</option>
+                                <option value="Bucheon-si">김포국제공항</option>
+                                <option value="Gwangju">김해국제공항</option>
+                                <option value="Jeju City">제주국제공항</option>
+                                <option value="Ipseokdong">대구국제공항</option>
+                                <option value="Ipyang-ni">청주국제공항</option>
+                                <option value="Muan">무안국제공항</option>
+                                <option value="Jangjolli">양양국제공항</option>
+                                <option value="Yach’on">광주공항</option>
+                                <option value="Sŏnyŏl-li">군산공항</option>
+                                <option value="Shisen">사천공항</option>
+                                <option value="Sangok">여수공항</option>
+                                <option value="Songjeong">울산공항</option>
+                                <option value="Hup’yŏng">원주공항</option>
+                                <option value="Ch’ŏngnim">포항경주공항</option>
+                            </select>
+                        </div>
+                        <button onclick="weatherSearchApi()">검색</button>
+                    </div>
+                    <div class="topWeatherApi">
+                        <h2 class="SeoulIconApi"></h2>
+                        <h2 class="SeoulNowTempApi"></h2>
+                    </div>
+                    <h3 class="nowWeatherApi"></h3>
+                    <div class="temp">
+                        <h5 class="SeoulTempMaxApi"></h5>
+                        <h5 class="SeoulTempMinApi"></h5>
+                    </div>
+                </div>
+                <div id="map" style="width:50%;height:450px;"></div>
+            </div>
+            <div class="futureWeather">
+                <div class="weather_table">
+                    <div class="row">
+                        <div class="header">시간</div>
+                        <div class="data" id="date0"></div>
+                        <div class="data" id="date1"></div>
+                        <div class="data" id="date2"></div>
+                        <div class="data" id="date3"></div>
+                        <div class="data" id="date4"></div>
+                        <div class="data" id="date5"></div>
+                        <div class="data" id="date6"></div>
+                        <div class="data" id="date7"></div>
+                        <div class="data" id="date8"></div>
+                        <div class="data" id="date9"></div>
+                        <div class="data" id="date10"></div>
+                        <div class="data" id="date11"></div>
+                        <div class="data" id="date12"></div>
+                        <div class="data" id="date13"></div>
+                        <div class="data" id="date14"></div>
+                    </div>
+                    <div class="row">
+                        <div class="header">온도 (°C)</div>
+                        <div class="data" id="temp0"></div>
+                        <div class="data" id="temp1"></div>
+                        <div class="data" id="temp2"></div>
+                        <div class="data" id="temp3"></div>
+                        <div class="data" id="temp4"></div>
+                        <div class="data" id="temp5"></div>
+                        <div class="data" id="temp6"></div>
+                        <div class="data" id="temp7"></div>
+                        <div class="data" id="temp8"></div>
+                        <div class="data" id="temp9"></div>
+                        <div class="data" id="temp10"></div>
+                        <div class="data" id="temp11"></div>
+                        <div class="data" id="temp12"></div>
+                        <div class="data" id="temp13"></div>
+                        <div class="data" id="temp14"></div>
+                    </div>
+                    <div class="row">
+                        <div class="header">날씨</div>
+                        <div class="data" id="weather0"></div>
+                        <div class="data" id="weather1"></div>
+                        <div class="data" id="weather2"></div>
+                        <div class="data" id="weather3"></div>
+                        <div class="data" id="weather4"></div>
+                        <div class="data" id="weather5"></div>
+                        <div class="data" id="weather6"></div>
+                        <div class="data" id="weather7"></div>
+                        <div class="data" id="weather8"></div>
+                        <div class="data" id="weather9"></div>
+                        <div class="data" id="weather10"></div>
+                        <div class="data" id="weather11"></div>
+                        <div class="data" id="weather12"></div>
+                        <div class="data" id="weather13"></div>
+                        <div class="data" id="weather14"></div>
+                    </div>
+                    <div class="row">
+                        <div class="header">이미지</div>
+                        <div class="data" id="weatherI0"></div>
+                        <div class="data" id="weatherI1"></div>
+                        <div class="data" id="weatherI2"></div>
+                        <div class="data" id="weatherI3"></div>
+                        <div class="data" id="weatherI4"></div>
+                        <div class="data" id="weatherI5"></div>
+                        <div class="data" id="weatherI6"></div>
+                        <div class="data" id="weatherI7"></div>
+                        <div class="data" id="weatherI8"></div>
+                        <div class="data" id="weatherI9"></div>
+                        <div class="data" id="weatherI10"></div>
+                        <div class="data" id="weatherI11"></div>
+                        <div class="data" id="weatherI12"></div>
+                        <div class="data" id="weatherI13"></div>
+                        <div class="data" id="weatherI14"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

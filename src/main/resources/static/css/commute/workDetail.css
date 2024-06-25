@@ -1,0 +1,77 @@
+@import url(../common/reset.css);
+@import url(../common/paging.css);
+
+/*
+.adminContainer{
+    width: 100%;
+    height: calc(100vh - 100px);
+    padding: 20px;
+    overflow: scroll;
+    box-sizing: border-box;
+}
+*/
+
+.adminContainer h1{
+    text-align: center;
+    padding: 28px;
+    border-bottom: 1px solid #ccc;
+}
+
+.adminContainer .workInOut{
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    align-items: center;
+    font-size: 30px;
+    line-height: 100px;
+}
+
+.adminContainer .workInOut >a.workIn{
+    width: 200px;
+    height: 100px;
+    background-color: #3767a6;
+    color: white;
+    border: 1px solid #333333;
+    border-radius: 100px 100px;
+    margin: 20px;
+
+}
+.adminContainer .workInOut >a.workOut{
+    width: 200px;
+    height: 100px;
+    background-color: #eff6ff;
+    border: 1px solid #333333;
+    border-radius: 100px 100px;
+    margin: 20px;
+}
+
+.adminContainer .work .work-con .search{
+    float: right;
+    padding: 10px;
+    padding-right: 20px;
+}
+
+.adminContainer .work .work-con table{
+    text-align: center;
+    padding: 0 20px;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.adminContainer .work .work-con .clock{
+    text-align: center;
+    font-size: 30px;
+    padding : 10px;
+}
+
+.adminContainer .work .work-con table th{
+    font-size: 20px;
+    padding: 10px;
+    border-bottom: 1px solid #333;
+}
+
+.adminContainer .work .work-con table td{
+    font-size: 15px;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+}

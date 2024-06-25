@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="chat" th:fragment="chatBotFragment">
+
+    <div id="chat-bot">
+        <div class="wrap">
+            <img th:src="@{/images/chatBot.png}" alt="chatBotImg"
+                 id="btn-chat-open" onclick="openChat()">
+            <div id="chat-disp">
+                <h3 id="chat-header">
+                    <span>chatBot</span>
+                    <span class="btn-wrap">
+				<button type="button" id="btn-chat-close" onclick="disconnect()">X</button>
+			</span>
+                </h3>
+                <div id="chat-content">
+
+                </div>
+                <div id="chat-question" class="flex between">
+                    <span class="flex column center"><i></i></span>
+                    <input type="text" id="question" placeholder="질문을 입력하세요">
+                    <button type="button" id="btn-msg-send" onclick="btnMsgSendClicked()">전송</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
+
+
+

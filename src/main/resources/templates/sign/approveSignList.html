@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/adminLayout}">
+
+<th:block layout:fragment="title">
+
+</th:block>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/sign/signList.css}">
+</th:block>
+<th:block layout:fragment="script">
+
+</th:block>
+
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+        <div class="approveSignList">
+            <div class="approveSignList-con">
+                <div class="search">
+                    <form th:action="@{/sign/approveSignList}" method="get">
+                        <select name="subject" id="subject">
+                            <option value="" th:selected="${#strings.isEmpty(param.subject)}"> ::선택::</option>
+                            <option value="title" th:selected="${#strings.equals(param.subject, 'title')}">제목</option>
+                            <option value="lastApprover"
+                                    th:selected="${#strings.equals(param.subject, 'lastApprover')}">최종승인자
+                            </option>
+                            <option value="content" th:selected="${#strings.equals(param.subject, 'content')}">내용
+                            </option>
+
+                        </select>
+                        <input type="text" name="search" id="search" th:value="${param.search}">
+                        <input type="submit" value="SEARCH">
+                    </form>
+                </div>
+                <h2>상신함목록:<span th:text="'(' + ${signDtoPage.totalElements} + '건)'"></span></h2>
+
+                <!--                <span><a th:href="@{/sign/signOk}">승인된결재페이지</a></span>-->
+                <!--                <span><a th:href="@{/sign/signNo}">반려된결재페이지</a></span>-->
+
+                <form th:action="@{/sign/approveSignList}" method="get">
+                </form>
+                <div class="sigh_list">
+                    <div>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>번호</th>
+                                <th>기안자</th>
+                                <th>부서</th>
+                                <th>직급</th>
+                                <th>제목</th>
+                                <th>내용</th>
+                                <th>작성시간</th>
+                                <th>수정시간</th>
+                                <th>처리상태</th>
+                                <th>상세보기</th>
+                                <th>삭제</th>
+                                <th>최종승인자</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr th:each="sign : ${signDtoPage}">
+                                <td th:text="${sign.id}"></td>
+                                <td th:text="${sign.approve}"></td>
+                                <td th:text="${sign.deptName}"></td>
+                                <td th:text="${sign.level}"></td>
+                                <td th:text="${sign.title}"></td>
+                                <td th:text="${sign.content}"></td>
+                                <td th:text="${#temporals.format(sign.createTime, 'yy-mm-dd hh:mm:ss')}"></td>
+                                <td th:text="${#temporals.format(sign.updateTime, 'yy-mm-dd hh:mm:ss')}"></td>
+
+                                <td th:text="${sign.subContent}"></td>
+                                <td><a th:href="@{/sign/detail/{id}(id=${sign.id})}">상세보기</a></td>
+
+                                <td><a th:href="@{/sign/delete/{id}(id=${sign.id})}">삭제</a></td>
+
+                                <td th:text="${sign.lastApprover}">승인자</td>
+
+
+                                <!--                        <th:block th:if="${sign.signAttachFile==1}">-->
+                                <!--                            <td>O</td>-->
+                                <!--                        </th:block>-->
+                                <!--                        <th:block th:unless="${sign.signAttachFile==1}">-->
+                                <!--                            <td>X</td>-->
+                                <!--                        </th:block>-->
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <div class="paging">
+                            <ul>
+                                <li>
+                                        <span th:if="${signDtoPage.pageable.pageNumber+1 eq 1}"
+                                              class="span0"> START </span>
+                                    <span th:unless="${signDtoPage.pageable.pageNumber+1 eq 1}">
+                                            <a th:href="@{/sign/signList(page=0,search=${param.search},
+                                                subject = ${param.subject})}"
+                                               class="span1"> << </a>
+                                        </span>
+                                </li>
+                                <li>
+                                        <span th:if="${signDtoPage.pageable.pageNumber+1 eq 1}"
+                                              class="span0">PRE</span>
+                                    <span th:unless="${signDtoPage.pageable.pageNumber+1 eq 1}">
+                                            <a th:href="@{/sign/approveSignList(page=${signDtoPage.pageable.pageNumber-1}
+                                            ,search = ${param.search}, subject = ${param.subject})}"
+                                               class="span1">이전</a>
+                                    </span>
+                                </li>
+
+                                <li th:each="i : ${#numbers.sequence(startPage, endPage)}" class="block">
+                                    <span th:if="${signDtoPage.pageable.pageNumber +1 == i}" th:text="${i}"
+                                          class="now"></span>
+                                    <a th:unless="${signDtoPage.pageable.pageNumber+1 == i}"
+                                       th:href="@{/sign/approveSignList(page=${i-1}
+                                    ,search=${param.search}, subject=${param.subject})}" th:text="${i}"></a>
+                                </li>
+
+                                <li>
+                                <span th:if="${signDtoPage.totalPages == signDtoPage.pageable.pageNumber+1}"
+                                      class="span0">NEXT</span>
+                                    <span
+                                            th:unless="${signDtoPage.totalPages == signDtoPage.pageable.pageNumber+1}">
+                                    <a th:href="@{/sign/approveSignList(page=${signDtoPage.pageable.pageNumber+1}
+                                    ,search=${param.search},subject=${param.subject})}" class="span1">다음</a>
+                                </span>
+                                </li>
+                                <li>
+                                    <span th:if="${signDtoPage.totalPages == signDtoPage.pageable.pageNumber+1}"
+                                          class="span0">
+                                        END
+                                    </span>
+                                    <span
+                                            th:unless="${signDtoPage.totalPages == signDtoPage.pageable.pageNumber+1}">
+                                        <a th:href="@{/sign/approveSignList(page=${signDtoPage.totalPages-1}
+                                        ,search=${param.search}, subject=${param.subject})}" class="span1">
+                                            마지막
+                                        </a>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    </div>
+</th:block>
+</html>

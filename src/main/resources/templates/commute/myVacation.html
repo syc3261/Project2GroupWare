@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="~{common/layout/adminLayout}">
+<th:block layout:fragment="title">
+    <!-- 각 페이지 마다 변경 -->
+    <title>vacation</title>
+</th:block>
+<th:block layout:fragment="css">
+    <!-- 각 페이지 마다 변경 -->
+    <link rel="stylesheet" th:href="@{/css/commute/myVacation.css}">
+</th:block>
+<th:block layout:fragment="script">
+    <!-- 각 페이지 마다 변경 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js" defer></script>
+    <script th:src="@{/js/autoDirection.js}" defer></script>
+</th:block>
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+        <div class="vacation">
+            <div class="vacation-con">
+                <h1>[[${#authentication.principal.memberEntity.name}]]님의 휴가</h1>
+                <table id="myTable">
+                    <thead>
+                    <tr>
+                        <th onclick="sortTable(0)">이름</th>
+                        <th onclick="sortTable(1)">직급</th>
+                        <th onclick="sortTable(2)">종류</th>
+                        <th onclick="sortTable(3)">출발일</th>
+                        <th onclick="sortTable(4)">복귀일</th>
+                        <th onclick="sortTable(5)">휴가 일수</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="vacation : ${vacationDtoList}">
+                        <td th:text="${vacation.memberEntity.name}"></td>
+                        <td th:text="${vacation.memberEntity.positionEntity.positionName}"></td>
+                        <td th:text="${vacation.vacType}"></td>
+                        <td th:text="${vacation.vacStartDate}"></td>
+                        <td th:text="${vacation.vacEndDate}"></td>
+                        <td th:text="${vacation.vacDays}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

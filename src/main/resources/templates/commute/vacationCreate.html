@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/adminLayout}">
+<th:block layout:fragment="title">
+    <!-- 각 페이지 마다 변경 -->
+    <title>vacationCreate</title>
+</th:block>
+<th:block layout:fragment="css">
+    <!-- 각 페이지 마다 변경 -->
+    <link rel="stylesheet" th:href="@{/css/commute/vacationCreate.css}">
+</th:block>
+<th:block layout:fragment="script">
+    <!-- 각 페이지 마다 변경 -->
+</th:block>
+<th:block layout:fragment="adminContainer">
+    <div class="adminContainer">
+        <div class="vacationCreate">
+            <div class="vacationCreate-con">
+                <form th:action="@{/commute/vacationCreate}" method="post">
+                    <ul>
+                        <li>
+                            <label for="employeeId">휴가자</label>
+                            <select name="employeeId" id="employeeId">
+                                <option th:each="member : ${memberDtoList}"
+                                        th:value="${member.id}"
+                                        th:text="${member.name}">
+                                </option>
+                            </select>
+                        </li>
+                        <li>
+                            <label for="vacType">휴가종류</label>
+                            <select name="vacType" id="vacType">
+                                <option value="휴가">휴가</option>
+                                <option value="병가">병가</option>
+                            </select>
+                        </li>
+                        <li>
+                            <label for="vacStartDate">출발일</label>
+                            <input type="date" id="vacStartDate" name="vacStartDate" th:value="${vacStartDate}">
+                        </li>
+                        <li>
+                            <label for="vacEndDate">복귀일</label>
+                            <input type="date" id="vacEndDate" name="vacEndDate" th:value="${vacEndDate}">
+                        </li>
+
+                        <li class="li2">
+                            <input type="submit" value="휴가 등록">
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

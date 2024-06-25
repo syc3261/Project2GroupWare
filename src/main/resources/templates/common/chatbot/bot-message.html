@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+	<div class="flex center date" th:if="${msg.today}" th:text="${msg.today}"></div>
+	<div class="msg bot flex">
+		<div  class="icon">
+			<img th:src="@{/images/chatBot.png}">
+		</div>
+		<div class="message" >
+			<div class="part" th:if="${msg.answerDto.keyword ne '전화' or msg.answerDto.keyword ne '부서' or msg.answerDto.keyword ne '이메일' or
+			msg.answerDto.employeeInfo != null}">
+				<p th:utext="${msg.answerDto.content}"></p>
+			</div>
+			<div th:if="${msg.answerDto.keyword eq '전화'}" >
+				<div th:replace="~{common/chatbot/fragments/phone :: phoneFragment}"></div>
+			</div>
+			<div th:if="${msg.answerDto.keyword eq '부서'}" >
+				<div th:replace="~{common/chatbot/fragments/dept :: deptFragment}"></div>
+			</div>
+			<div th:if="${msg.answerDto.keyword eq '이메일'}" >
+				<div th:replace="~{common/chatbot/fragments/email :: emailFragment}"></div>
+			</div>
+			<div th:if="${msg.answerDto.keyword eq '날씨'}" >
+				<div th:replace="~{common/chatbot/fragments/weather :: weatherFragment}"></div>
+			</div>
+			<div th:if="${msg.answerDto.keyword eq '주간'}" >
+				<div th:replace="~{common/chatbot/fragments/movie :: movieFragment}"></div>
+			</div>
+			<div th:if="${msg.answerDto.keyword eq '정보'}" >
+				<div th:replace="~{common/chatbot/fragments/movieDetail :: movieDetailFragment}"></div>
+			</div>
+			<div th:if="${msg.answerDto.keyword eq '버스'}" >
+				<div th:replace="~{common/chatbot/fragments/bus :: busFragment}"></div>
+			</div>
+
+
+
+			<div class="time" th:text="${msg.time}">메세지 작성 시간</div>
+		</div>
+	</div>
+</html>
+

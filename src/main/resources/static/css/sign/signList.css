@@ -1,0 +1,201 @@
+@import url(../common/reset.css);
+/* 관리자 컨테이너 스타일 */
+.adminContainer{
+     position: absolute;
+     min-height: calc(100vh - 75px);
+     width: calc(100% - 230px);
+     right: 0;
+     top: 75px;
+     background-color: #fff;
+     border-radius: 10px 0 0 0;
+}
+
+/* 결재함 리스트(signList) 스타일 */
+.approveSignList {
+    text-align: center;
+    margin-top: 20px;
+    
+}
+/*
+approveSignList .approveSignList-con {
+    margin: 5%;
+    box-sizing: border-box;
+}
+*/
+
+/* 결재함 리스트 컨텐츠(signList-con) 스타일 */
+.approveSignList-con {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 검색 영역 스타일 */
+.search {
+    margin-bottom: 20px;
+}
+
+.sigh_list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 70vh;
+}
+
+.search select,
+.search input[type="text"] {
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search input[type="submit"] {
+    font-family: 'TTLaundryGothicB';
+    padding: 10px 20px;
+    background-color: #96b3d9;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #96b3d9;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* 페이지 네이션 스타일 */
+.paging {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.paging ul {
+    list-style: none;
+    padding: 0;
+}
+
+.paging ul li {
+    display: inline;
+    margin: 0 5px;
+}
+
+.paging ul li a,
+.paging ul li span {
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #324153;
+}
+
+.paging ul li a {
+    width: 100%;
+    border: none;
+}
+
+.paging ul li span:hover a {
+    background-color: #3767a6;
+    color: #fff;
+}
+
+.paging ul li span:hover {
+    background-color: #3767a6;
+    color: #fff;
+}
+
+.paging ul li .now {
+    background-color: #3767a6;
+    color: #fff;
+}
+
+/* 반응형 조정 */
+@media (max-width: 768px) {
+    .search select,
+    .search input[type="text"],
+    .search input[type="submit"] {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    table, th, td {
+        display: block;
+    }
+
+    th, td {
+        text-align: right;
+    }
+
+    th::before, td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+    }
+
+    .paging ul li {
+        display: block;
+        text-align: center;
+    }
+
+}
+
+.signList-con p{
+    display: inline-block;
+    margin-right: 20px; /* 버튼 간격 조절 */
+
+
+}
+
+
+
+
+
+.signList-con p a{
+    
+    width: 150px;
+    height: 15px;
+    line-height: 60px; /* Vertically center the text */
+    border-radius: 10px; /* Round corners */
+    border: 1px solid;
+    color: black;
+    font-size:20px;
+    background: white;
+    padding: 10px 20px;
+ 
+
+
+    }
+
+.signList-con p a:hover{
+    background-color:#96b3d9;
+    color: white;
+}
+
+
+

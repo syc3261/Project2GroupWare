@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<div class="right" th:fragment="MovieHeaderFragment">
+<link rel="stylesheet" th:href="@{/css/api/movie/movieHeader.css}">
+  <a th:href="@{/}"><li class="logo"><img th:src="@{/images/logo.png}" alt="이미지없음"></li></a>
+
+  <div class="right-con">
+    <div class="top">
+      <div class="gnb">
+        <ul>
+          <th:block sec:authorize="isAnonymous()">
+            <li><a th:href="@{/}">로그인</a></li>
+            <!--                        <li><a th:href="@{/member/memberJoin}">회원가입</a></li>-->
+          </th:block>
+
+          <th:block sec:authorize="isAuthenticated()">
+            <th:block sec:authorize="hasAnyRole('ADMIN')">
+              <li>ADMIN</li>
+              <li>[[${#authentication.principal.memberEntity.name}]] 님</li>
+              <li class="logout"><a th:href="@{/member/logout}">로그아웃</a></li>
+              <li class="chatBtn"><a th:href="@{/chat/{id}(id=${#authentication.principal.id})}">채팅</a></li>
+            </th:block>
+
+            <th:block sec:authorize="hasAnyRole('MANAGER')">
+              <li>MANAGER</li>
+              <li>[[${#authentication.principal.memberEntity.name}]] 님</li>
+              <li class="logout"><a th:href="@{/member/logout}">로그아웃</a></li>
+              <li class="chatBtn"><a th:href="@{/chat/{id}(id=${#authentication.principal.id})}">채팅</a></li>
+            </th:block>
+
+            <th:block sec:authorize="hasAnyRole('MEMBER')">
+              <li>MEMBER</li>
+              <li>[[${#authentication.principal.memberEntity.name}]] 님</li>
+              <li class="logout"><a th:href="@{/member/logout}">로그아웃</a></li>
+              <li class="chatBtn"><a th:href="@{/chat/{id}(id=${#authentication.principal.id})}">채팅</a></li>
+            </th:block>
+          </th:block>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</html>

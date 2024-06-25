@@ -1,0 +1,417 @@
+@import url(/css/common/reset.css);
+/*admin*/
+
+@font-face {
+    font-family: 'TTLaundryGothicB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/TTLaundryGothicB.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+.groupAir{
+    font-family: 'TTLaundryGothicB';
+    width:100%;
+    background-color: #eff6ff;
+}
+.admin{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: space-between;
+}
+.admin .left{
+    flex: 0 0 230px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    /* background-color: bisque; */
+}
+.admin .left-con{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* padding: 10px; */
+    box-sizing: border-box;
+    position : fixed;
+    width: 230px;
+}
+.admin .left-con .top{
+
+    /* background-color: aquamarine; */
+    box-sizing: border-box;
+}
+
+.admin .left-con .top .title {height: 24vh;}
+.admin .left-con .top .title h1.logo {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #3767a6;
+}
+.admin .left-con .top .title h1.logo a {
+    display: flex;
+    align-items: center;
+}
+.admin .left-con .top .title h1.logo img {
+    height: 54px;
+    background-color: #fff;
+    border: 2px solid #324153;
+    border-radius: 50px;
+    padding: 5px;
+    margin-right: 10px;
+    box-sizing: border-box;
+}
+.admin .left-con .top .title h1.logo p {
+    margin: 0;
+    font-size: 18px;
+    color: #324153;
+}
+
+
+.admin .left-con .top .title .weatherApi{
+    height: auto;
+    background: linear-gradient(180deg, rgba(55, 103, 166, 1) 14%, rgba(239, 246, 255, 1) 97%);
+    color: #324153;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin .left-con .top .title .weatherApi .nowTime {
+    padding: 4px 0px 0px 0px;
+}
+
+.admin .left-con .top .title .weatherApi .search {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 4px;
+}
+
+.admin .left-con .top .title .weatherApi .search #search {
+    -o-appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: 100%;
+    width: 90%;
+    background: url(/images/down.png) no-repeat 100% 50%;
+    font-family: 'TTLaundryGothicB';
+    box-shadow: 0px 1px 1px 0px #000;
+    border: 1px solid #000;
+    padding: 2px;
+    border-radius: 5px;
+}
+
+.admin .left-con .top .title .weatherApi .search .searchMenu {
+    display: flex;
+    width: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin .left-con .top .title .weatherApi .search #search option {
+    background-color: #96b3d9;
+}
+
+.admin .left-con .top .title .weatherApi .search .Arrow {
+    display: flex;
+    background: inherit;
+    height: 100%;
+    align-items: center;
+}
+
+.admin .left-con .top .title .weatherApi .search button {
+    border: none;
+    outline: 0px;
+    box-shadow: 0px 0px 2px 1px #eff6ff;
+    border-radius: 5px;
+    background: #96b3d9;
+    transition: 0.2s;
+    box-sizing: border-box;
+    padding: 1px 5px;
+    font-family: 'TTLaundryGothicB';
+}
+
+.admin .left-con .top .title .weatherApi .search button:hover {
+  box-shadow: 0px 0px 4px 2px #96b3d9;
+  background: #3767a6;
+  color: #fff;
+}
+
+.admin .left-con .top .title .weatherApi .topWeather {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin .left-con .top .title .weatherApi .topWeather h1.nowWeather {
+    text-align: center;
+}
+
+.admin .left-con .top .title .weatherApi .country {
+    padding: 2px 0px 0px 0px;
+}
+
+.admin .left-con .top .title .weatherApi .topWeather .nowWeather {
+    padding: 0px 0px 5px 0px;
+}
+
+.admin .left-con .top .left-menu{
+    padding: 20px 0;
+    height: 61.7vh;
+    overflow-y: scroll;
+}
+
+.admin .left-con .top .left-menu::-webkit-scrollbar {
+    width: 3px;
+}
+
+.admin .left-con .top .left-menu::-webkit-scrollbar-thumb {
+    background: #324153;
+    border-radius: 15px;
+}
+
+.admin .left-con .top .left-menu::-webkit-scrollbar-track {
+    background:#eff6ff;
+}
+
+.admin .left-con .top .left-menu>ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 3px;
+    background-color: #eff6ff;
+}
+
+.admin .left-con .top .left-menu>ul>.menuBar{
+    padding: 2px 5px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+
+.admin .left-con .top .left-menu>ul>.menuBar img {
+    width: 30px;
+}
+
+.admin .left-con .top .left-menu>ul>.menuBar>a{
+    display: block;
+    font-size: 16px;
+    padding: 12px 5px;
+    border-radius: 20px;
+    margin: 5px;
+    box-sizing: border-box;
+}
+
+.admin .left-con .top .left-menu>ul>.menuBar>li{
+    position: relative;
+}
+
+.admin .left-con .top .left-menu>ul>.menuBar:hover>a{
+    background-color: #3767a6;
+    color: #fff;
+    font-weight: bold;
+}
+
+.admin .left-con .top .left-menu>ul>.menuBar>.subMenu{
+    display: block;
+    position: relative;
+    max-height: 0px;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+
+.admin .left-con .top .left-menu>ul>.menuBar>.subMenu>li{
+    padding: 4px 10px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
+.admin .left-con .top .left-menu>ul>.menuBar:hover>.subMenu {
+    max-height: 500px; /* 적절한 최대 높이 설정 */
+    opacity: 1;
+}
+
+.admin .left-con .top .left-menu>ul>.menuBar>.subMenu>li>a {
+    display: block;
+    width: 150px;
+    text-align: center;
+    border-radius: 15px;
+    background-color: #96b3d9;
+    padding: 4px 3px;
+    font-size: 14px;
+}
+
+.admin .left-con .top .left-menu>ul>.menuBar>.subMenu>li>a:hover{
+    color: #fff;
+    background-color: #3767a6;
+    transition: 0.2s;
+}
+
+.admin .left-con .top .left-menu>ul>.menuBar>.subMenu>li input.naverBtn{
+    font-family: 'TTLaundryGothicB';
+    display: block;
+    width: 150px;
+    text-align: center;
+    border-radius: 15px;
+    background-color: #96b3d9 !important;
+    padding: 4px 3px;
+    font-size: 14px;
+}
+
+.admin .left-con .top .left-menu>ul>.menuBar>.subMenu>li input.naverBtn:hover{
+    color: #fff;
+    background-color: #3767a6 !important;
+    transition: 0.2s;
+}
+
+.admin .left-con .bottom{
+    width: 100%;
+    height: 10vh;
+    background-color: #324153;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin .left-con .bottom .bottom-con {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin .left-con .bottom .bottom-con p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #7c8289;
+}
+
+.admin .left-con .bottom .bottom-con .bottom-sns {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin .left-con .bottom .bottom-con .bottom-sns a i {
+    justify-content: center;
+    display: flex;
+    padding: 12px;
+    font-size: 1.4rem;
+    color: #eff6ff;
+}
+
+.admin .right{
+    flex:1;
+    background-color: #3767a6;
+}
+.admin .right .right-con{
+    min-height: 100vh;
+}
+.admin .right .right-con .top{
+    height: 75px;
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 10px;
+    box-sizing: border-box;
+    background: linear-gradient(90deg, rgba(55, 103, 166, 1) 20.5625%, rgba(150, 179, 217, 1) 80.5625%);
+    z-index: 999;
+}
+.admin .right .right-con .top .gnb{
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin .right .right-con .top .gnb>ul{
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    height: 40px;
+    gap: 10px;
+}
+
+.admin .right .right-con .top .gnb>ul>li {
+    box-sizing: border-box;
+    border-radius: 20px;
+    transition: 0.5s;
+    height: 30px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+
+.admin .right .right-con .top .gnb>ul>li>a{
+    color: inherit;
+    font-size: 15px;
+}
+
+.admin .right .right-con .top .gnb>ul>li:hover{
+    background-color: #3767a6;
+    color: #ffffff;
+}
+
+.admin .right .right-con .top .gnb>ul>li.logout:hover{
+    background-color: red;
+    color: #000;
+}
+/*.admin .right .right-con .top .gnb>ul>li.logout>a:hover{*/
+/*    background-color: red;*/
+/*    color: #000;*/
+/*}*/
+
+.admin .right .right-con .top .gnb>ul>li.chatBtn:hover{
+    background-color: #3767a6;
+    color: #ffffff;
+    transition: 0.5s;
+}
+/*.admin .right .right-con .top .gnb>ul>li.chat>a:hover{*/
+/*    background-color: #3767a6;*/
+/*    color: #ffffff;*/
+/*    transition: 0.5s;*/
+/*}*/
+
+.admin .right .right-con .bottom{
+}
+
+.admin .right .right-con .bottom .admin-data{
+    height: calc(100vh - 100px);
+    box-sizing: border-box;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminContainer {
+    position: absolute;
+    min-height: calc(100vh - 75px);
+    width: calc(100% - 230px);
+    right: 0;
+    top: 75px;
+    background-color: #fff;
+    border-radius: 10px 0 0 0;
+}
+
+
+
